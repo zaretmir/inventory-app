@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HangarsSearchResultsComponent } from './pages/hangars-search-results/hangars-search-results.component';
+import { HangarsComponent } from './pages/hangars/hangars.component';
+import { HangarFormComponent } from './components/hangar-form/hangar-form.component';
 
 
 const routes: Routes = [
-  { path: 'hangars', component: HangarsSearchResultsComponent}
+  { path: '', component: HangarsComponent},
+  { path: 'add', component: HangarFormComponent }
 ];
 
 @NgModule({

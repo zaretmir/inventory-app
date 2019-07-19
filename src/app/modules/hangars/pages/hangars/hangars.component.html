@@ -1,0 +1,11 @@
+<a routerLink="add" class="button">
+  <span>New Hangar</span>
+</a>
+
+<table>
+  <tr *ngFor="let item of hangars">
+    <td>{{ item.name }}</td>
+    <td>{{ item.address }}</td>
+    <button (click)="seeMoreClick()" type="button" class="btn btn-outline-primary btn-block btn-sm">Ver más...</button>
+  </tr>
+</table>

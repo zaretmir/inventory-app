@@ -7,18 +7,25 @@ import { SideNavComponent } from './layouts/side-nav/side-nav.component';
 import { ContentLayoutComponent } from './layouts/content-layout/content-layout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './views/not-found/not-found.component';
+import { CardComponent } from './views/home/components/card/card.component';
+import { HomeComponent } from './views/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     SideNavComponent,
-    ContentLayoutComponent
+    ContentLayoutComponent,
+    NotFoundComponent,
+    CardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
