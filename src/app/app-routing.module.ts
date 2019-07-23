@@ -27,6 +27,11 @@ const routes: Routes = [
     loadChildren: () => import(`./modules/hangars/hangars.module`).then( m => m.HangarsModule)
   },
   {
+    path: 'products',
+    component: ContentLayoutComponent,
+    loadChildren: () => import(`./modules/products/products.module`).then( m => m.ProductsModule)
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

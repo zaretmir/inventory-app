@@ -16,12 +16,14 @@ export class HomeComponent implements OnInit {
 
     this.hangarCard = {
       title: 'Hangars',
-      text: 'Texto de prueba'
+      text: 'Texto de prueba',
+      routePath: '/hangars'
     };
 
     this.productCard = {
       title: 'Products',
-      text: 'Texto de prueba'
+      text: 'Texto de prueba',
+      routePath: '/products'
     };
   }
 

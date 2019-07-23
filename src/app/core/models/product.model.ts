@@ -1,8 +1,8 @@
-export class Hangar {
+export class Product {
 
   id: number;
   name: string;
-  address: string;
+  description: string;
 
   constructor() { }
 }

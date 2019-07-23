@@ -8,16 +8,19 @@ import { HangarsRoutingModule } from './hangars-routing.module';
 import { FormsModule } from '@angular/forms';
 
 import { HangarFormComponent } from './components/hangar-form/hangar-form.component';
-import { HangarsComponent } from './pages/hangars/hangars.component';
-import { HangarDetailedViewComponent } from './pages/hangar-detailed-view/hangar-detailed-view.component';
+import { HangarsComponent } from './views/hangars/hangars.component';
+import { HangarDetailedViewComponent } from './views/hangar-detailed-view/hangar-detailed-view.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 @NgModule({
-  declarations: [HangarsComponent, HangarFormComponent, HangarDetailedViewComponent],
+  declarations: [HangarsComponent, HangarFormComponent, HangarDetailedViewComponent, SidenavComponent],
   imports: [
     CommonModule,
     HangarsRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [// ¿proveer en el raíz?
     ApiService

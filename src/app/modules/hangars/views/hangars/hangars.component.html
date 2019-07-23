@@ -1,0 +1,27 @@
+<app-floating-button-plus (click)="selectButtonAction()" [sidenavComponent]="hangarsSidenav"></app-floating-button-plus>
+
+<app-sidenav #hangarsSidenav></app-sidenav>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let hangar of hangars">
+      <td>{{ hangar.name }}</td>
+      <td>{{ hangar.address }}</td>
+      <button (click)="setHangarSelected(hangar)" (dblclick)="hangarForm(hangar)" type="button" class="btn btn-outline-primary btn-block btn-sm">Seleccionar</button>
+      <!-- Usar un timeout en el ts -->
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+

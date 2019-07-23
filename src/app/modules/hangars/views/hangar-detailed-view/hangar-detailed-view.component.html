@@ -1,0 +1,27 @@
+<form>
+  <div class="form-group">
+    <label for="inputAddress">Name</label>
+    <input type="text" class="form-control" id="inputName" placeholder="H0X" [value]="hangar.name">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Test address" [value]="hangar.address">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
