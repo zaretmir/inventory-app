@@ -3,11 +3,23 @@ import { ComponentComService } from 'src/app/core/services/component-com.service
 import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router } from '@angular/router';
 
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css']
-  // animate* y quitar open/close fcns (alts: CSS)
+  styleUrls: ['./sidenav.component.css'],
+  animations: [
+
+    trigger('openClose', [
+      state('open', style({
+        width: '250px'
+      })),
+      state('closed', style({
+        width: '0px'
+      }))
+    ])
+  ]
 })
 export class SidenavComponent implements OnInit {
 
@@ -22,22 +34,9 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
   }
 
-  public toggle() {
-    console.log('Toggled');
-    if (this.isOpen) {
-      this.closeNav();
-    } else {
-      this.openNav();
-    }
+  toggle() {
     this.isOpen = !this.isOpen;
-  }
-
-  public openNav() {
-    document.getElementById('mySidenav').style.width = '250px';
-  }
-
-  public closeNav() {
-    document.getElementById('mySidenav').style.width = '0';
+    console.log('Toggled');
   }
 
   public manageElement() {

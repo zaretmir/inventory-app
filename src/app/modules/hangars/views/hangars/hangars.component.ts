@@ -31,10 +31,11 @@ export class HangarsComponent implements OnInit {
 
     this.apiService.getAllHangars().subscribe(
       data => {
-        this.hangars = data.map( item => this.apiService.mapResult(item));
+        this.hangars = data.map( item => this.apiService.mapToHangar(item));
         console.log(this.hangars);
       }
     );
+    /*
 
     this.apiService.getHangarById().subscribe(
       data => {
@@ -44,11 +45,7 @@ export class HangarsComponent implements OnInit {
           this.hangar = this.apiService.mapResult(data);
         }
       });
-  }
-
-  public showOptionsMenu() {
-    console.log('Menú de opciones para el hangar: ' + this.hangarSelected.name);
-    document.getElementById('mySidenav').style.width = '250px';
+      */
   }
 
   /***
@@ -63,7 +60,7 @@ export class HangarsComponent implements OnInit {
 
   public addNewHangar() {
     console.log('Navigating to new hangar form');
-    this.router.navigate(['hangars/new']);
+    this.router.navigate(['hangars/add']);
   }
 
   public setHangarSelected( hangar: Hangar) {

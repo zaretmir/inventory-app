@@ -1,5 +1,5 @@
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+<div *ngIf="isOpen" [@openClose] id="mySidenav" class="sidenav d-flex flex-column">
+  <a href="javascript:void(0)" class="closebtn" (click)="toggle()">&times;</a>
   <button (click)="manageElement()" type="button" class="btn btn-primary btn-sm">Manage</button>
   <button (click)="editElement()" type="button" class="btn btn-primary btn-sm">Edit</button>
   <button (click)="removeElement()"type="button" class="btn btn-primary btn-sm">Remove</button>
