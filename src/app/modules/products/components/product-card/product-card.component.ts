@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/core/models/product.model';
-
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -9,10 +8,19 @@ import { Product } from 'src/app/core/models/product.model';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
+  @Output() selectedProduct: EventEmitter<Product>;
 
-  constructor() { }
+  constructor() {
+    this.selectedProduct = new EventEmitter();
+  }
 
   ngOnInit() {
+  }
+
+  onClick() {
+    console.log('Product card, product:');
+    console.log(this.product);
+    this.selectedProduct.emit(this.product);
   }
 
 }

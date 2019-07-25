@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { CardComponent } from './views/home/components/card/card.component';
 import { HomeComponent } from './views/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,9 @@ import { HomeComponent } from './views/home/home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule,
-
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

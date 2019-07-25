@@ -8,9 +8,9 @@ import { SidenavComponent } from 'src/app/modules/hangars/components/sidenav/sid
 })
 export class FloatingButtonPlusComponent implements OnInit {
 
-  @Input() routePath: string;
+  @Input() routePath?: string;
 
-  @Input() sidenavComponent: SidenavComponent;
+  @Input() sidenavComponent?: SidenavComponent;
 
   @HostListener('click')
   click() {

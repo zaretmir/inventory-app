@@ -1,1 +1,19 @@
-<p>product-detailed-view works!</p>
+<app-product-form [inputProduct]="product" [isReadOnly]="true"></app-product-form>
+
+<table >
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of priceHistory">
+        <td>{{ entry.price_id }}</td>
+        <td>{{ entry.dateUpdated }}</td>
+        <td>{{ entry.price }}</td>
+    </tr>
+  </tbody>
+
+</table>
