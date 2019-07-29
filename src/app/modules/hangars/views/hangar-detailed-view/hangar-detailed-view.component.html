@@ -1,2 +1,20 @@
 <h2>{{ hangar.name }}</h2>
-<app-hangar-form [isReadOnly]="true" [hangarReadOnly]="hangar"></app-hangar-form>
+<app-hangar-form [isReadOnly]="true" [hangarPopulate]="hangar"></app-hangar-form>
+
+<div>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.productpk }}</td>
+          <td>{{ product.qtyph }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+

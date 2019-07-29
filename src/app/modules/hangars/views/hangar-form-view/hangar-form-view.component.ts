@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar.model';
-import { ApiService } from 'src/app/core/services/api.service';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { Router } from '@angular/router';
+import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 
 @Component({
   selector: 'app-hangar-form-view',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class HangarFormViewComponent implements OnInit {
 
   constructor( private router: Router,
-               private apiService: ApiService,
+               private hangarApiService: HangarApiService,
                private componentComService: ComponentComService ) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class HangarFormViewComponent implements OnInit {
   postData(hangar: Hangar) {
     console.log(JSON.stringify(hangar));
     console.log(hangar);
-    return this.apiService.postHangar(hangar).subscribe( response => {
+    return this.hangarApiService.postHangar(hangar).subscribe( response => {
       this.componentComService.collectData(response);
       hangar = this.componentComService.retrieveData(); // To retrieve id
       this.router.navigate(['/hangars/details', hangar.id]);

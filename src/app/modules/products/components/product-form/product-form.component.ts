@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/core/models/product.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,6 +12,8 @@ export class ProductFormComponent implements OnInit {
 
   @Input() inputProduct: Product;
   @Input() isReadOnly: boolean;
+
+  @Output() newProduct = new EventEmitter<Product>();
 
   productForm = new FormGroup({
     name: new FormControl(
@@ -37,6 +39,10 @@ export class ProductFormComponent implements OnInit {
 
   get description() {
     return this.productForm.get('description');
+  }
+
+  public onSubmit() {
+    return this.newProduct.emit( this.productForm.value );
   }
 
 }

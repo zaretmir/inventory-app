@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar.model';
-import { ApiService } from 'src/app/core/services/api.service';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 
 @Component({
   selector: 'app-hangar-form',
@@ -18,7 +18,20 @@ export class HangarFormComponent implements OnInit {
       [Validators.required, Validators.minLength(3)]),
     address: new FormControl(
       '',
-      Validators.required)
+      Validators.required),
+    ownerInfo: new FormGroup({
+      owner: new FormControl(
+        '',
+        [Validators.required]),
+      email: new FormControl(
+        '',
+        [Validators.email]),
+      phone: new FormControl(
+        '',
+        [Validators.required]
+      )
+      })
+
   });
 
   // Getters for cleaner acces in template. Allows using hangarName instead of hangarForm.get('hangarName')
@@ -30,19 +43,35 @@ export class HangarFormComponent implements OnInit {
     return this.hangarForm.get('address');
   }
 
-  @Input() isReadOnly: boolean;
-  @Input() hangarReadOnly: Hangar; // Hangar to populate value fields with
+  get owner() {
+    return this.hangarForm.get('ownerInfo.owner');
+  }
+
+  get email() {
+    return this.hangarForm.get('ownerInfo.email');
+  }
+
+  get phone() {
+    return this.hangarForm.get('ownerInfo.phone');
+  }
+
+  @Input() isEditExistent?: boolean;
+  @Input() isReadOnly?: boolean;
+  @Input() hangarPopulate: Hangar; // Hangar to populate value fields with
 
   @Output() outputToParent = new EventEmitter<Hangar>();
 
   hangar: Hangar =  new Hangar();
 
-  constructor( private apiService: ApiService ) { }
+  constructor( private hangarApiService: HangarApiService ) { }
 
   ngOnInit() {
-    if (this.isReadOnly) {
-      this.name.setValue(this.hangarReadOnly.name);
-      this.address.setValue(this.hangarReadOnly.address);
+    if (this.isReadOnly || this.isEditExistent) {
+      this.name.setValue(this.hangarPopulate.name);
+      this.address.setValue(this.hangarPopulate.address);
+      this.owner.setValue(this.hangarPopulate.owner);
+      this.email.setValue(this.hangarPopulate.ownerEmail);
+      this.phone.setValue(this.hangarPopulate.phoneNumber);
     }
   }
 

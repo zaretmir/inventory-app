@@ -8,10 +8,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductDetailedViewComponent } from './views/product-detailed-view/product-detailed-view.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductFormViewComponent } from './views/product-form-view/product-form-view.component';
+import { PriceFormComponent } from './components/price-form/price-form.component';
+import { ProductManagerNavComponent } from './components/product-manager-nav/product-manager-nav.component';
 
 
 @NgModule({
-  declarations: [ProductsViewAllComponent, ProductCardComponent, ProductDetailedViewComponent, ProductFormComponent],
+  declarations: [ProductsViewAllComponent, ProductCardComponent, ProductDetailedViewComponent, ProductFormComponent, ProductFormViewComponent, PriceFormComponent, ProductManagerNavComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

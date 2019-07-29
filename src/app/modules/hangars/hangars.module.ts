@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ApiService } from 'src/app/core/services/api.service';
-
 import { HangarsRoutingModule } from './hangars-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,10 +11,17 @@ import { HangarDetailedViewComponent } from './views/hangar-detailed-view/hangar
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-view.component';
+import { HangarEditViewComponent } from './views/hangar-edit-view/hangar-edit-view.component';
 
 
 @NgModule({
-  declarations: [HangarsComponent, HangarFormComponent, HangarDetailedViewComponent, SidenavComponent, HangarFormViewComponent],
+  declarations: [
+    HangarsComponent,
+    HangarFormComponent,
+    HangarDetailedViewComponent,
+    SidenavComponent,
+    HangarFormViewComponent,
+    HangarEditViewComponent],
   imports: [
     CommonModule,
     HangarsRoutingModule,
@@ -25,7 +30,6 @@ import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-vi
     SharedModule
   ],
   providers: [// ¿proveer en el raíz?
-    ApiService
   ]
 })
 export class HangarsModule { }

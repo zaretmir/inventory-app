@@ -1,10 +1,8 @@
-import { Component, OnInit, SystemJsNgModuleLoader, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar.model';
-import { ApiService } from 'src/app/core/services/api.service';
 import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { SideNavComponent } from 'src/app/layouts/side-nav/side-nav.component';
-import { SidenavToggleService } from 'src/app/core/services/sidenav-toggle.service';
+import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 
 @Component({
   selector: 'app-hangars',
@@ -22,16 +20,16 @@ export class HangarsComponent implements OnInit {
   hangarSelected: Hangar = new Hangar();
 
   constructor( private router: Router,
-               private apiService: ApiService,
+               private hangarApiService: HangarApiService,
                private componentComService: ComponentComService) { }
 
   ngOnInit() {
 
     this.isHangarSelected = false;
 
-    this.apiService.getAllHangars().subscribe(
+    this.hangarApiService.getAllHangars().subscribe(
       data => {
-        this.hangars = data.map( item => this.apiService.mapToHangar(item));
+        this.hangars = data.map( item => this.hangarApiService.mapToHangar(item));
         console.log(this.hangars);
       }
     );
@@ -57,6 +55,13 @@ export class HangarsComponent implements OnInit {
     this.componentComService.collectData(hangar);
     this.router.navigate(['/hangars/details', hangar.id]);
   }
+
+  public hangarEdit( hangar: Hangar ) {
+    this.componentComService.collectData(hangar);
+    this.router.navigate(['hangar/edit', hangar.id]);
+  }
+
+
 
   public addNewHangar() {
     console.log('Navigating to new hangar form');

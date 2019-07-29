@@ -46,7 +46,7 @@ export class SidenavComponent implements OnInit {
 
   public editElement() {
     this.hangar = this.componentComService.retrieveData();
-    this.router.navigate(['/hangars/details', this.hangar.id]);
+    this.router.navigate(['hangars/edit', this.hangar.id]);
   }
 
   public removeElement() {

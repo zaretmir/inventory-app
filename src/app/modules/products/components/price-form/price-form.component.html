@@ -1,0 +1,7 @@
+<form [formGroup]="priceEntryForm" (ngSubmit)=onSubmit($event)>
+  <div class="form-group">
+    <label for="figure">Price</label>
+    <input formControlName="figure" id="figure" type="number" class="form-control">
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>

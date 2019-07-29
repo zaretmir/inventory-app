@@ -11,7 +11,23 @@
   <div class="form-group">
     <label for="address">Address</label>
     <input formControlName="address" id="address" type="text" class="form-control" [readonly]="isReadOnly">
+    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">This field is required.</div>
   </div>
-  <div *ngIf="address.touched && address.invalid" class="alert alert-danger">This field is required.</div>
+  <div formGroupName="ownerInfo">
+    <div class="form-group">
+        <label for="owner">Owner</label>
+        <input formControlName="owner" id="owner" type="text" class="form-control" [readOnly]="isReadOnly">
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input formControlName="email" id="ownerEmail" type="email" class="form-control" [readOnly]="isReadOnly">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input formControlName="phone" id="phone" type="tel" class="form-control" [readOnly]="isReadOnly">
+      </div>
+  </div>
+
+
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>
