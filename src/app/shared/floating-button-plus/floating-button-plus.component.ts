@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { SidenavComponent } from 'src/app/modules/hangars/components/sidenav/sidenav.component';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-floating-button-plus',
@@ -12,13 +13,23 @@ export class FloatingButtonPlusComponent implements OnInit {
 
   @Input() sidenavComponent?: SidenavComponent;
 
+  @Output() clicked = new EventEmitter<MouseEvent>();
+
   @HostListener('click')
   click() {
-    this.sidenavComponent.toggle();
+    if (!isNullOrUndefined(this.sidenavComponent)) {
+      this.sidenavComponent.toggle();
+    }
   }
   constructor() { }
 
   ngOnInit() {
   }
+
+  onClickButton(event) {
+    this.clicked.emit(event);
+  }
+
+
 
 }

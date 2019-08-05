@@ -27,15 +27,33 @@ export class ProductsViewAllComponent implements OnInit {
     );
   }
 
-
+  // Pasar estas funciones a los componentes de las tarjetas???
+  // REPENSAR BIEN ESTO
 
   seeMore(product: Product) {
     this.componentComService.collectData(product);
     this.router.navigate(['products/details']);
   }
 
+  editProduct(product: Product) {
+    console.log(' edit product (parent)');
+    this.componentComService.collectData(product);
+    this.router.navigate(['/products/edit/', product.id.toString()]);
+  }
+
+  removeProduct(product: Product) {
+    console.log(' delete product (parent)');
+    //this.componentComService.collectData(product);
+    //this.productApiService.removeProduct(product.id.toString()).subscribe();
+  }
+
   selectButtonAction() {
-    this.router.navigate(['products/details']);
+    this.router.navigate(['products/details/66']);
+  }
+
+  addProduct(e: MouseEvent) {
+    console.log('add product');
+    this.router.navigate(['products/add']);
   }
 
 

@@ -1,6 +1,7 @@
 <app-product-form [inputProduct]="product" [isReadOnly]="true"></app-product-form>
 
-<table >
+<h5>Price history</h5>
+<table class="table">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -15,7 +16,20 @@
         <td>{{ entry.price }}</td>
     </tr>
   </tbody>
-
 </table>
 
-<app-price-form (newPriceEntry)="postPrice($event)"></app-price-form>
+
+
+<h5>Availability</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Hangar</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>Nombre del hangar</td>
+    <td>Unidades disponibles</td>
+  </tbody>
+</table>

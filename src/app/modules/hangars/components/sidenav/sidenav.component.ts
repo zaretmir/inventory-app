@@ -4,6 +4,7 @@ import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router } from '@angular/router';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -28,7 +29,8 @@ export class SidenavComponent implements OnInit {
   hangar: Hangar = new Hangar();
 
   constructor( private router: Router,
-               private componentComService: ComponentComService ) {
+               private componentComService: ComponentComService,
+               private hangarApiService: HangarApiService ) {
   }
 
   ngOnInit() {
@@ -41,17 +43,18 @@ export class SidenavComponent implements OnInit {
 
   public manageElement() {
     this.hangar = this.componentComService.retrieveData();
-    this.router.navigate(['/hangars/details', this.hangar.id]);
+    this.router.navigate(['/hangars/manage', this.hangar.id.toString()]);
   }
 
   public editElement() {
     this.hangar = this.componentComService.retrieveData();
-    this.router.navigate(['hangars/edit', this.hangar.id]);
+    this.router.navigate(['hangars/edit', this.hangar.id.toString()]);
   }
 
   public removeElement() {
     this.hangar = this.componentComService.retrieveData();
-    this.router.navigate(['/hangars/details', this.hangar.id]);
+    this.hangarApiService.removeHangar( this.hangar.id )
+      .subscribe();
   }
 
 }

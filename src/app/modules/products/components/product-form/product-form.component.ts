@@ -12,8 +12,9 @@ export class ProductFormComponent implements OnInit {
 
   @Input() inputProduct: Product;
   @Input() isReadOnly: boolean;
+  @Input() isEdit: boolean;
 
-  @Output() newProduct = new EventEmitter<Product>();
+  @Output() clickedSubmit = new EventEmitter<Product>();
 
   productForm = new FormGroup({
     name: new FormControl(
@@ -27,7 +28,7 @@ export class ProductFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.isReadOnly) {
+    if (this.isReadOnly || this.isEdit) {
       this.name.setValue(this.inputProduct.name);
       this.description.setValue(this.inputProduct.description);
     }
@@ -41,8 +42,8 @@ export class ProductFormComponent implements OnInit {
     return this.productForm.get('description');
   }
 
-  public onSubmit() {
-    return this.newProduct.emit( this.productForm.value );
+  public onSubmitClicked() {
+    return this.clickedSubmit.emit( this.productForm.value );
   }
 
 }

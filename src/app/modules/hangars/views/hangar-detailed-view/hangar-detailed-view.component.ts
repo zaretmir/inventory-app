@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 import { ProductHangar } from 'src/app/core/models/product-hangar.model';
+import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
 
 @Component({
   selector: 'app-hangar-detailed-view',
@@ -17,14 +17,14 @@ export class HangarDetailedViewComponent implements OnInit {
 
   constructor(private router: Router,
               private componentComService: ComponentComService,
-              private hangarApiService: HangarApiService) {
+              private productHangarApiService: ProductHangarApiService) {
   }
 
   ngOnInit() {
     this.hangar = this.componentComService.retrieveData();
-    this.hangarApiService.productsByHangar(this.hangar.id).subscribe(
+    this.productHangarApiService.productsInHangar(this.hangar.id).subscribe(
       data => {
-        this.products = data.map( item => this.hangarApiService.mapToProductHangar(item) );
+        this.products = data.map( item => this.productHangarApiService.mapToProductHangar(item) );
         console.log(this.products);
       }
     );

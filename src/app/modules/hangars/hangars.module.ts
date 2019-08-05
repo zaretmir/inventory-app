@@ -12,6 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-view.component';
 import { HangarEditViewComponent } from './views/hangar-edit-view/hangar-edit-view.component';
+import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-manage-view.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HangarEditViewComponent } from './views/hangar-edit-view/hangar-edit-vi
     HangarDetailedViewComponent,
     SidenavComponent,
     HangarFormViewComponent,
-    HangarEditViewComponent],
+    HangarEditViewComponent,
+    HangarManageViewComponent],
   imports: [
     CommonModule,
     HangarsRoutingModule,

@@ -6,6 +6,7 @@ export class Hangar {
   owner: string;
   ownerEmail: string;
   phoneNumber: number;
+  isState: boolean;
 
   constructor() { }
 }

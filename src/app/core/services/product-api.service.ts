@@ -23,6 +23,18 @@ export class ProductApiService {
     return this.http.post(urlR, product);
   }
 
+  public editProduct( product: Product ) {
+    const id = product.id.toString();
+    console.log('Id: ' + id);
+    const urlR = `${this.urlApi}${'/product/product/'}${id}`;
+    return this.http.put(urlR, product);
+  }
+
+  public removeProduct( productid: string ) {
+    const urlR = `${this.urlApi}${'/product/delete/'}${productid}`;
+    return this.http.put(urlR, null);
+  }
+
   public getPriceDataByProduct( productId: number ): Observable<any> {
     const id = productId.toString();
     const urlR = `${this.urlApi}${'/price/product/'}${id}`;

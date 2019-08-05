@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/core/models/product.model';
+import { ProductApiService } from 'src/app/core/services/product-api.service';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -8,19 +9,32 @@ import { Product } from 'src/app/core/models/product.model';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
-  @Output() selectedProduct: EventEmitter<Product>;
+  @Output() clickedDetails = new EventEmitter<Product>();
+  @Output() clickedEdit = new EventEmitter<Product>();
+  @Output() clickedRemove = new EventEmitter<Product>();
 
-  constructor() {
-    this.selectedProduct = new EventEmitter();
+
+  constructor( private productApiService: ProductApiService)  {
   }
 
   ngOnInit() {
   }
 
-  onClick() {
-    console.log('Product card, product:');
-    console.log(this.product);
-    this.selectedProduct.emit(this.product);
+  onClickMore() {
+    console.log('Clicked Details');
+    this.clickedDetails.emit(this.product);
+  }
+
+  onClickEdit() {
+    console.log('Clicked edit');
+    this.clickedEdit.emit(this.product);
+  }
+
+  onClickRemove() {
+    console.log('Clicked remove');
+    console.log(this.product.id);
+    this.productApiService.removeProduct(this.product.id.toString()).subscribe();
+    //this.clickedRemove.emit(this.product);
   }
 
 }

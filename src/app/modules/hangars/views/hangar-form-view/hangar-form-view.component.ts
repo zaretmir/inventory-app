@@ -21,6 +21,7 @@ export class HangarFormViewComponent implements OnInit {
   postData(hangar: Hangar) {
     console.log(JSON.stringify(hangar));
     console.log(hangar);
+    hangar.isState = true;
     return this.hangarApiService.postHangar(hangar).subscribe( response => {
       this.componentComService.collectData(response);
       hangar = this.componentComService.retrieveData(); // To retrieve id

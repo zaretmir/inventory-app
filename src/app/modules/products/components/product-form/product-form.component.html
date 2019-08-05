@@ -1,4 +1,7 @@
+<!--
 <form [formGroup]="productForm" (ngSubmit)="onSubmit($event)">
+-->
+<form [formGroup]="productForm">
   <div class="form-group">
     <label for="name">Name</label>
     <input formControlName="name" id="name" type="text" class="form-control" [readOnly]="isReadOnly">
@@ -7,5 +10,5 @@
     <label for="description">Description</label>
     <textarea formControlName="description" id="description" type="text" class="form-control" [readOnly]="isReadOnly" cols="30" rows="10"></textarea>
   </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <button class="btn btn-primary" type="submit" (click)="onSubmitClicked()">Submit</button>
 </form>

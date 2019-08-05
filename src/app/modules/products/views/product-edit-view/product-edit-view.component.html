@@ -1,0 +1,6 @@
+<app-product-form [isReadOnly]="false" [isEdit]="true" [inputProduct]="product"
+  (clickedSubmit)=editProduct($event)>
+</app-product-form>
+
+<h5>Update Price</h5>
+<app-price-form (newPriceEntry)="postPrice($event)"></app-price-form>

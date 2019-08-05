@@ -11,7 +11,9 @@ import { HangarApiService } from 'src/app/core/services/hangar-api.service';
   styleUrls: ['./hangar-form.component.css']
 })
 export class HangarFormComponent implements OnInit {
+/*
 
+  // Nested
   hangarForm =  new FormGroup({
     name: new FormControl(
       '',
@@ -34,7 +36,8 @@ export class HangarFormComponent implements OnInit {
 
   });
 
-  // Getters for cleaner acces in template. Allows using hangarName instead of hangarForm.get('hangarName')
+  // Nested
+  // Getters for cleaner access in template. Allows using hangarName instead of hangarForm.get('hangarName')
   get name() {
     return this.hangarForm.get('name');
   }
@@ -53,7 +56,52 @@ export class HangarFormComponent implements OnInit {
 
   get phone() {
     return this.hangarForm.get('ownerInfo.phone');
+  }*/
+
+
+
+  hangarForm =  new FormGroup({
+    name: new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3)]),
+    address: new FormControl(
+      '',
+      Validators.required),
+    owner: new FormControl(
+        '',
+      [Validators.required]),
+    ownerEmail: new FormControl(
+      '',
+      [Validators.email]),
+    phoneNumber: new FormControl(
+      '',
+      [Validators.required]
+    )
+  });
+
+  // Getters for cleaner access in template. Allows using hangarName instead of hangarForm.get('hangarName')
+  get name() {
+    return this.hangarForm.get('name');
   }
+
+  get address() {
+    return this.hangarForm.get('address');
+  }
+
+  get owner() {
+    return this.hangarForm.get('owner');
+  }
+
+  get ownerEmail() {
+    return this.hangarForm.get('ownerEmail');
+  }
+
+  get phoneNumber() {
+    return this.hangarForm.get('phoneNumber');
+  }
+
+
+
 
   @Input() isEditExistent?: boolean;
   @Input() isReadOnly?: boolean;
@@ -70,12 +118,13 @@ export class HangarFormComponent implements OnInit {
       this.name.setValue(this.hangarPopulate.name);
       this.address.setValue(this.hangarPopulate.address);
       this.owner.setValue(this.hangarPopulate.owner);
-      this.email.setValue(this.hangarPopulate.ownerEmail);
-      this.phone.setValue(this.hangarPopulate.phoneNumber);
+      this.ownerEmail.setValue(this.hangarPopulate.ownerEmail);
+      this.phoneNumber.setValue(this.hangarPopulate.phoneNumber);
     }
   }
 
   onSubmit() {
+    console.log(this.hangarForm.value);
     this.outputToParent.emit( this.hangarForm.value );
 
   }

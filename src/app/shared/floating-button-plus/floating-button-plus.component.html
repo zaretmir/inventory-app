@@ -1,3 +1,8 @@
+<!--
 <a [routerLink]="routePath" class="float">
+  <i class="fa fa-plus my-float"></i>
+</a>
+-->
+<a [routerLink]="routePath" (click)="onClickButton($event)" class="float">
   <i class="fa fa-plus my-float"></i>
 </a>

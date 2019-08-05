@@ -29,12 +29,5 @@ export class ProductDetailedViewComponent implements OnInit {
     );
   }
 
-  postPrice( price: Price) {
-    return this.productApiService.postPrice(this.product.id, price).subscribe(
-      response => {
-        console.log(response);
-      }
-     );
-  }
 
 }
