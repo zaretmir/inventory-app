@@ -19,10 +19,10 @@ export class ProductFormComponent implements OnInit {
   productForm = new FormGroup({
     name: new FormControl(
       '',
-      [Validators.required]),
+      [Validators.required, Validators.minLength(3)]),
     description: new FormControl(
       '',
-      [Validators.required])
+      [Validators.required, Validators.maxLength(250)])
   });
 
   constructor() { }

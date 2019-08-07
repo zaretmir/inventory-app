@@ -36,3 +36,29 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.sidebar {
+  position: fixed;
+  z-index: 0; /* On top of the toher elements */
+  height: 100%;
+  right: 0; /* Flush to the right */
+}
+
+ul {
+  list-style-type: none; /* Remove bullets */
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+li a {
+  display: block;
+  padding: 8px 16px;
+  color: #000;
+}
+
+li a:hover {
+  background-color: #555;
+  color: white;
+}

@@ -1,5 +1,5 @@
 <h2>{{ hangar.name }}</h2>
-<app-hangar-form [isReadOnly]="true" [hangarPopulate]="hangar"></app-hangar-form>
+<app-hangar-form *ngIf="isDataReady" [isReadOnly]="true" [hangarPopulate]="hangar"></app-hangar-form>
 
 <div>
   <table class="table">

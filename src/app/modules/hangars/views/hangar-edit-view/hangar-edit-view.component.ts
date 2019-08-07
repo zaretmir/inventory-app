@@ -17,14 +17,32 @@ export class HangarEditViewComponent implements OnInit {
   hangar: Hangar;
   products: ProductHangar[] = new Array<ProductHangar>();
 
+  id: number;
+  isDataReady = false;
+
   constructor( private hangarApiService: HangarApiService,
                private componentComService: ComponentComService,
                private route: ActivatedRoute ) { }
 
   ngOnInit() {
+
+    this.getHangar();
+
+    /*
     this.hangarid = this.route.snapshot.params['hangarid'];
-    console.log('Id hangar: ' + this.hangarid);
     this.hangar = this.componentComService.retrieveData();
+    */
+  }
+
+  getHangar() {
+    this.route.params.subscribe( params => this.id = params.hangarid );
+
+    this.hangarApiService.getHangarById(this.id).subscribe(
+      data => {
+        this.hangar = this.hangarApiService.mapToHangar(data);
+        this.isDataReady = true;
+      }
+    );
   }
 
   public editHangar( hangar: Hangar ) {

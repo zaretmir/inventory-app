@@ -1,0 +1,41 @@
+{
+  "hangar": {
+    "gSing": "Hangar",
+    "gPl": "Hangars",
+    "gTxt": "Sample text"
+  },
+  "hangarform": {
+    "name": "Name",
+    "address": "Address",
+    "owner": "Owner",
+    "phone": "Phone Number"
+  },
+  "product": {
+    "gSing": "Product",
+    "gPl": "Products",
+    "gTxt": "Sample text"
+  },
+  "productform": {
+    "name": "Name",
+    "description": "Description"
+  },
+  "price": {
+    "price": "Price",
+    "history": "Price History"
+  },
+  "button": {
+    "more": "More",
+    "submit": "Submit",
+    "remove": "Remove",
+    "edit": "Edit",
+    "details": "details"
+  },
+  "availability": "Availability",
+  "qty": "Quantity",
+  "formvalidation": {
+    "required": "This field is required.",
+    "minlength": "This field must have at least {{ minlength }} characters.",
+    "maxlength": "This field cannot have more than {{ maxlength] }} characters."
+  }
+}
+

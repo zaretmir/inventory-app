@@ -1,4 +1,14 @@
-<div class="card-deck">
-  <app-card [card]="hangarCard"></app-card>
-  <app-card [card]="productCard"></app-card>
+<app-searchbar></app-searchbar>
+
+<!--
+<div *ngFor="let item of results">
+  <h1>{{ item.name }}</h1>
+</div>
+-->
+
+<div class="container mt-3">
+  <div class="card-deck">
+    <app-card [title]="'hangar.gPl'" [text]="'hangar.gTxt'" [routePath]="'/hangars'"></app-card>
+    <app-card [title]="'product.gPl'" [text]="'product.gTxt'" [routePath]="'/products'"></app-card>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterContentInit } from '@angular/core';
 import { Product } from 'src/app/core/models/product.model';
 import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
@@ -9,30 +9,70 @@ import { ProductApiService } from 'src/app/core/services/product-api.service';
   templateUrl: './products-view-all.component.html',
   styleUrls: ['./products-view-all.component.css']
 })
-export class ProductsViewAllComponent implements OnInit {
+export class ProductsViewAllComponent implements OnInit, AfterContentInit {
+
+  // Infinite scroll config params
+  items = 3;
+  private totalPages: number;
+  private currentPage: number;
 
   products: Array<Product> = [];
 
   constructor( private router: Router,
                private productApiService: ProductApiService,
-               private componentComService: ComponentComService ) { }
+               private componentComService: ComponentComService ) {
+
+    this.currentPage = 0;
+
+                }
 
   ngOnInit() {
 
-    this.productApiService.getAllProducts().subscribe(
-      data => {
-        this.products = data.map( (item: Product) => this.productApiService.mapToProduct(item) );
-        console.log(this.products);
-      }
-    );
+    // var hasScrollbar = window.innerWidth > document.documentElement.clientWidth
+
+    this.getProducts(this.currentPage, this.items);
+
   }
+
+  ngAfterContentInit() {
+
+    let hasScrollbar = window.innerWidth < document.documentElement.clientWidth;
+
+    if (!hasScrollbar) {
+      console.log('bucle');
+      this.getProducts(this.currentPage, this.items);
+      hasScrollbar = window.innerWidth < document.documentElement.clientWidth;
+    }
+
+  }
+
+  getProducts(page: number, items: number) {
+
+    this.productApiService.getProductPage(page, items).subscribe(
+      response => {
+        response.content.map( item => {
+          this.products.push(this.productApiService.mapToProduct(item));
+        });
+        this.totalPages = response.totalPages;
+      });
+    this.currentPage++;
+  }
+
+  onScroll() {
+    if (this.currentPage < this.totalPages ) {
+      console.log('onscroll');
+      this.getProducts(this.currentPage++, this.items);
+    }
+  }
+
+
 
   // Pasar estas funciones a los componentes de las tarjetas???
   // REPENSAR BIEN ESTO
 
   seeMore(product: Product) {
     this.componentComService.collectData(product);
-    this.router.navigate(['products/details']);
+    this.router.navigate(['products/details/', product.id.toString()]);
   }
 
   editProduct(product: Product) {
@@ -43,8 +83,8 @@ export class ProductsViewAllComponent implements OnInit {
 
   removeProduct(product: Product) {
     console.log(' delete product (parent)');
-    //this.componentComService.collectData(product);
-    //this.productApiService.removeProduct(product.id.toString()).subscribe();
+    // this.componentComService.collectData(product);
+    // this.productApiService.removeProduct(product.id.toString()).subscribe();
   }
 
   selectButtonAction() {
@@ -55,9 +95,5 @@ export class ProductsViewAllComponent implements OnInit {
     console.log('add product');
     this.router.navigate(['products/add']);
   }
-
-
-
-
 
 }

@@ -1,12 +1,17 @@
+<div infiniteScroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
 
-<app-floating-button-plus (click)="addProduct($event)"></app-floating-button-plus>
+    <app-floating-button-plus (click)="addProduct($event)"></app-floating-button-plus>
 
-<app-product-manager-nav></app-product-manager-nav>
-<div class="card-columns">
-<app-product-card *ngFor="let product of products" [product]="product"
-  (clickedDetails)=seeMore($event)
-  (clickedEdit)=editProduct($event)
-  (clickedRemove)=removeProduct($event)>
-</app-product-card>
+    <app-product-manager-nav></app-product-manager-nav>
+
+    <div class="card-columns">
+    <app-product-card *ngFor="let product of products" [product]="product"
+      (clickedDetails)=seeMore($event)
+      (clickedEdit)=editProduct($event)
+      (clickedRemove)=removeProduct($event)>
+    </app-product-card>
+    </div>
+
 </div>
+
 

@@ -1,0 +1,41 @@
+{
+  "hangar": {
+    "gSing": "Hangar",
+    "gPl": "Hangares",
+    "gTxt": "Texto de prueba"
+  },
+  "hangarform": {
+    "name": "Nombre",
+    "address": "Ubicación",
+    "owner": "Gerente",
+    "phone": "Teléfono"
+  },
+  "productform": {
+    "name": "Nombre",
+    "description": "Descripción"
+  },
+  "product": {
+    "gSing": "Producto",
+    "gPl": "Productos",
+    "gTxt": "Texto de prueba"
+  },
+  "price": {
+    "price": "Precio",
+    "history": "Histórico de precios"
+  },
+  "button":{
+    "more": "Ver más",
+    "submit": "Enviar",
+    "remove": "Eliminar",
+    "edit": "Editar",
+    "details": "Datos"
+  },
+  "availability": "Disponibilidad",
+  "qty": "Cantidad",
+  "formvalidation": {
+    "required": "Campo obligatorio.",
+    "minlength": "Debe tener al menos {{ minlength }} caracteres.",
+    "maxlength": "Se permite un máximo de {{ maxlength] }} caracteres."
+  }
+}
+

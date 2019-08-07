@@ -14,7 +14,20 @@ export class ProductApiService {
   constructor( private http: HttpClient ) { }
 
   public getAllProducts(): Observable<any> {
-    const urlR = `${this.urlApi}${'/product/products'}`;
+    const urlR = `${this.urlApi}${'/product/products-all'}`;
+    return this.http.get(urlR);
+  }
+
+  public getProductPage(page: number, items: number): Observable<any> {
+    const p = page.toString();
+    const i = items.toString();
+    const urlR = `${this.urlApi}${'/product/products/'}${p}${'/'}${i}`;
+    return this.http.get(urlR);
+  }
+
+  public getProductById(productid: number): Observable<any> {
+    const id = productid.toString();
+    const urlR = `${this.urlApi}${'/product/product/'}${id}`;
     return this.http.get(urlR);
   }
 

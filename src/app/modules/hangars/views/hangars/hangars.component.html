@@ -11,7 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let hangar of hangars">
+    <tr *ngFor="let hangar of hangars | paginate: {
+                                            itemsPerPage: pageSize,
+                                            currentPage: p,
+                                            totalItems: total }">
       <td>{{ hangar.name }}</td>
       <td>{{ hangar.address }}</td>
       <button (click)="setHangarSelected(hangar)" (dblclick)="hangarForm(hangar)" type="button" class="btn btn-outline-primary btn-block btn-sm">Seleccionar</button>
@@ -20,7 +23,8 @@
   </tbody>
 </table>
 
-
+<pagination-controls (pageChange)="pageChanged($event)"
+                     autoHide="true"></pagination-controls>
 
 
 

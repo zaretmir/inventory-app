@@ -1,2 +1,2 @@
 <h2>Edit hangar</h2>
-<app-hangar-form [isEditExistent]="true" [hangarPopulate]="hangar" (outputToParent)="editHangar($event)"></app-hangar-form>
+<app-hangar-form *ngIf="isDataReady" [isEditExistent]="true" [hangarPopulate]="hangar" (outputToParent)="editHangar($event)"></app-hangar-form>

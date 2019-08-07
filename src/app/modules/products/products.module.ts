@@ -12,16 +12,29 @@ import { ProductFormViewComponent } from './views/product-form-view/product-form
 import { PriceFormComponent } from './components/price-form/price-form.component';
 import { ProductManagerNavComponent } from './components/product-manager-nav/product-manager-nav.component';
 import { ProductEditViewComponent } from './views/product-edit-view/product-edit-view.component';
+import { TranslateModule } from '@ngx-translate/core';
+
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 
 @NgModule({
-  declarations: [ProductsViewAllComponent, ProductCardComponent, ProductDetailedViewComponent, ProductFormComponent, ProductFormViewComponent, PriceFormComponent, ProductManagerNavComponent, ProductEditViewComponent],
+  declarations: [
+    ProductsViewAllComponent,
+    ProductCardComponent,
+    ProductDetailedViewComponent,
+    ProductFormComponent,
+    ProductFormViewComponent,
+    PriceFormComponent,
+    ProductManagerNavComponent,
+    ProductEditViewComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule,
+    InfiniteScrollModule
   ]
 })
 export class ProductsModule { }

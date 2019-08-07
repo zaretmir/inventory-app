@@ -14,6 +14,9 @@ import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-vi
 import { HangarEditViewComponent } from './views/hangar-edit-view/hangar-edit-view.component';
 import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-manage-view.component';
 
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -29,9 +32,13 @@ import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-man
     HangarsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule,
+    NgxPaginationModule
   ],
   providers: [// ¿proveer en el raíz?
   ]
 })
-export class HangarsModule { }
+export class HangarsModule {
+
+ }

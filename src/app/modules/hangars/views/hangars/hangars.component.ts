@@ -11,6 +11,11 @@ import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 })
 export class HangarsComponent implements OnInit {
 
+  // Pagination
+  pageSize = 5;
+  p = 1;
+  total: number;
+
 
   hangar: Hangar = new Hangar();
 
@@ -27,12 +32,24 @@ export class HangarsComponent implements OnInit {
 
     this.isHangarSelected = false;
 
+    this.hangarApiService.getHangarPage(this.p - 1, this.pageSize).subscribe(
+      response => {
+        this.total = response.totalElements;
+        this.hangars = response.content.map( item => this.hangarApiService.mapToHangar(item));
+        console.log(this.hangars);
+      }
+    );
+
+    /*
+
     this.hangarApiService.getAllHangars().subscribe(
       data => {
         this.hangars = data.map( item => this.hangarApiService.mapToHangar(item));
         console.log(this.hangars);
       }
     );
+
+    */
     /*
 
     this.apiService.getHangarById().subscribe(
@@ -81,6 +98,18 @@ export class HangarsComponent implements OnInit {
     } else {
       this.addNewHangar();
     }
+  }
+
+  pageChanged(page) {
+    this.p = page;
+
+    this.hangarApiService.getHangarPage(page - 1, this.pageSize).subscribe(
+      response => {
+        this.total = response.totalElements;
+        this.hangars = response.content.map( item => this.hangarApiService.mapToHangar(item));
+        console.log(this.hangars);
+      }
+    );
   }
 
 

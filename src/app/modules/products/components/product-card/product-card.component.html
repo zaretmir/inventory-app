@@ -1,12 +1,12 @@
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <!--<img src="..." class="card-img-top" alt="...">-->
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text">{{ product.description }}</p>
-    <button (click)="onClickMore()" class="btn btn-primary">Details</button>
-    <button (click)="onClickEdit()" class="btn btn-primary">Edit</button>
-    <button (click)="onClickRemove()" class="btn btn-primary">Remove</button>
+    <button (click)="onClickMore()" class="btn btn-primary">{{ 'button.more' | translate }}</button>
+    <button (click)="onClickEdit()" class="btn btn-primary">{{ 'button.edit' | translate }}</button>
+    <button (click)="onClickRemove()" class="btn btn-primary">{{ 'button.remove' | translate }}</button>
   </div>
 </div>
 

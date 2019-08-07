@@ -19,7 +19,14 @@ export class HangarApiService {
   }
 
   public getAllHangars(): Observable<any> {
-    const urlR = `${this.urlApi}${'/hangars'}`;
+    const urlR = `${this.urlApi}${'/hangars-all'}`;
+    return this.http.get(urlR);
+  }
+
+  public getHangarPage(page: number, items: number): Observable<any> {
+    const p = page.toString();
+    const i = items.toString();
+    const urlR = `${this.urlApi}${'/hangars/'}${p}${'/'}${i}`;
     return this.http.get(urlR);
   }
 

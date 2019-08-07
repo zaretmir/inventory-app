@@ -4,6 +4,7 @@ import { ProductsViewAllComponent } from './views/products-view-all/products-vie
 import { ProductDetailedViewComponent } from './views/product-detailed-view/product-detailed-view.component';
 import { ProductFormViewComponent } from './views/product-form-view/product-form-view.component';
 import { ProductEditViewComponent } from './views/product-edit-view/product-edit-view.component';
+import { ProductResolver } from 'src/app/core/resolvers/product-resolver';
 
 
 const routes: Routes = [
@@ -11,13 +12,14 @@ const routes: Routes = [
     path: '', component: ProductsViewAllComponent
   },
   {
-    path: 'details', component: ProductDetailedViewComponent
+    path: 'details/:productid', component: ProductDetailedViewComponent
   },
   {
     path: 'add', component: ProductFormViewComponent
   },
   {
-    path: 'edit/:productid', component: ProductEditViewComponent
+    path: 'edit/:productid',
+    component: ProductEditViewComponent
   }
 ];
 

@@ -4,6 +4,7 @@ import { Hangar } from 'src/app/core/models/hangar.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hangar-form',
@@ -99,9 +100,6 @@ export class HangarFormComponent implements OnInit {
   get phoneNumber() {
     return this.hangarForm.get('phoneNumber');
   }
-
-
-
 
   @Input() isEditExistent?: boolean;
   @Input() isReadOnly?: boolean;
