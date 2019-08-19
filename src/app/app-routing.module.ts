@@ -4,6 +4,9 @@ import { ContentLayoutComponent } from './layouts/content-layout/content-layout.
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { LoginComponent } from './views/login/login.component';
+import { LogoutComponent } from './views/logout/logout.component';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -14,6 +17,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: ContentLayoutComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: '',
@@ -22,13 +26,29 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'login',
+    component: ContentLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent
+      }
+    ]
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
     path: 'hangars',
     component: ContentLayoutComponent,
+    canActivate: [AuthGuardService],
     loadChildren: () => import(`./modules/hangars/hangars.module`).then( m => m.HangarsModule)
   },
   {
     path: 'products',
     component: ContentLayoutComponent,
+    canActivate: [AuthGuardService],
     loadChildren: () => import(`./modules/products/products.module`).then( m => m.ProductsModule)
   },
   {

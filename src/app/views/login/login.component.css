@@ -1,0 +1,5 @@
+.box {
+  height: 30%;
+  width: 25%;
+  border: 2px grooved black;
+}

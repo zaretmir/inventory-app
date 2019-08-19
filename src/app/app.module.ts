@@ -19,9 +19,10 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { CardComponent } from './views/home/components/card/card.component';
 import { HomeComponent } from './views/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { from } from 'rxjs';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './views/login/login.component';
+import { LogoutComponent } from './views/logout/logout.component';
 
 
 
@@ -33,7 +34,10 @@ import { SharedModule } from './shared/shared.module';
     ContentLayoutComponent,
     NotFoundComponent,
     CardComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LogoutComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -49,7 +53,9 @@ import { SharedModule } from './shared/shared.module';
       }
     }),
     NgxPaginationModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
