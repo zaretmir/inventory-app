@@ -7,37 +7,38 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
 import { AuthGuardService } from './core/services/auth-guard.service';
+import { RegistrationFormComponent } from './views/registration-form/registration-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     component: ContentLayoutComponent,
-    canActivate: [AuthGuardService],
     children: [
       {
         path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        canActivate: [AuthGuardService],
         component: HomeComponent
-      }
-    ]
-  },
-  {
-    path: 'login',
-    component: ContentLayoutComponent,
-    children: [
+      },
       {
-        path: '',
+        path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'register',
+        // canActivate: [AuthGuardService],
+        component: RegistrationFormComponent
+      },
+      {
+        path: 'logout',
+        canActivate: [AuthGuardService],
+        component: LogoutComponent
       }
     ]
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent
   },
   {
     path: 'hangars',
