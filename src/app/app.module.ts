@@ -23,6 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
+import { RegistrationFormComponent } from './views/registration-form/registration-form.component';
 
 
 
@@ -36,7 +37,8 @@ import { LogoutComponent } from './views/logout/logout.component';
     CardComponent,
     HomeComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegistrationFormComponent
 
   ],
   imports: [

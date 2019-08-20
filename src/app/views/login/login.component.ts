@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.authenticate(this.username.value, this.password.value)
     .subscribe(
       data => {
-        this.router.navigate(['']);
+        this.router.navigateByUrl('/home');
         console.log('data');
         console.log(data);
         this.invalidLogin = false;
