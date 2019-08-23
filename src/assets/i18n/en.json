@@ -4,7 +4,7 @@
     "gPl": "Hangars",
     "gTxt": "Sample text"
   },
-  "hangarform": {
+  "hangar-form": {
     "name": "Name",
     "address": "Address",
     "owner": "Owner",
@@ -15,7 +15,7 @@
     "gPl": "Products",
     "gTxt": "Sample text"
   },
-  "productform": {
+  "product-form": {
     "name": "Name",
     "description": "Description"
   },
@@ -32,10 +32,18 @@
   },
   "availability": "Availability",
   "qty": "Quantity",
-  "formvalidation": {
+  "form-validation": {
     "required": "This field is required.",
     "minlength": "This field must have at least {{ minlength }} characters.",
-    "maxlength": "This field cannot have more than {{ maxlength] }} characters."
+    "maxlength": "This field cannot have more than {{ maxlength] }} characters.",
+    "missmatch": "Passwords do not match."
+  },
+  "registration-form": {
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "signup": "Don't have an account? Sign up",
+    "login": "Log in"
   }
 }
 

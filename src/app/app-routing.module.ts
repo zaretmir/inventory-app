@@ -6,7 +6,7 @@ import { HomeComponent } from './views/home/home.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
-import { AuthGuardService } from './core/services/auth-guard.service';
+import { AuthGuardService } from './core/services/auth/auth-guard.service';
 import { RegistrationFormComponent } from './views/registration-form/registration-form.component';
 
 const routes: Routes = [

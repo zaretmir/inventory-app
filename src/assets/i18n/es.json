@@ -4,13 +4,13 @@
     "gPl": "Hangares",
     "gTxt": "Texto de prueba"
   },
-  "hangarform": {
+  "hangar-form": {
     "name": "Nombre",
     "address": "Ubicación",
     "owner": "Gerente",
     "phone": "Teléfono"
   },
-  "productform": {
+  "product-form": {
     "name": "Nombre",
     "description": "Descripción"
   },
@@ -32,10 +32,18 @@
   },
   "availability": "Disponibilidad",
   "qty": "Cantidad",
-  "formvalidation": {
+  "form-validation": {
     "required": "Campo obligatorio.",
     "minlength": "Debe tener al menos {{ minlength }} caracteres.",
-    "maxlength": "Se permite un máximo de {{ maxlength] }} caracteres."
+    "maxlength": "Se permite un máximo de {{ maxlength] }} caracteres.",
+    "missmatch": "Las contraseñas no coinciden."
+  },
+  "registration-form": {
+    "username": "Usuario",
+    "password": "Contraseña",
+    "confirmPassword": "Repita la contraseña",
+    "signup": "¿Aún no tienes una cuenta? Regístrate",
+    "login": "Acceder"
   }
 }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/core/models/user.model';
-import { RegistrationService } from 'src/app/core/services/registration.service';
 import { Router } from '@angular/router';
+import { RegistrationService } from 'src/app/core/services/auth/registration.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -18,13 +18,16 @@ export class RegistrationFormComponent implements OnInit {
       '',
       Validators.required
     ),
-    password: new FormControl(
-      '',
-      [Validators.required]
-    ),
-    passwordR: new FormControl(
-      '',
-      Validators.required
+    passwords: new FormGroup({
+      password: new FormControl(
+        '',
+        [Validators.required]
+      ),
+      confirmPass: new FormControl(
+        '',
+        Validators.required
+      )
+    }, { validators: this.validatePassword }
     )
   });
 
@@ -52,7 +55,19 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   get password() {
-    return this.registrationForm.get('password');
+    return this.registrationForm.get('passwords').get('password');
+  }
+
+  get confirmPass() {
+    return this.registrationForm.get('passwords').get('confirmPass');
+  }
+
+  // Password validation
+  validatePassword(group: FormGroup) {
+    const pass = group.get('password');
+    const confirmPass = group.get('confirmPass');
+
+    return pass.value === confirmPass.value ? null : { notSame: true };
   }
 
 }

@@ -2,21 +2,25 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit($event)">
 -->
 <form [formGroup]="productForm">
+
   <div class="form-group">
-    <label for="name">{{ 'productform.name' | translate }}</label>
+    <label for="name">{{ 'product-form.name' | translate }}</label>
     <input formControlName="name" id="name" type="text" class="form-control" [readOnly]="isReadOnly">
     <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-      <div *ngIf="name?.errors['required']">{{ 'formvalidation.required' | translate }}</div>
-      <div *ngIf="name?.errors['minlength']">{{ 'formvalidation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}</div>
+      <div *ngIf="name?.errors['required']">{{ 'form-validation.required' | translate }}</div>
+      <div *ngIf="name?.errors['minlength']">{{ 'form-validation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}</div>
     </div>
   </div>
+
   <div class="form-group">
-    <label for="description">{{ 'productform.description' | translate }}</label>
+    <label for="description">{{ 'product-form.description' | translate }}</label>
     <textarea formControlName="description" id="description" type="text" class="form-control" [readOnly]="isReadOnly" cols="30" rows="10"></textarea>
     <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
-      <div *ngIf="description?.errors['required']">{{ 'formvalidation.required' | translate }}</div>
-      <div *ngIf="description?.errors['maxlength']">T{{ 'formvalidation.maxlength' | translate: {maxlength: name.errors['maxlength'].requiredLength} }}</div>
+      <div *ngIf="description?.errors['required']">{{ 'form-validation.required' | translate }}</div>
+      <div *ngIf="description?.errors['maxlength']">T{{ 'form-validation.maxlength' | translate: {maxlength: name.errors['maxlength'].requiredLength} }}</div>
     </div>
   </div>
+
   <button class="btn btn-primary" type="submit" (click)="onSubmitClicked()">{{ 'button.submit' | translate }}</button>
+
 </form>
