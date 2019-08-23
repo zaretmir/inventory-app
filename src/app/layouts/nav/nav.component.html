@@ -35,12 +35,7 @@
     <li><a routerLink="/products">Products</a></li>
     <li><a *ngIf="!authenticationService.isUserLoggedIn()" routerLink="/login">Log in</a></li>
     <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/logout">Log out</a></li>
+    <li *ngIf="authenticationService.isUserLoggedIn()" style='float: right;'><a routerLink="#">{{ authenticationService.getUsername() }}</a></li>
   </ul>
   </div>
-  <div class="dropdown" style="float:left">
-    <a href="javascript:void(0)" class="dropbtn">LANG</a>
-    <div class="dropdown-content">
-      <a (click)="onSelectLanguage('en')">EN</a>
-      <a (click)="onSelectLanguage('es')">ES</a>
-    </div>
 </div>

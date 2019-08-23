@@ -1,0 +1,15 @@
+header {
+  background-color: blueviolet;
+  color: white;
+  margin: 0;
+  padding: 14px;
+}
+
+span {
+  display: inline-block;
+  /*padding: 14px;*/
+}
+
+#lan-button {
+  float: right;
+}
