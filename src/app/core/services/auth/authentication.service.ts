@@ -21,7 +21,7 @@ export class AuthenticationService {
 
   constructor( private http: HttpClient ) { }
 
-  private authUrl = 'http://localhost:9007/authenticate';
+  private authUrl = 'http://localhost:9006/authenticate';
 
   authenticate(username, password) {
     return this.http.post<any>(this.authUrl, {username, password}).pipe(
@@ -49,6 +49,11 @@ export class AuthenticationService {
     // sessionStorage.removeItem('token');
     sessionStorage.clear();
   }
+
+  getUsername(): string {
+    return sessionStorage.getItem('username');
+  }
+
 
 
 }
