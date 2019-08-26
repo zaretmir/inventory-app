@@ -8,17 +8,29 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
 
-  lang: string;
+  langTag: string;
 
   constructor( private translate: TranslateService ) { }
 
   ngOnInit() {
-    this.lang = 'en';
+    this.updateLangTag();
   }
 
-  public onSelectLanguage() {
-    this.lang = (this.lang === 'en') ? 'es' : 'en';
-    this.translate.use(this.lang);
+  public switchLanguage() {
+    if (this.translate.currentLang === 'es') {
+      this.translate.use('en').subscribe(
+        () => this.updateLangTag()
+      );
+    } else {
+      console.log('No ES');
+      this.translate.use('es').subscribe(
+        () => this.updateLangTag()
+      );
+    }
+  }
+
+  private updateLangTag() {
+    this.langTag = (this.translate.currentLang === 'en') ? 'es' : 'en';
   }
 
 }

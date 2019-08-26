@@ -10,15 +10,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'inventoryApp';
 
-  public  activeLang = 'es';
+  public  activeLang = 'en';
 
   constructor( private translate: TranslateService ) {
-    this.translate.setDefaultLang(this.activeLang);
-  }
-
-  public selectLanguage(lang) {
-    this.activeLang = lang;
-    this.translate.use(lang);
+    translate.setDefaultLang(this.activeLang);
+    translate.use(translate.defaultLang);
   }
 
 }
