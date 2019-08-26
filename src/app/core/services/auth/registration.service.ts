@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -7,12 +7,20 @@ import { User } from '../../models/user.model';
 })
 export class RegistrationService {
 
-  private regUrl = 'http://localhost:9006/register';
+  private baseUrl = 'http://localhost:9006/';
 
   constructor( private http: HttpClient ) { }
 
   public register( user: User ) {
-    return this.http.post(this.regUrl, user);
+    const urlR = `${this.baseUrl}${'register'}`;
+
+    return this.http.post(urlR, user);
+  }
+
+  public isUser( username: string ) {
+    const urlR = `${this.baseUrl}${'validate'}`;
+    const params = new HttpParams().set('username', username);
+    return this.http.get(urlR, {params});
   }
 
 

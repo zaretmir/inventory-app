@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/core/models/user.model';
 import { Router } from '@angular/router';
 import { RegistrationService } from 'src/app/core/services/auth/registration.service';
+import { PasswordValidators } from './password.validators';
+import { UsernameValidators } from './username.validators';
 
 @Component({
   selector: 'app-registration-form',
@@ -16,25 +18,30 @@ export class RegistrationFormComponent implements OnInit {
   registrationForm = new FormGroup({
     username: new FormControl(
       '',
-      Validators.required
+      [ Validators.required,
+        UsernameValidators.validPattern ],
+      UsernameValidators.mustBeUnique(this.registrationService)
     ),
     passwords: new FormGroup({
       password: new FormControl(
         '',
-        [Validators.required]
+        [ Validators.required,
+          PasswordValidators.safetyLevel ]
       ),
       confirmPass: new FormControl(
         '',
         Validators.required
       )
-    }, { validators: this.validatePassword }
+    }, { validators: PasswordValidators.shouldMatch('password', 'confirmPass') }
     )
   });
 
   constructor( private registrationService: RegistrationService,
-               private router: Router ) { }
+               private router: Router,
+               private fb: FormBuilder) { }
 
   ngOnInit() {
+
   }
 
   registerUser() {
@@ -62,12 +69,8 @@ export class RegistrationFormComponent implements OnInit {
     return this.registrationForm.get('passwords').get('confirmPass');
   }
 
-  // Password validation
-  validatePassword(group: FormGroup) {
-    const pass = group.get('password');
-    const confirmPass = group.get('confirmPass');
-
-    return pass.value === confirmPass.value ? null : { notSame: true };
+  get passwords() {
+    return this.registrationForm.get('passwords');
   }
 
 }

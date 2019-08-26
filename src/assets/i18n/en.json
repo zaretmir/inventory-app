@@ -36,12 +36,15 @@
     "required": "This field is required.",
     "minlength": "This field must have at least {{ minlength }} characters.",
     "maxlength": "This field cannot have more than {{ maxlength] }} characters.",
-    "missmatch": "Passwords do not match."
+    "mismatch": "Passwords do not match."
   },
   "registration-form": {
     "username": "Username",
     "password": "Password",
-    "confirmPassword": "Confirm password",
+    "username-already-exists": "This username already exists.",
+    "invalid-pattern": "Username cannot contain whitespaces.",
+    "confirm-password": "Confirm password",
+    "unsafe-password": "Password must be at least 8 characters and contain at least one digit, one special character, uppercase and lowercase letters.",
     "signup": "Don't have an account? Sign up",
     "login": "Log in"
   }

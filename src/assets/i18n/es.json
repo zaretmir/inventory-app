@@ -36,12 +36,15 @@
     "required": "Campo obligatorio.",
     "minlength": "Debe tener al menos {{ minlength }} caracteres.",
     "maxlength": "Se permite un máximo de {{ maxlength] }} caracteres.",
-    "missmatch": "Las contraseñas no coinciden."
+    "mismatch": "Las contraseñas no coinciden."
   },
   "registration-form": {
     "username": "Usuario",
     "password": "Contraseña",
-    "confirmPassword": "Repita la contraseña",
+    "username-already-exists": "Este nombre de usuario no está disponible.",
+    "invalid-pattern": "El nombre de usuario no puede contener espacios en blanco",
+    "confirm-password": "Repita la contraseña",
+    "unsafe-password": "La contraseña debe tener al menos 8 caracteres y contener mayúsculas, minúsculas, números y caracteres especiales.",
     "signup": "¿Aún no tienes una cuenta? Regístrate",
     "login": "Acceder"
   }

@@ -4,26 +4,31 @@
     <label for="username">{{ 'registration-form.username' | translate }}</label>
     <input type="text" formControlName="username" id="username" class="form-control">
     <div *ngIf='username.touched && username.invalid' class="alert alert-danger">
-        <div *ngIf="username?.errors['required']">{{ 'formvalidation.required' | translate }}</div>
+        <div *ngIf="username?.errors['required']">{{ 'form-validation.required' | translate }}</div>
+        <div *ngIf="username.hasError('invalidPattern')">{{ 'registration-form.invalid-pattern' | translate }}</div>
+        <div *ngIf="username.hasError('notUnique')">{{ 'registration-form.username-already-exists' | translate }}</div>
     </div>
   </div>
 
   <div formGroupName="passwords" class="form-group">
-      <div class="form-group">
+    <div class="form-group">
         <label for="password">{{ 'registration-form.password' | translate }}</label>
         <input type="password" formControlName="password" id="password" class="form-control">
         <div *ngIf='password.touched && password.invalid' class="alert alert-danger">
-          <div>aqui mensajes de error</div>
+          <div *ngIf="password.hasError('unsafe')">
+            {{ 'registration-form.unsafe-password' | translate }}
+          </div>
+          <div>{{ 'form-validation.required' | translate }}</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="confirmPass">{{ 'registration-form.confirmPassword' | translate }}</label>
+        <label for="confirmPass">{{ 'registration-form.confirm-password' | translate }}</label>
         <input type="password" formControlName="confirmPass" id="confirmPass" class="form-control">
       </div>
-      <div *ngIf="confirmPass.touched && registrationForm.hasError('notSame', 'passwords')" class="alert alert-danger">
-        {{ 'formvalidation.missmatch' | translate }}
+      <div *ngIf="confirmPass.touched && passwords.hasError('mismatch')" class="alert alert-danger">
+        {{ 'form-validation.mismatch' | translate }}
       </div>
-  </div>
+    </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

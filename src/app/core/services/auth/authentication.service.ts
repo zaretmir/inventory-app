@@ -3,14 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { shareReplay, map } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 
-/*
-export class JwtResponse {
-  constructor(
-    public jwttoken: string,
-     ) {}
-}
-*/
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,10 +20,8 @@ export class AuthenticationService {
       map(
         userData => {
           sessionStorage.setItem('username', username);
-          console.log('decoded token: ');
           console.log(jwt_decode(userData.token));
           const tokenStr = 'Bearer ' + userData.token;
-          console.log(tokenStr);
           sessionStorage.setItem('token', tokenStr);
           return userData;
         }
