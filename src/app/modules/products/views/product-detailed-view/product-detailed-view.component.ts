@@ -34,18 +34,18 @@ export class ProductDetailedViewComponent implements OnInit {
         this.product = this.productApiService.mapToProduct(response);
         console.log(this.product);
         this.isDataReady = true;
-      });
+      },
+      (err) => console.log(err),
+      () => this.getPriceHistory()
+    );
+  }
 
-    if (this.isDataReady) {
-      this.productApiService.getPriceDataByProduct(this.product.id).subscribe(
+  public getPriceHistory(): void {
+    this.productApiService.getPriceDataByProduct(this.product.id).subscribe(
       data => {
         this.priceHistory = data.map( (entry: Price) => this.productApiService.mapToPrice(entry) );
         console.log(this.priceHistory);
-      }
-    );
-    }
-
-
+      });
   }
 
 

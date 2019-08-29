@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let entry of priceHistory">
           <td>{{ entry.price_id }}</td>
-          <td>{{ entry.dateUpdated }}</td>
+          <td>{{ entry.dateUpdated | date }}</td>
           <td>{{ entry.price }}</td>
       </tr>
     </tbody>
