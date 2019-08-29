@@ -1,6 +1,4 @@
 import { FormControl, ValidationErrors, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
-import { resolve } from 'path';
-import { reject } from 'q';
 import { RegistrationService } from 'src/app/core/services/auth/registration.service';
 
 export class UsernameValidators {
