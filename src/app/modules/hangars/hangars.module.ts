@@ -16,6 +16,7 @@ import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-man
 
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductsExcerptsComponent } from './components/products-excerpts/products-excerpts.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SidenavComponent,
     HangarFormViewComponent,
     HangarEditViewComponent,
-    HangarManageViewComponent],
+    HangarManageViewComponent,
+    ProductsExcerptsComponent],
   imports: [
     CommonModule,
     HangarsRoutingModule,

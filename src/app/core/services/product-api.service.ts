@@ -31,6 +31,12 @@ export class ProductApiService {
     return this.http.get(urlR);
   }
 
+  public getSimplProductById(productid: number): Observable<any> {
+    const id = productid.toString();
+    const urlR = `${this.urlApi}${'/product/simplified/'}${id}`;
+    return this.http.get(urlR);
+  }
+
   public postProduct( product: Product ) {
     const urlR = `${this.urlApi}${'/product/product'}`;
     return this.http.post(urlR, product);
@@ -68,6 +74,8 @@ export class ProductApiService {
 
     return product;
   }
+
+
 
   public mapToPrice(response: any): Price {
     const price: Price = new Price();

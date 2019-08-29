@@ -4,6 +4,8 @@ import { Hangar } from 'src/app/core/models/hangar.model';
 import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
 import { Router, ActivatedRoute, ParamMap, Route } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { Product } from 'src/app/core/models/product.model';
 
 @Component({
   selector: 'app-hangar-manage-view',
@@ -17,17 +19,18 @@ export class HangarManageViewComponent implements OnInit {
 
   constructor( private route: ActivatedRoute,
                private router: Router,
-               private productHangarApiService: ProductHangarApiService )
+               private productHangarApiService: ProductHangarApiService,
+               private productApiService: ProductApiService )
   {
     this.hangarid = route.snapshot.params['hangarid'];
   }
 
   ngOnInit() {
-    this.productHangarApiService.productsInHangar( this.hangarid ).subscribe(
+    /*this.productHangarApiService.productsInHangar( this.hangarid ).subscribe(
       data => {
         this.products = data.map( item => this.productHangarApiService.mapToProductHangar(item) );
       }
-    );
+    );*/
   }
 
   public viewProduct( productid: number) {

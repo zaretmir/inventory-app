@@ -1,0 +1,23 @@
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.qty }}</td>
+            <td>
+              <button (click)="viewProduct(product.product_id)" type="button" class="btn btn-outline-primary btn-block btn-sm">View Product</button>
+              <button (click)="removeFromStock()" type="button" class="btn btn-outline-primary btn-block btn-sm">Remove from stock</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>

@@ -46,7 +46,6 @@ import { HeaderComponent } from './layouts/header/header.component';
     LogoutComponent,
     RegistrationFormComponent,
     HeaderComponent
-
   ],
   imports: [
     BrowserAnimationsModule,

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { ProductHangar } from 'src/app/core/models/product-hangar.model';
 import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
+import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { ProductExcerpt } from 'src/app/core/models/product-excerpt.model';
+import { map, filter, switchMap, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hangar-detailed-view',
@@ -16,9 +18,10 @@ export class HangarDetailedViewComponent implements OnInit {
   id: number;
 
   public hangar: Hangar = new Hangar();
-  products: ProductHangar[] = new Array<ProductHangar>();
+  products: ProductExcerpt[] = new Array<ProductExcerpt>();
 
   isDataReady = false;
+  loadProducts = false;
 
   constructor(private route: ActivatedRoute,
               private componentComService: ComponentComService,
@@ -28,31 +31,36 @@ export class HangarDetailedViewComponent implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.pipe(first()).subscribe(
+      params => {
+        console.log(params);
+        this.id = params.hangarid; },
+      err => { console.log(err); },
+      () => {
+        this.getHangar(this.id); } // on complete
+    );
+
+    // this.getHangar(this.id);
+
     // this.hangar = this.componentComService.retrieveData();
-
-    this.getHangar();
-    this.getProductsInHangar();
   }
 
-  getHangar() {
-    this.route.params.subscribe( params => this.id = params.hangarid );
+  getHangar(id: number) {
+    console.log('gethangar');
 
-    this.hangarApiService.getHangarById(this.id).subscribe(
-      data => {
-        this.hangar = this.hangarApiService.mapToHangar(data);
-        this.isDataReady = true;
-      }
+    this.hangarApiService.getHangarById(id).subscribe(
+      data => { this.hangar = this.hangarApiService.mapToHangar(data); },
+      err => { console.log(err); },
+      () => {
+        this.isDataReady = true; }
     );
   }
 
-  getProductsInHangar() {
-    this.productHangarApiService.productsInHangar(this.id).subscribe(
-      data => {
-        this.products = data.map( item => this.productHangarApiService.mapToProductHangar(item) );
-        console.log(this.products);
-      }
-    );
+  onLoadProducts() {
+    console.log('load products');
+    this.loadProducts = true;
   }
+
 
 
 
