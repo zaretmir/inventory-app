@@ -12,8 +12,17 @@
           <tr *ngFor="let product of products">
             <td>{{ product.product_id }}</td>
             <td>{{ product.name }}</td>
-            <td>{{ product.qty }}</td>
+            <td *ngIf="!isEditable">{{ product.qty }}</td>
+            <td *ngIf="isEditable">
+              <form [formGroup]="editStockForm" id="editStockForm" (ngSubmit)="updateQty(product.product_id)">
+                <div class="form-group">
+                  <input formControlName="qty" type="number" id="qty" [value]="product.qty">
+                </div>
+              </form>
+            </td>
+
             <td>
+              <button type="submit" form="editStockForm">Update qty</button>
               <button (click)="viewProduct(product.product_id)" type="button" class="btn btn-outline-primary btn-block btn-sm">View Product</button>
               <button (click)="removeFromStock()" type="button" class="btn btn-outline-primary btn-block btn-sm">Remove from stock</button>
             </td>

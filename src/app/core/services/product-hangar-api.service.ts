@@ -27,7 +27,7 @@ export class ProductHangarApiService {
 
   public addProductToHangar( entry: ProductHangar ) {
     const id = entry.hangarpk.toString();
-    const urlR = `${this.urlApi}${'add-to-hangar/'}${id}`;
+    const urlR = `${this.urlApi}${'add-to-hangar/'}`;
     return this.http.post(urlR, entry);
   }
 
