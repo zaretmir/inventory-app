@@ -8,26 +8,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductHangarApiService {
 
-  private urlApi = 'http://localhost:9006/api/stock/';
+  private urlApi = 'http://localhost:9006/api/stock-management';
 
   constructor( private http: HttpClient ) { }
 
   public getProductsInHangar( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${'all-products/'}${hangarid}`;
+    const urlR = `${this.urlApi}${'/entries/hangars/'}${hangarid}`;
     return this.http.get(urlR);
   }
 
   public getProductsInHangarExcerpt( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${hangarid}${'/products/simplified'}`;
+    const urlR = `${this.urlApi}${'/entries/hangar/'}${hangarid}${'?details=true'}`;
     return this.http.get(urlR);
 
   }
 
   public addProductToHangar( entry: ProductHangar ) {
     const id = entry.hangarpk.toString();
-    const urlR = `${this.urlApi}${'add-to-hangar/'}`;
+    const urlR = `${this.urlApi}${'/entries'}`;
     return this.http.post(urlR, entry);
   }
 

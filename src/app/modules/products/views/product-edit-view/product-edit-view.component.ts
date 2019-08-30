@@ -4,6 +4,7 @@ import { ComponentComService } from 'src/app/core/services/component-com.service
 import { Product } from 'src/app/core/models/product.model';
 import { Price } from 'src/app/core/models/price.model';
 import { ActivatedRoute } from '@angular/router';
+import { PriceApiService } from 'src/app/core/services/price-api.service';
 
 @Component({
   selector: 'app-product-edit-view',
@@ -18,6 +19,7 @@ export class ProductEditViewComponent implements OnInit {
   isDataReady = false;
 
   constructor( private productApiService: ProductApiService,
+               private priceApiService: PriceApiService,
                private componentComService: ComponentComService,
                private route: ActivatedRoute ) { }
 
@@ -33,13 +35,11 @@ export class ProductEditViewComponent implements OnInit {
       }
     );
 
-
-
-
   }
 
   editProduct( product: Product ) {
     product.id = this.product.id;
+    product.isState = true;
     console.log('Producto editado');
     console.log(product);
     this.productApiService.editProduct(product).subscribe(
@@ -50,7 +50,7 @@ export class ProductEditViewComponent implements OnInit {
   }
 
   postPrice( price: Price) {
-    return this.productApiService.postPrice(this.product.id, price).subscribe(
+    return this.priceApiService.postPrice(this.product.id, price).subscribe(
       response => {
         console.log(response);
       }

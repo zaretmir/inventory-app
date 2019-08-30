@@ -4,6 +4,7 @@ import { ComponentComService } from 'src/app/core/services/component-com.service
 import { Price } from 'src/app/core/models/price.model';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { PriceApiService } from 'src/app/core/services/price-api.service';
 
 @Component({
   selector: 'app-product-detailed-view',
@@ -21,6 +22,7 @@ export class ProductDetailedViewComponent implements OnInit {
   isDataReady = false;
 
   constructor( private productApiService: ProductApiService,
+               private priceApiService: PriceApiService,
                private componentComService: ComponentComService,
                private route: ActivatedRoute ) {
    }
@@ -41,9 +43,9 @@ export class ProductDetailedViewComponent implements OnInit {
   }
 
   public getPriceHistory(): void {
-    this.productApiService.getPriceDataByProduct(this.product.id).subscribe(
+    this.priceApiService.getPriceDataByProduct(this.product.id).subscribe(
       data => {
-        this.priceHistory = data.map( (entry: Price) => this.productApiService.mapToPrice(entry) );
+        this.priceHistory = data.map( (entry: Price) => this.priceApiService.mapToPrice(entry) );
         console.log(this.priceHistory);
       });
   }

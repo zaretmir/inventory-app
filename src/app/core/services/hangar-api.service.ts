@@ -8,18 +8,18 @@ import { Observable } from 'rxjs';
 })
 export class HangarApiService {
 
-  private urlApi = 'http://localhost:9006/api/hangar';
+  private urlApi = 'http://localhost:9006/api/hangar-management';
 
   constructor( private http: HttpClient ) { }
 
   public getHangarById( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${'/hangar/'}${id}`;
+    const urlR = `${this.urlApi}${'/hangars/'}${id}`;
     return this.http.get(urlR);
   }
 
   public getAllHangars(): Observable<any> {
-    const urlR = `${this.urlApi}${'/hangars-all'}`;
+    const urlR = `${this.urlApi}${'/hangars'}`;
     return this.http.get(urlR);
   }
 
@@ -33,14 +33,14 @@ export class HangarApiService {
   public postHangar( hangar: Hangar ) {
     console.log('Posting hangar');
     console.log(hangar);
-    const urlR = `${this.urlApi}${'/hangar'}`;
+    const urlR = `${this.urlApi}${'/hangars'}`;
     return this.http.post(urlR, hangar);
   }
 
   public editHangar( hangar: Hangar ) {
     const id = hangar.id.toString();
     console.log(id);
-    const urlR = `${this.urlApi}${'/update/'}${id}`;
+    const urlR = `${this.urlApi}${'/hangars/'}${id}`;
     return this.http.put(urlR, hangar);
   }
 
