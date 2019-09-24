@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Product } from '../models/product.model';
+import { Product } from '../interfaces/product';
 
 @Injectable()
 export class ProductResolver implements Resolve<any> {
@@ -14,12 +14,12 @@ export class ProductResolver implements Resolve<any> {
 
   }
 
-  getProduct(productid: number) {
-    let product = new Product();
+  getProduct(productid: string) {
+    let product: Product;
 
     this.productApiService.getProductById(productid).subscribe(
       response => {
-        product = this.productApiService.mapToProduct(response);
+        product = response;
         console.log('Resolver:');
         console.log(product);
       }

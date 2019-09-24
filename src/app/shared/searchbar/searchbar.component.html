@@ -1,5 +1,11 @@
 <div class="row">
   <div class="col">
-    <input #queryTerm type="text" (keyup)="search(queryTerm.value)" placeholder="..." class="form-control">
+    <input #queryTerm type="text" (keyup)="triggerSearch(queryTerm.value)" placeholder="Buscar..." class="form-control">
   </div>
+</div>
+
+<div>
+  <table>
+    <tr *ngFor="let result of results">{{ result.name }}</tr>
+  </table>
 </div>

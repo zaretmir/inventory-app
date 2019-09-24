@@ -1,0 +1,6 @@
+<pre> {{ order$ | async | json}} </pre>
+<div *ngIf='order$ | async as order'>
+  <app-cart-items-list [order]="order"></app-cart-items-list>
+  <app-cart-extras-totals [order]="order"></app-cart-extras-totals>
+</div>
+

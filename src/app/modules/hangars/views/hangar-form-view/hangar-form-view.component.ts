@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hangar } from 'src/app/core/models/hangar.model';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { Router } from '@angular/router';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
+import { Hangar } from 'src/app/core/interfaces/hangar';
 
 @Component({
   selector: 'app-hangar-form-view',
@@ -21,7 +21,7 @@ export class HangarFormViewComponent implements OnInit {
   postData(hangar: Hangar) {
     console.log(JSON.stringify(hangar));
     console.log(hangar);
-    hangar.isState = true;
+    hangar.isActive = true;
     return this.hangarApiService.postHangar(hangar).subscribe( response => {
       this.componentComService.collectData(response);
       hangar = this.componentComService.retrieveData(); // To retrieve id

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, AfterContentInit } from '@angular/core';
-import { Product } from 'src/app/core/models/product.model';
 import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { Product } from 'src/app/core/interfaces/product';
 
 @Component({
   selector: 'app-products-view-all',
@@ -51,7 +51,7 @@ export class ProductsViewAllComponent implements OnInit, AfterContentInit {
     this.productApiService.getProductPage(page, items).subscribe(
       response => {
         response.content.map( item => {
-          this.products.push(this.productApiService.mapToProduct(item));
+          this.products.push(item);
         });
         this.totalPages = response.totalPages;
       });
@@ -65,7 +65,15 @@ export class ProductsViewAllComponent implements OnInit, AfterContentInit {
     }
   }
 
-
+  search(name: string) {
+    console.log(name);
+    this.productApiService.getProductSearchResults(name)
+      .subscribe(
+        (data) => console.log(data),
+        (err) => console.log(err),
+        () => console.log('completed')
+      );
+  }
 
   // Pasar estas funciones a los componentes de las tarjetas???
   // REPENSAR BIEN ESTO

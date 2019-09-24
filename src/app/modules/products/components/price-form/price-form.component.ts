@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Price } from 'src/app/core/models/price.model';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { Price } from 'src/app/core/interfaces/price';
+import { StockEntry } from 'src/app/core/interfaces/stock-entry';
 
 @Component({
   selector: 'app-price-form',
@@ -10,8 +11,8 @@ import { ProductApiService } from 'src/app/core/services/product-api.service';
 })
 export class PriceFormComponent implements OnInit {
 
-  price: Price = new Price();
-
+  price: Price;
+  @Input() stockEntry: StockEntry;
   @Output() newPriceEntry = new EventEmitter<Price>();
 
   priceEntryForm = new FormGroup({
@@ -31,8 +32,8 @@ export class PriceFormComponent implements OnInit {
     console.log(date.getTime().toString());
     this.price.dateUpdated = date.getTime();
     this.price.price = this.priceEntryForm.get('figure').value;
-    this.price.product = this.productApiService.getAllProducts[0];
-    console.log(this.price.product);
+    this.price.stockEntry = this.stockEntry;
+    console.log(this.price.stockEntry);
 
     return this.newPriceEntry.emit( this.price );
   }

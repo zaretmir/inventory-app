@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/core/models/product.model';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { Price } from 'src/app/core/models/price.model';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { PriceApiService } from 'src/app/core/services/price-api.service';
+import { flatMap, switchMap } from 'rxjs/operators';
+import { StockEntry } from 'src/app/core/interfaces/stock-entry';
+import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
+import { Product } from 'src/app/core/interfaces/product';
+import { Price } from 'src/app/core/interfaces/price';
 
 @Component({
   selector: 'app-product-detailed-view',
@@ -14,15 +17,13 @@ import { PriceApiService } from 'src/app/core/services/price-api.service';
 export class ProductDetailedViewComponent implements OnInit {
 
   product: Product;
-
-  id: number;
-
-  priceHistory: Array<Price>;
-
+  id: string;
+  stockEntries: StockEntry[];
   isDataReady = false;
 
   constructor( private productApiService: ProductApiService,
                private priceApiService: PriceApiService,
+               private stockService: ProductHangarApiService,
                private componentComService: ComponentComService,
                private route: ActivatedRoute ) {
    }
@@ -31,23 +32,56 @@ export class ProductDetailedViewComponent implements OnInit {
 
     this.route.params.subscribe( (params) => this.id = params.productid );
 
-    this.productApiService.getProductById(+this.id).subscribe(
-      (response: any) => {
-        this.product = this.productApiService.mapToProduct(response);
-        console.log(this.product);
+    this.getProduct(this.id);
+    this.getStock(this.id);
+    this.getProductSM(this.id);
+  }
+
+  getProduct(productId: string) {
+    this.productApiService.getProductById(productId).subscribe(
+      response => {
+        this.product = response;
         this.isDataReady = true;
       },
-      (err) => console.log(err),
-      () => this.getPriceHistory()
+      (error: Response) => {
+        if (error.status === 404) {
+          alert('Product not found');
+        } else {
+          alert('Product unexpected error');
+        }
+      },
+      () => console.log('product info retrieved')
     );
   }
 
-  public getPriceHistory(): void {
-    this.priceApiService.getPriceDataByProduct(this.product.id).subscribe(
-      data => {
-        this.priceHistory = data.map( (entry: Price) => this.priceApiService.mapToPrice(entry) );
-        console.log(this.priceHistory);
-      });
+  getProductSM(productId: string): void {
+    this.productApiService
+    .getProductById(productId).pipe(
+      switchMap(
+        (product: Product) => {
+          this.product = product;
+          return this.priceApiService.getPriceDataByProduct(product.id);
+      }))
+      .subscribe(
+        response => console.log('Res sm: ' + response),
+        error => console.log('error sm'),
+        () => console.log('complete')
+      );
+  }
+
+  public getStock(productId: string): void {
+    this.stockService.getStockByProduct(productId).subscribe(
+      response => {
+        this.stockEntries = response;
+      },
+      (error: Response) => {
+        if (error.status === 404) {
+          alert ('No stock found');
+        } else {
+          alert('Stock unexpected error');
+        }
+      }
+    );
   }
 
 

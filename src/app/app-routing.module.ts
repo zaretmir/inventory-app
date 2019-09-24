@@ -44,13 +44,19 @@ const routes: Routes = [
     path: 'hangars',
     component: ContentLayoutComponent,
     canActivate: [AuthGuardService],
-    loadChildren: () => import(`./modules/hangars/hangars.module`).then( m => m.HangarsModule)
+    loadChildren: './modules/hangars/hangars.module#HangarsModule'
   },
   {
     path: 'products',
     component: ContentLayoutComponent,
     canActivate: [AuthGuardService],
-    loadChildren: () => import(`./modules/products/products.module`).then( m => m.ProductsModule)
+    loadChildren: './modules/products/products.module#ProductsModule'
+  },
+  {
+    path: 'cart',
+    component: ContentLayoutComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: './modules/shop/shop.module#ShopModule'
   },
   {
     path: '**',

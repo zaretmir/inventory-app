@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { Product } from 'src/app/core/models/product.model';
-import { Price } from 'src/app/core/models/price.model';
 import { ActivatedRoute } from '@angular/router';
 import { PriceApiService } from 'src/app/core/services/price-api.service';
+import { Product } from 'src/app/core/interfaces/product';
+import { Price } from 'src/app/core/interfaces/price';
 
 @Component({
   selector: 'app-product-edit-view',
@@ -27,26 +27,13 @@ export class ProductEditViewComponent implements OnInit {
 
     this.route.params.subscribe( (params) => this.id = params.productid );
 
-    this.productApiService.getProductById(+this.id).subscribe(
+    this.productApiService.getProductById(this.id).subscribe(
       (response: any) => {
-        this.product = this.productApiService.mapToProduct(response);
-        console.log(this.product);
+        this.product = response;
         this.isDataReady = true;
       }
     );
 
-  }
-
-  editProduct( product: Product ) {
-    product.id = this.product.id;
-    product.isState = true;
-    console.log('Producto editado');
-    console.log(product);
-    this.productApiService.editProduct(product).subscribe(
-      ( response: any ) => {
-        console.log('Response:');
-        console.log(response);
-      });
   }
 
   postPrice( price: Price) {

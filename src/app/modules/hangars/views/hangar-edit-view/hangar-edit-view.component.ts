@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Hangar } from 'src/app/core/models/hangar.model';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
-import { ProductHangar } from 'src/app/core/models/product-hangar.model';
 import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Hangar } from 'src/app/core/interfaces/hangar';
+import { StockEntry } from 'src/app/core/interfaces/stock-entry';
 
 @Component({
   selector: 'app-hangar-edit-view',
@@ -15,7 +15,7 @@ export class HangarEditViewComponent implements OnInit {
 
   hangarid: number;
   hangar: Hangar;
-  products: ProductHangar[] = new Array<ProductHangar>();
+  products: StockEntry[];
 
   id: number;
   isDataReady = false;
@@ -41,7 +41,7 @@ export class HangarEditViewComponent implements OnInit {
 
     this.hangarApiService.getHangarById(this.id).subscribe(
       data => {
-        this.hangar = this.hangarApiService.mapToHangar(data);
+        this.hangar = data;
         this.isDataReady = true;
       }
     );

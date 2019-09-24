@@ -1,63 +1,57 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product.model';
 import { Observable } from 'rxjs';
-import { Price } from '../models/price.model';
+
+import { Product } from '../interfaces/product';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { AppError } from '../exception/app-error';
+
+const BASE_URL = 'http://localhost:9006/api/product-management';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductApiService {
-
-  private urlApi = 'http://localhost:9006/api/product-management';
+  BASER_URL: any;
 
   constructor( private http: HttpClient ) { }
 
   public getAllProducts(): Observable<any> {
-    const urlR = `${this.urlApi}${'/products'}`;
+    const urlR = `${BASE_URL}${'/products'}`;
     return this.http.get(urlR);
   }
 
   public getProductPage(page: number, items: number): Observable<any> {
-    const p = page.toString();
-    const i = items.toString();
-    const urlR = `${this.urlApi}${'/products/'}${p}${'/'}${i}`;
+    const urlR = `${BASE_URL}${'/products/'}${page.toString()}${'/'}${items.toString()}`;
     return this.http.get(urlR);
   }
 
-  public getProductById(productid: number): Observable<any> {
-    const id = productid.toString();
-    const urlR = `${this.urlApi}${'/products/'}${id}`;
+  public getProductById(id: string): Observable<any> {
+    const urlR = `${BASE_URL}/products/${id}`;
+    return this.http.get(urlR);
+  }
+
+  public getProductSearchResults(name: string): Observable<any> {
+    const urlR = `${BASE_URL}/products?name=${name}`;
     return this.http.get(urlR);
   }
 
   public postProduct( product: Product ) {
-    const urlR = `${this.urlApi}${'/products/'}`;
+    const urlR = `${BASE_URL}/products`;
     return this.http.post(urlR, product);
   }
 
   public editProduct( product: Product ) {
     const id = product.id.toString();
     console.log('Id: ' + id);
-    const urlR = `${this.urlApi}${'/products/'}${id}`;
+    const urlR = `${BASE_URL}/products`;
     return this.http.put(urlR, product);
   }
 
   public removeProduct( productId: string ) {
-    const urlR = `${this.urlApi}${'/products/delete/'}${productId}`;
+    const urlR = `${BASE_URL}/products/delete/${productId}`;
     return this.http.put(urlR, null);
-  }
-
-
-
-  public mapToProduct(response: any): Product {
-    const product = new Product();
-    product.id = response.id;
-    product.name = response.name;
-    product.description = response.description;
-    product.isState = response.isState;
-
-    return product;
   }
 
 }

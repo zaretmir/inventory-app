@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Hangar } from 'src/app/core/models/hangar.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Hangar } from 'src/app/core/interfaces/hangar';
 
 @Component({
   selector: 'app-hangar-form',
@@ -107,7 +107,7 @@ export class HangarFormComponent implements OnInit {
 
   @Output() outputToParent = new EventEmitter<Hangar>();
 
-  hangar: Hangar =  new Hangar();
+  hangar: Hangar;
 
   constructor( private hangarApiService: HangarApiService ) { }
 

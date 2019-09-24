@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { User } from 'src/app/core/models/user.model';
 import { Router } from '@angular/router';
 import { RegistrationService } from 'src/app/core/services/auth/registration.service';
 import { PasswordValidators } from './password.validators';
 import { UsernameValidators } from './username.validators';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-registration-form',
@@ -45,7 +45,6 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   registerUser() {
-    this.user = new User();
     this.user.username = this.username.value;
     this.user.password = this.password.value;
 

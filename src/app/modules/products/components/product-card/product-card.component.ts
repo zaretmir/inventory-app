@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from 'src/app/core/models/product.model';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { Product } from 'src/app/core/interfaces/product';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -34,7 +34,7 @@ export class ProductCardComponent implements OnInit {
     console.log('Clicked remove');
     console.log(this.product.id);
     this.productApiService.removeProduct(this.product.id.toString()).subscribe();
-    //this.clickedRemove.emit(this.product);
+    // this.clickedRemove.emit(this.product);
   }
 
 }

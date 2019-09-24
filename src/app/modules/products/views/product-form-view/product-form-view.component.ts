@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/core/models/product.model';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { Product } from 'src/app/core/interfaces/product';
 
 @Component({
   selector: 'app-product-form-view',
@@ -13,12 +13,18 @@ export class ProductFormViewComponent implements OnInit {
 
   ngOnInit() {
   }
-
+/*
   postData( product: Product ) {
-    this.productApiService.postProduct(product).subscribe(
+    this.productApiService.postProduct(product)
+    .subscribe(
       response => {
         console.log(response);
-    });
+      },
+      (error: Response) => {
+        alert('An unexpected error ocurred');
+      }
+    );
   }
+  */
 
 }

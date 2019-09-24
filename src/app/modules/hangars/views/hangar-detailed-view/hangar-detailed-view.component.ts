@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { ProductHangarApiService } from 'src/app/core/services/product-hangar-api.service';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
-import { ProductExcerpt } from 'src/app/core/models/product-excerpt.model';
 import { map, filter, switchMap, first } from 'rxjs/operators';
+import { Hangar } from 'src/app/core/interfaces/hangar';
+import { ProductExcerpt } from 'src/app/core/interfaces/product-excerpt';
 
 @Component({
   selector: 'app-hangar-detailed-view',
@@ -17,8 +17,8 @@ export class HangarDetailedViewComponent implements OnInit {
 
   id: number;
 
-  public hangar: Hangar = new Hangar();
-  products: ProductExcerpt[] = new Array<ProductExcerpt>();
+  public hangar: Hangar;
+  products: ProductExcerpt[];
 
   isDataReady = false;
   loadProducts = false;
@@ -49,7 +49,7 @@ export class HangarDetailedViewComponent implements OnInit {
     console.log('gethangar');
 
     this.hangarApiService.getHangarById(id).subscribe(
-      data => { this.hangar = this.hangarApiService.mapToHangar(data); },
+      data => { this.hangar = data; },
       err => { console.log(err); },
       () => {
         this.isDataReady = true; }

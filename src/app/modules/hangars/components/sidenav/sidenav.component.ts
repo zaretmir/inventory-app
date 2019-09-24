@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
+import { Hangar } from 'src/app/core/interfaces/hangar';
 
 @Component({
   selector: 'app-sidenav',
@@ -26,7 +26,7 @@ export class SidenavComponent implements OnInit {
 
   isOpen = false;
 
-  hangar: Hangar = new Hangar();
+  hangar: Hangar;
 
   constructor( private router: Router,
                private componentComService: ComponentComService,

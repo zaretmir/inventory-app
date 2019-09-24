@@ -1,6 +1,22 @@
 <app-product-form *ngIf="isDataReady" [inputProduct]="product" [isReadOnly]="true"></app-product-form>
 
-<div class="container mt-3">
+<div *ngFor="let stockEntry of stockEntries" class="container mt-3">
+  <h5>Availability</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Hangar</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>{{ stockEntry.hangarPk }}</td>
+      <td>{{ stockEntry.productPk }}</td>
+    </tbody>
+  </table>
+</div>
+
+<div *ngFor="let stockEntry of stockEntries" class="container mt-3">
   <h5>Price history</h5>
   <table class="table">
     <thead>
@@ -11,27 +27,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let entry of priceHistory">
-          <td>{{ entry.price_id }}</td>
-          <td>{{ entry.dateUpdated | date }}</td>
-          <td>{{ entry.price }}</td>
+      <tr *ngFor="let priceEntry of stockEntry.priceHistory">
+          <td>{{ priceEntry.price_id }}</td>
+          <td>{{ priceEntry.dateUpdated | date }}</td>
+          <td>{{ priceEntry.price }}</td>
       </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="container mt-3">
-  <h5>Availability</h5>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Hangar</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <td>Nombre del hangar</td>
-      <td>Unidades disponibles</td>
     </tbody>
   </table>
 </div>

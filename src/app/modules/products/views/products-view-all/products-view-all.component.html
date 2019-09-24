@@ -1,3 +1,4 @@
+<app-searchbar (keyup)="search()"></app-searchbar>
 <div infiniteScroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
 
     <app-floating-button-plus (click)="addProduct($event)"></app-floating-button-plus>

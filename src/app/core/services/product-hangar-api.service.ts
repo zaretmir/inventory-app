@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductHangar } from '../models/product-hangar.model';
 import { HttpClient } from '@angular/common/http';
+import { StockEntry } from '../interfaces/stock-entry';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,12 @@ export class ProductHangarApiService {
     return this.http.get(urlR);
   }
 
+  public getStockByProduct( productid: string ): Observable<any> {
+    console.log('en servicio');
+    const urlR = `${this.urlApi}${'/entries/product/'}${productid}`;
+    return this.http.get(urlR);
+  }
+
   public getProductsInHangarExcerpt( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
     const urlR = `${this.urlApi}${'/entries/hangar/'}${hangarid}${'?details=true'}`;
@@ -25,24 +31,10 @@ export class ProductHangarApiService {
 
   }
 
-  public addProductToHangar( entry: ProductHangar ) {
-    const id = entry.hangarpk.toString();
+  public addProductToHangar( entry: StockEntry ) {
+    const id = entry.hangarPk.toString();
     const urlR = `${this.urlApi}${'/entries'}`;
-    return this.http.post(urlR, entry);
-  }
-
-  /**
-   * Model mappings
-   */
-
-  public mapToProductHangar(response: any): ProductHangar {
-
-    const productHangar = new ProductHangar();
-    productHangar.hangarpk = response.hangarpk;
-    productHangar.productpk = response.productpk;
-    productHangar.qtyph = response.qtyph;
-
-    return productHangar;
+    return this.http.put(urlR, entry);
   }
 
 }

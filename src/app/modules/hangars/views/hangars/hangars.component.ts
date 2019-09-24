@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Hangar } from 'src/app/core/models/hangar.model';
 import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
+import { Hangar } from 'src/app/core/interfaces/hangar';
 
 @Component({
   selector: 'app-hangars',
@@ -17,12 +17,12 @@ export class HangarsComponent implements OnInit {
   total: number;
 
 
-  hangar: Hangar = new Hangar();
+  hangar: Hangar;
 
   hangars: Hangar[] = new Array<Hangar>();
 
   isHangarSelected: boolean;
-  hangarSelected: Hangar = new Hangar();
+  hangarSelected: Hangar;
 
   constructor( private router: Router,
                private hangarApiService: HangarApiService,
@@ -35,7 +35,7 @@ export class HangarsComponent implements OnInit {
     this.hangarApiService.getHangarPage(this.p - 1, this.pageSize).subscribe(
       response => {
         this.total = response.totalElements;
-        this.hangars = response.content.map( item => this.hangarApiService.mapToHangar(item));
+        this.hangars = response.content;
         console.log(this.hangars);
       }
     );
@@ -106,7 +106,7 @@ export class HangarsComponent implements OnInit {
     this.hangarApiService.getHangarPage(page - 1, this.pageSize).subscribe(
       response => {
         this.total = response.totalElements;
-        this.hangars = response.content.map( item => this.hangarApiService.mapToHangar(item));
+        this.hangars = response.content;
         console.log(this.hangars);
       }
     );

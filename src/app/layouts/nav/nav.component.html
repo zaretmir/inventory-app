@@ -36,6 +36,7 @@
     <li><a *ngIf="!authenticationService.isUserLoggedIn()" routerLink="/login">Log in</a></li>
     <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/logout">Log out</a></li>
     <li *ngIf="authenticationService.isUserLoggedIn()" style='float: right;'><a routerLink="#">{{ authenticationService.getUsername() }}</a></li>
+    <li style='float: right;'><a routerLink="/cart">Cart</a></li>
   </ul>
   </div>
 </div>

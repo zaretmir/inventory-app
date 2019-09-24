@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Hangar } from '../models/hangar.model';
 import { Observable } from 'rxjs';
+import { Hangar } from '../interfaces/hangar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HangarApiService {
 
-  private urlApi = 'http://localhost:9006/api/hangar-management';
+  private urlApi = 'http://localhost:9006/api/hangar-management/';
 
   constructor( private http: HttpClient ) { }
 
   public getHangarById( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${'/hangars/'}${id}`;
+    const urlR = `${this.urlApi}${'hangars/'}${id}`;
     return this.http.get(urlR);
   }
 
   public getAllHangars(): Observable<any> {
-    const urlR = `${this.urlApi}${'/hangars'}`;
+    const urlR = `${this.urlApi}${'hangars'}`;
     return this.http.get(urlR);
   }
 
   public getHangarPage(page: number, items: number): Observable<any> {
     const p = page.toString();
     const i = items.toString();
-    const urlR = `${this.urlApi}${'/hangars/'}${p}${'/'}${i}`;
+    const urlR = `${this.urlApi}${'hangars/'}${p}${'/'}${i}`;
+    return this.http.get(urlR);
+  }
+
+  public getHangarSearchReults(term: string) {
+    const urlR = `${this.urlApi}${'hangars?name='}${term}`;
     return this.http.get(urlR);
   }
 
@@ -55,7 +60,7 @@ export class HangarApiService {
   /**
    * Model mappings
    */
-
+/*
   public mapToHangar(response: any): Hangar {
     const hangar = new Hangar();
     hangar.id = response.id;
@@ -68,4 +73,5 @@ export class HangarApiService {
 
     return hangar;
   }
+  */
 }
