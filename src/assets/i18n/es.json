@@ -28,7 +28,8 @@
     "submit": "Enviar",
     "remove": "Eliminar",
     "edit": "Editar",
-    "details": "Datos"
+    "details": "Datos",
+    "add-to-cart": "Añadir al carrito"
   },
   "availability": "Disponibilidad",
   "qty": "Cantidad",

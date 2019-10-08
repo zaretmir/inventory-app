@@ -31,10 +31,16 @@ import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
 import { RegistrationFormComponent } from './views/registration-form/registration-form.component';
 import { HeaderComponent } from './layouts/header/header.component';
+
+// Redux
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { rootReducers, metaReducers } from './core/state';
+import { StateModule } from './core/state/state.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './core/state/app.effects';
+import { ProductApiService } from './core/services/product-api.service';
 
 
 @NgModule({
@@ -67,7 +73,8 @@ import { environment } from '../environments/environment';
     NgxPaginationModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StateModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true}

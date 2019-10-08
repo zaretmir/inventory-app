@@ -11,6 +11,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   @Output() clickedDetails = new EventEmitter<Product>();
   @Output() clickedEdit = new EventEmitter<Product>();
+  @Output() clickedAddToCart = new EventEmitter<Product>();
   @Output() clickedRemove = new EventEmitter<Product>();
 
 
@@ -28,6 +29,11 @@ export class ProductCardComponent implements OnInit {
   onClickEdit() {
     console.log('Clicked edit');
     this.clickedEdit.emit(this.product);
+  }
+
+  onClickAddToCart() {
+    console.log('"Add to cart" clicked');
+    this.clickedAddToCart.emit(this.product);
   }
 
   onClickRemove() {

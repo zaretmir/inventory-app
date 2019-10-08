@@ -6,10 +6,11 @@
     <app-product-manager-nav></app-product-manager-nav>
 
     <div class="card-columns">
-    <app-product-card *ngFor="let product of products" [product]="product"
-      (clickedDetails)=seeMore($event)
-      (clickedEdit)=editProduct($event)
-      (clickedRemove)=removeProduct($event)>
+    <app-product-card *ngFor="let product of products$ | async" [product]="product"
+      (clickedDetails)=seeProductDetails(product.id)
+      (clickedEdit)=editProduct(product.id)
+      (clickedAddToCart)=addToCart(product)
+      (clickedRemove)=removeProduct(product.id)>
     </app-product-card>
     </div>
 

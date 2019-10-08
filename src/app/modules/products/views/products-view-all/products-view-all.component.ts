@@ -3,6 +3,16 @@ import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { Product } from 'src/app/core/interfaces/product';
+import { Store, select } from '@ngrx/store';
+import { CartState } from 'src/app/core/state/cart/cart.reducer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CartActionTypes } from 'src/app/core/state/cart/cart.actions';
+import { ProductsState } from 'src/app/core/state/products/products.reducer';
+import { ProductsEffects } from 'src/app/core/state/products/products.effects';
+import { ProductsActionTypes, LoadProducts } from 'src/app/core/state/products/products.actions';
+import { ProductsFacade } from 'src/app/core/state/products/products.facade';
+import { CartFacade } from 'src/app/core/state/cart/cart.facade';
 
 @Component({
   selector: 'app-products-view-all',
@@ -12,40 +22,48 @@ import { Product } from 'src/app/core/interfaces/product';
 export class ProductsViewAllComponent implements OnInit, AfterContentInit {
 
   // Infinite scroll config params
-  items = 3;
+  items = 5;
   private totalPages: number;
   private currentPage: number;
 
-  products: Array<Product> = [];
+  products$: Observable<Product[]>;
 
-  constructor( private router: Router,
-               private productApiService: ProductApiService,
-               private componentComService: ComponentComService ) {
+  constructor(
+    private router: Router,
+    private productApiService: ProductApiService,
+    private productsFacade: ProductsFacade,
+    private cartFacade: CartFacade) {
 
     this.currentPage = 0;
-
-                }
+  }
 
   ngOnInit() {
-
+    this.products$ = this.productsFacade.products$;
     // var hasScrollbar = window.innerWidth > document.documentElement.clientWidth
-
-    this.getProducts(this.currentPage, this.items);
-
+    this.getProductsPage(this.currentPage, this.items);
   }
 
   ngAfterContentInit() {
 
-    let hasScrollbar = window.innerWidth < document.documentElement.clientWidth;
+    let hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
 
     if (!hasScrollbar) {
       console.log('bucle');
-      this.getProducts(this.currentPage, this.items);
-      hasScrollbar = window.innerWidth < document.documentElement.clientWidth;
+      this.getProductsPage(this.currentPage, this.items);
+      hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
     }
-
   }
 
+  getAllProducts() {
+    this.productsFacade.loadAllProducts();
+  }
+
+  getProductsPage(page: number, items: number) {
+    this.productsFacade.loadProductsPage(this.currentPage, this.items);
+    this.currentPage++;
+  }
+
+  /*
   getProducts(page: number, items: number) {
 
     this.productApiService.getProductPage(page, items).subscribe(
@@ -56,12 +74,13 @@ export class ProductsViewAllComponent implements OnInit, AfterContentInit {
         this.totalPages = response.totalPages;
       });
     this.currentPage++;
-  }
+  }*/
 
   onScroll() {
+    console.log('scrolled');
     if (this.currentPage < this.totalPages ) {
       console.log('onscroll');
-      this.getProducts(this.currentPage++, this.items);
+      this.getProductsPage(this.currentPage++, this.items);
     }
   }
 
@@ -78,15 +97,18 @@ export class ProductsViewAllComponent implements OnInit, AfterContentInit {
   // Pasar estas funciones a los componentes de las tarjetas???
   // REPENSAR BIEN ESTO
 
-  seeMore(product: Product) {
-    this.componentComService.collectData(product);
-    this.router.navigate(['products/details/', product.id.toString()]);
+  seeProductDetails(productId: number) {
+    this.productsFacade.setSelectedProductId(productId);
+    this.router.navigate(['products/details/', productId.toString()]);
   }
 
-  editProduct(product: Product) {
-    console.log(' edit product (parent)');
-    this.componentComService.collectData(product);
-    this.router.navigate(['/products/edit/', product.id.toString()]);
+  editProduct(productId: number) {
+    this.productsFacade.setSelectedProductId(productId);
+    this.router.navigate(['/products/edit/', productId.toString()]);
+  }
+
+  addToCart(product: Product) {
+    this.cartFacade.updateItemCount();
   }
 
   removeProduct(product: Product) {

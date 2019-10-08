@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Product } from '../interfaces/product';
-import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { AppError } from '../exception/app-error';
 
 const BASE_URL = 'http://localhost:9006/api/product-management';
 
@@ -13,7 +10,6 @@ const BASE_URL = 'http://localhost:9006/api/product-management';
   providedIn: 'root'
 })
 export class ProductApiService {
-  BASER_URL: any;
 
   constructor( private http: HttpClient ) { }
 
@@ -23,7 +19,8 @@ export class ProductApiService {
   }
 
   public getProductPage(page: number, items: number): Observable<any> {
-    const urlR = `${BASE_URL}${'/products/'}${page.toString()}${'/'}${items.toString()}`;
+    console.log('page request');
+    const urlR = `${BASE_URL}/products/${page.toString()}/${items.toString()}`;
     return this.http.get(urlR);
   }
 

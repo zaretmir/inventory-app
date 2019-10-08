@@ -11,10 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let hangar of hangars | paginate: {
-                                            itemsPerPage: pageSize,
-                                            currentPage: p,
-                                            totalItems: total }">
+    <tr *ngFor="let hangar of (hangarsPage$ | async)?.content | paginate: {
+                                            itemsPerPage: items,
+                                            currentPage: currentPage + 1,
+                                            totalItems: (hangarsPage$ | async)?.totalElements }">
       <td>{{ hangar.name }}</td>
       <td>{{ hangar.address }}</td>
       <button (click)="setHangarSelected(hangar)" (dblclick)="hangarForm(hangar)" type="button" class="btn btn-outline-primary btn-block btn-sm">Seleccionar</button>

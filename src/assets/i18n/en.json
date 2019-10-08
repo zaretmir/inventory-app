@@ -28,7 +28,8 @@
     "submit": "Submit",
     "remove": "Remove",
     "edit": "Edit",
-    "details": "details"
+    "details": "details",
+    "add-to-cart": "Add to cart"
   },
   "availability": "Availability",
   "qty": "Quantity",

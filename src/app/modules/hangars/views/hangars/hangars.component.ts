@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { HangarApiService } from 'src/app/core/services/hangar-api.service';
 import { Hangar } from 'src/app/core/interfaces/hangar';
+import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
+import { Observable } from 'rxjs';
+import { HangarPage } from 'src/app/core/interfaces/hangarPage';
 
 @Component({
   selector: 'app-hangars',
@@ -12,55 +14,31 @@ import { Hangar } from 'src/app/core/interfaces/hangar';
 export class HangarsComponent implements OnInit {
 
   // Pagination
-  pageSize = 5;
-  p = 1;
+  currentPage = 0;
+  items = 5;
   total: number;
 
-
-  hangar: Hangar;
-
-  hangars: Hangar[] = new Array<Hangar>();
+  hangarsPage$: Observable<HangarPage>;
 
   isHangarSelected: boolean;
   hangarSelected: Hangar;
 
   constructor( private router: Router,
-               private hangarApiService: HangarApiService,
-               private componentComService: ComponentComService) { }
+               private componentComService: ComponentComService,
+               private facade: HangarsFacade) {
+               }
 
   ngOnInit() {
 
     this.isHangarSelected = false;
 
-    this.hangarApiService.getHangarPage(this.p - 1, this.pageSize).subscribe(
-      response => {
-        this.total = response.totalElements;
-        this.hangars = response.content;
-        console.log(this.hangars);
-      }
-    );
+    this.hangarsPage$ = this.facade.hangarsPage$;
 
-    /*
+    this.getHangarsPage(this.currentPage, this.items);
+  }
 
-    this.hangarApiService.getAllHangars().subscribe(
-      data => {
-        this.hangars = data.map( item => this.hangarApiService.mapToHangar(item));
-        console.log(this.hangars);
-      }
-    );
-
-    */
-    /*
-
-    this.apiService.getHangarById().subscribe(
-      data => {
-        if (data === undefined ) {
-          alert('No se ha encontrado el hangar'); // ¿nunca entra aquí?
-        } else {
-          this.hangar = this.apiService.mapResult(data);
-        }
-      });
-      */
+  getHangarsPage(page: number, items: number) {
+    this.facade.loadHangarsPage(page, items);
   }
 
   /***
@@ -101,15 +79,8 @@ export class HangarsComponent implements OnInit {
   }
 
   pageChanged(page) {
-    this.p = page;
-
-    this.hangarApiService.getHangarPage(page - 1, this.pageSize).subscribe(
-      response => {
-        this.total = response.totalElements;
-        this.hangars = response.content;
-        console.log(this.hangars);
-      }
-    );
+    this.currentPage = page - 1;
+    this.getHangarsPage(this.currentPage, this.items);
   }
 
 
