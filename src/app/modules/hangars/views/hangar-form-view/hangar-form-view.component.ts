@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { Router } from '@angular/router';
-import { HangarApiService } from 'src/app/core/services/hangar-api.service';
-import { Hangar } from 'src/app/core/interfaces/hangar';
+import { Hangar } from 'src/app/core/models/hangar';
+import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
 
 @Component({
   selector: 'app-hangar-form-view',
@@ -11,22 +10,30 @@ import { Hangar } from 'src/app/core/interfaces/hangar';
 })
 export class HangarFormViewComponent implements OnInit {
 
-  constructor( private router: Router,
-               private hangarApiService: HangarApiService,
-               private componentComService: ComponentComService ) { }
+  hangar: Hangar = null;
+
+  isReadOnly: boolean;
+
+  constructor(
+    private hangarsFacade: HangarsFacade,
+    private router: Router
+    ) {
+
+    }
 
   ngOnInit() {
   }
 
-  postData(hangar: Hangar) {
-    console.log(JSON.stringify(hangar));
-    console.log(hangar);
+  onUpdate(hangar: Hangar) {
+    hangar.id = this.hangar.id;
+    this.hangarsFacade.updateHangar(hangar);
+  }
+
+  onSubmit(hangar: Hangar) {
     hangar.isActive = true;
-    return this.hangarApiService.postHangar(hangar).subscribe( response => {
-      this.componentComService.collectData(response);
-      hangar = this.componentComService.retrieveData(); // To retrieve id
-      this.router.navigate(['/hangars/details', hangar.id]);
-    });
+    this.hangarsFacade.addHangar(hangar);
+    // TODO: Retrieve id and navigate to details
+    this.router.navigate(['/hangars/details', hangar.id]);
   }
 
 }

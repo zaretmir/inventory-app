@@ -1,9 +1,21 @@
-<h2>{{ hangar.name }}</h2>
-<app-hangar-form *ngIf="isDataReady" [isReadOnly]="true" [hangarPopulate]="hangar"></app-hangar-form>
-<div>
-  <button class="btn btn-block" (click)="onLoadProducts()">Load products</button>
+<div *ngIf="hangar$ | async as hangar; else loading">
+  <h2>{{ hangar.name }}</h2>
+
+  <app-hangar-form
+    [hangar]="hangar"
+    [isReadOnly]="isReadOnly"
+    (updated)="onUpdate($event)">
+  </app-hangar-form>
+
+  <div>
+    <button class="btn btn-block" (click)="onLoadProducts()">Load products</button>
+  </div>
+
+  <div>
+    <app-products-excerpts *ngIf='loadProducts'></app-products-excerpts>
+  </div>
 </div>
 
-<div>
-  <app-products-excerpts *ngIf='loadProducts'></app-products-excerpts>
-</div>
+<ng-template #loading>
+  Loading hangar data...
+</ng-template>
