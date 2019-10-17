@@ -2,10 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { ofType, Actions, Effect } from '@ngrx/effects';
-import { ProductsActionTypes, ProductsLoaded, ProductsPageLoaded, LoadProductsPage } from './products.actions';
-import { switchMap, map } from 'rxjs/operators';
+import {
+  ProductsActionTypes,
+  ProductsLoaded,
+  ProductsPageLoaded,
+  LoadProductsPage,
+  UpdateProduct,
+  ProductUpdated,
+  AddProduct,
+  ProductAdded} from './products.actions';
+import { switchMap, map, filter } from 'rxjs/operators';
 import { ProductApiService } from '../../services/product-api.service';
-import { Product } from '../../interfaces/product';
+import { Product } from '../../models/product';
 
 @Injectable()
 export class ProductsEffects {
@@ -15,7 +23,8 @@ export class ProductsEffects {
       switchMap(() =>
         this.productsService
             .getAllProducts()
-            .pipe(map((response: Product[]) => new ProductsLoaded(response)))
+            .pipe(
+              map((response: Product[]) => new ProductsLoaded(response)))
       )
     );
 
@@ -28,6 +37,27 @@ export class ProductsEffects {
             .pipe(
               map((response: any) => new ProductsPageLoaded(response.content))
             ))
+    );
+
+  @Effect() addProduct$: Observable<Action>
+    = this.actions$.pipe(
+      ofType(ProductsActionTypes.AddProduct),
+      switchMap((action: AddProduct) =>
+        this.productsService
+          .postProduct(action.product)
+          .pipe(
+            map((response: Product) => new ProductAdded(response)))
+      ));
+
+  @Effect() updateProduct$: Observable<Action>
+    = this.actions$.pipe(
+      ofType(ProductsActionTypes.UpdateProduct),
+      switchMap((action: UpdateProduct) =>
+        this.productsService
+          .editProduct(action.product)
+          .pipe(
+            map((response: Product) => new ProductUpdated(response)))
+          )
     );
 
   constructor(

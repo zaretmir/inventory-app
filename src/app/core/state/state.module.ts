@@ -7,6 +7,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products/products.effects';
 import { HangarsEffects } from './hangars/hangars.effects';
 import { CartEffects } from './cart/cart.effects';
+import { AuthEffects } from './auth/auth.effects';
+import { StockEffects } from './stock/stock.effects';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CartEffects } from './cart/cart.effects';
     EffectsModule.forRoot([
       ProductsEffects,
       HangarsEffects,
-      CartEffects]),
+      CartEffects,
+      AuthEffects,
+      StockEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 10 })
   ]
 })

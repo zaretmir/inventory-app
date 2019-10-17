@@ -1,64 +1,99 @@
 import { Action } from '@ngrx/store';
-import { Hangar } from '../../interfaces/hangar';
-import { HangarPage } from '../../interfaces/hangarPage';
+import { Hangar } from '../../models/hangar';
+import { HangarPage } from '../../models/hangarPage';
 
 export enum HangarsActionTypes {
-  SelectedHangar = '[Hangars] Selected',
-  LoadHangars = '[Hangars] Load all hangars data',
-  HangarsLoaded = '[Hangars] All hangars data loaded',
-  LoadHangarsPage = '[Hangars] Load hangars data page',
-  HangarsPageLoaded = '[Hangars] hangars data page loaded',
-  AddHangar = '[Hangars] Add data',
-  UpdateHangar = '[Hangars] Update data',
-  DeleteHangar = '[Hangars] Delete data'
+  SELECT_HANGAR = '[Hangars] Selected',
+  LOAD_HANGAR = '[Hangars] Load hangar data',
+  LOAD_HANGAR_SUCCESS = '[Hangars] Hangar data loaded',
+  LOAD_HANGARS = '[Hangars] Load all hangars data',
+  LOAD_HANGARS_SUCCESS = '[Hangars] All hangars data loaded',
+  LOAD_HANGARS_PAGE = '[Hangars] Load hangars data page',
+  LOAD_HANGARS_PAGE_SUCCESS = '[Hangars] hangars data page loaded',
+  ADD_HANGAR = '[Hangars] Add data',
+  ADD_HANGAR_SUCCESS = '[Hangars] Data added',
+  UPDATE_HANGAR = '[Hangars] Update data',
+  UPDATE_HANGAR_SUCCESS = '[Hangars] Data updated',
+  DELETE_HANGAR = '[Hangars] Delete data',
+  DELETE_HANGAR_SUCCESS = '[Hangars] Data deleted'
 }
 
-export class SelectedHangar implements Action {
-  readonly type = HangarsActionTypes.SelectedHangar;
-  constructor(public payload: number) {}
+export class SelectHangar implements Action {
+  readonly type = HangarsActionTypes.SELECT_HANGAR;
+  constructor(public hangarId: number) {}
+}
+
+export class LoadHangar implements Action {
+  readonly type = HangarsActionTypes.LOAD_HANGAR;
+  constructor(public hangarId: number) {}
+}
+
+export class HangarLoaded implements Action {
+  readonly type = HangarsActionTypes.LOAD_HANGAR_SUCCESS;
+  constructor(public hangar: Hangar) {}
 }
 
 export class LoadHangars implements Action {
-  readonly type = HangarsActionTypes.LoadHangars;
+  readonly type = HangarsActionTypes.LOAD_HANGARS;
 }
 
 export class HangarsLoaded implements Action {
-  readonly type = HangarsActionTypes.HangarsLoaded;
+  readonly type = HangarsActionTypes.LOAD_HANGARS_SUCCESS;
   constructor(public hangars: Hangar[]) {}
 }
 
 export class LoadHangarsPage implements Action {
-  readonly type = HangarsActionTypes.LoadHangarsPage;
+  readonly type = HangarsActionTypes.LOAD_HANGARS_PAGE;
     constructor(
       public page: number,
       public items: number) {}
 }
 
 export class HangarsPageLoaded implements Action {
-  readonly type = HangarsActionTypes.HangarsPageLoaded;
+  readonly type = HangarsActionTypes.LOAD_HANGARS_PAGE_SUCCESS;
   constructor(public hangarPage: HangarPage) {}
 }
 
 export class AddHangar implements Action {
-  readonly type = HangarsActionTypes.AddHangar;
-  constructor(public payload: number) {}
+  readonly type = HangarsActionTypes.ADD_HANGAR;
+  constructor(public hangar: Hangar) {}
+}
+
+export class HangarAdded implements Action {
+  readonly type = HangarsActionTypes.ADD_HANGAR_SUCCESS;
+  constructor(public hangar: Hangar) {}
 }
 
 export class UpdateHangar implements Action {
-  readonly type = HangarsActionTypes.UpdateHangar;
-  constructor(public payload: number) {}
+  readonly type = HangarsActionTypes.UPDATE_HANGAR;
+  constructor(public hangar: Hangar) {}
+}
+
+export class HangarUpdated implements Action {
+  readonly type = HangarsActionTypes.UPDATE_HANGAR_SUCCESS;
+  constructor(public hangar: Hangar) {}
 }
 
 export class DeleteHangar implements Action {
-  readonly type = HangarsActionTypes.DeleteHangar;
-  constructor(public payload: number) {}
+  readonly type = HangarsActionTypes.DELETE_HANGAR;
+  constructor(public hangar: Hangar) {}
 }
 
-export type HangarsAction = SelectedHangar
+export class HangarDeleted implements Action {
+  readonly type = HangarsActionTypes.DELETE_HANGAR_SUCCESS;
+  constructor(public hangar: Hangar) {}
+}
+
+export type HangarsAction = SelectHangar
   | LoadHangars
   | HangarsLoaded
   | LoadHangarsPage
   | HangarsPageLoaded
+  | LoadHangar
+  | HangarLoaded
   | AddHangar
+  | HangarAdded
   | UpdateHangar
-  | DeleteHangar;
+  | HangarUpdated
+  | DeleteHangar
+  | HangarDeleted;

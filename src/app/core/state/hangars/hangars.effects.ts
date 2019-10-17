@@ -2,24 +2,57 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { HangarsActionTypes, LoadHangarsPage, HangarsPageLoaded } from './hangars.actions';
+import { HangarsActionTypes, LoadHangarsPage, HangarsPageLoaded, AddHangar, HangarAdded, LoadHangar } from './hangars.actions';
 import { HangarApiService } from '../../services/hangar-api.service';
 import { map, switchMap } from 'rxjs/operators';
-import { Hangar } from '../../interfaces/hangar';
-import { HangarPage } from '../../interfaces/hangarPage';
+import { Hangar } from '../../models/hangar';
+import { HangarPage } from '../../models/hangarPage';
 
-@Injectable({ providedIn: 'root'})
+@Injectable()
 export class HangarsEffects {
-  @Effect() loadHangarsPage$: Observable<Action>
+  @Effect() loadHangar$: Observable<Action>
     = this.actions$.pipe(
-      ofType(HangarsActionTypes.LoadHangarsPage),
-      switchMap((action: LoadHangarsPage) =>
+      ofType(HangarsActionTypes.LOAD_HANGAR),
+      switchMap((action: LoadHangar) =>
         this.hangarService
-          .getHangarPage(action.page, action.items)
+          .getHangarById(action.hangarId)
           .pipe(
-            map((response: HangarPage) => new HangarsPageLoaded(response))
+            map((response: Hangar) => new HangarAdded(response)) // No necesito pasar por el reducer?
           ))
     );
+
+  @Effect() loadHangarsPage$: Observable<Action>
+    = this.actions$.pipe(
+        ofType(HangarsActionTypes.LOAD_HANGARS_PAGE),
+        switchMap((action: LoadHangarsPage) =>
+          this.hangarService
+            .getHangarPage(action.page, action.items)
+            .pipe(
+              map((response: HangarPage) => new HangarsPageLoaded(response))
+            ))
+      );
+
+  @Effect() addHangar$: Observable<Action>
+    = this.actions$.pipe(
+        ofType(HangarsActionTypes.ADD_HANGAR),
+        switchMap((action: AddHangar) =>
+          this.hangarService
+            .postHangar(action.hangar)
+            .pipe(
+              map((response: Hangar) => new HangarAdded(response))
+            ))
+      );
+
+  @Effect() updateHangar$: Observable<Action>
+    = this.actions$.pipe(
+        ofType(HangarsActionTypes.ADD_HANGAR),
+        switchMap((action: AddHangar) =>
+          this.hangarService
+            .editHangar(action.hangar)
+            .pipe(
+              map((response: Hangar) => new HangarAdded(response))
+            ))
+      );
 
 
   constructor(private hangarService: HangarApiService,

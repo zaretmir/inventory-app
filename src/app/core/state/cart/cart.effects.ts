@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Action, Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { CartActionTypes } from './cart.actions';
-import { switchMap } from 'rxjs/operators';
+import { CartActionTypes, AddItem } from './cart.actions';
+import { switchMap, withLatestFrom, map } from 'rxjs/operators';
 import { EcommerceService } from '../../services/ecommerce.service';
+import { CartState } from './cart.reducer';
+import { AddProduct } from '../products/products.actions';
+import { Item } from '../../models/item';
 
 @Injectable()
 export class CartEffects {
 
   constructor(
     private shopService: EcommerceService,
-    private actions$: Actions) {}
+    private actions$: Actions,
+    private store$: Store<CartState>) {}
 }

@@ -1,26 +1,33 @@
 import { CartActionTypes, CartAction} from './cart.actions';
-import { Item } from '../../interfaces/item';
+import { Item } from '../../models/item';
 import { tassign } from 'tassign';
+import * as CartUtils from './cart.utils';
+import { CartProduct } from '../../models/cartProduct';
 
-const addItem = (items: Item[], newItem: Item) => [...items, newItem];
 
 export interface CartState {
-  items: Item[];
-  itemsCounter: number;
+  cartProducts: CartProduct[];
+  productsCounter: number;
+  totalPrice: number;
 }
 
 export const initialState: CartState  = {
-  items: [],
-  itemsCounter: 0
+  cartProducts: [],
+  productsCounter: 0,
+  totalPrice: 0
 };
 
 export function cartReducer(
   state: CartState = initialState, action: CartAction): CartState {
     switch (action.type) {
       case CartActionTypes.AddItem:
-        return tassign(state, { items: addItem(state.items, action.item) });
-      case CartActionTypes.IncrementItems:
-        return tassign(state, { itemsCounter: state.itemsCounter + action.payload });
+        return tassign(
+          state,
+          CartUtils.updatedCartState(state, CartUtils.addItem(state.cartProducts, action.cartProduct)));
+      case CartActionTypes.DeleteItem:
+        return tassign(
+          state,
+          CartUtils.updatedCartState(state, CartUtils.deleteItem(state.cartProducts, action.cartProduct)));
       default:
         return state;
     }
