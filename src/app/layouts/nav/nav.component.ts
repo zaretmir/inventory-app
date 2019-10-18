@@ -11,13 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class NavComponent implements OnInit {
 
-  itemsCount$: Observable<number>;
+  productsCount$: Observable<number>;
 
 
   constructor(
     public authenticationService: AuthenticationService,
     private cartFacade: CartFacade) {
-      this.itemsCount$ = this.cartFacade.itemsCount$;
+      this.productsCount$ = this.cartFacade.productsCount$;
     }
 
   ngOnInit() {
