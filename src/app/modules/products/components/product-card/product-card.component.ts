@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
-import { Product } from 'src/app/core/interfaces/product';
+import { Product } from 'src/app/core/models/product';
+import { StockEntry } from 'src/app/core/models/stock-entry';
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -9,10 +10,10 @@ import { Product } from 'src/app/core/interfaces/product';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
-  @Output() clickedDetails = new EventEmitter<Product>();
-  @Output() clickedEdit = new EventEmitter<Product>();
-  @Output() clickedAddToCart = new EventEmitter<Product>();
-  @Output() clickedRemove = new EventEmitter<Product>();
+  @Output() seeDetails = new EventEmitter();
+  @Output() edit = new EventEmitter();
+  @Output() addToCart = new EventEmitter<StockEntry>();
+  @Output() remove = new EventEmitter<Product>();
 
 
   constructor( private productApiService: ProductApiService)  {
@@ -21,26 +22,20 @@ export class ProductCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClickMore() {
-    console.log('Clicked Details');
-    this.clickedDetails.emit(this.product);
+  seeProductDetails() {
+    this.seeDetails.emit();
   }
 
-  onClickEdit() {
-    console.log('Clicked edit');
-    this.clickedEdit.emit(this.product);
+  editProduct() {
+    this.edit.emit();
   }
 
-  onClickAddToCart() {
-    console.log('"Add to cart" clicked');
-    this.clickedAddToCart.emit(this.product);
+  addProductToCart(stockEntry: StockEntry) {
+    this.addToCart.emit(stockEntry);
   }
 
-  onClickRemove() {
-    console.log('Clicked remove');
-    console.log(this.product.id);
-    this.productApiService.removeProduct(this.product.id.toString()).subscribe();
-    // this.clickedRemove.emit(this.product);
+  removeProduct() {
+    this.remove.emit();
   }
 
 }

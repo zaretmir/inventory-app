@@ -1,15 +1,15 @@
 <app-product-form
-  *ngIf="isDataReady"
   [isReadOnly]="false"
-  [isUpdate]="true"
-  [inputProduct]="product">
+  [product]="product$ |async"
+  (submited)=onSubmit($event)>
 </app-product-form>
 
-<div class="container mt-2">
-    <h5>Update Price</h5>
-    <app-price-form
-      [stockEntry]=""
-      (newPriceEntry)="postPrice($event)">
-    </app-price-form>
+<div class="container mt-2" *ngFor="let stockEntry of productStock$ | async">
+  <h5>Update Price</h5>
+  <app-price-form
+    [stockEntry]="stockEntry"
+    (newPriceEntry)="postPrice($event)">
+  </app-price-form>
 </div>
+
 

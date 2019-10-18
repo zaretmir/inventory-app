@@ -4,10 +4,27 @@
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text">{{ product.description }}</p>
-    <button (click)="onClickMore()" class="btn btn-primary">{{ 'button.more' | translate }}</button>
-    <button (click)="onClickEdit()" class="btn btn-primary">{{ 'button.edit' | translate }}</button>
-    <button (click)="onClickAddToCart()" class="btn btn-primary">{{ 'button.add-to-cart' | translate }}</button>
-    <button (click)="onClickRemove()" class="btn btn-primary">{{ 'button.remove' | translate }}</button>
+    <table>
+      <thead>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stockEntry of product.stockEntries">
+          <td>{{ stockEntry.id.hangarPk }}</td>
+          <td>{{ stockEntry.quantity }}</td>
+
+          <td>
+            <button (click)="addProductToCart(stockEntry)" class="btn btn-primary">
+              {{ 'button.add-to-cart' | translate }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button (click)="seeProductDetails()" class="btn btn-primary">{{ 'button.more' | translate }}</button>
+    <button (click)="editProduct()" class="btn btn-primary">{{ 'button.edit' | translate }}</button>
+    <button (click)="removeProduct()" class="btn btn-primary">{{ 'button.remove' | translate }}</button>
   </div>
 </div>
 

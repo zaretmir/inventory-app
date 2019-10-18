@@ -1,1 +1,4 @@
-<app-product-form [isReadOnly]="false"></app-product-form>
+<app-product-form
+  [isReadOnly]="false"
+  (submited)="onSumbit($event)">
+</app-product-form>

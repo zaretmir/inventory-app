@@ -1,30 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductApiService } from 'src/app/core/services/product-api.service';
-import { Product } from 'src/app/core/interfaces/product';
+import { ProductsFacade } from 'src/app/core/state/products/products.facade';
+import { Product } from 'src/app/core/models/product';
 
 @Component({
   selector: 'app-product-form-view',
   templateUrl: './product-form-view.component.html',
   styleUrls: ['./product-form-view.component.css']
 })
-export class ProductFormViewComponent implements OnInit {
+export class ProductFormViewComponent {
 
-  constructor( private productApiService: ProductApiService ) { }
+  constructor(private productsFacade: ProductsFacade) { }
 
-  ngOnInit() {
+  onSumbit(product: Product) {
+    this.productsFacade.addProduct(product);
   }
-/*
-  postData( product: Product ) {
-    this.productApiService.postProduct(product)
-    .subscribe(
-      response => {
-        console.log(response);
-      },
-      (error: Response) => {
-        alert('An unexpected error ocurred');
-      }
-    );
-  }
-  */
+
 
 }

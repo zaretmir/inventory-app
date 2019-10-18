@@ -4,8 +4,11 @@
 <form [formGroup]="productForm">
 
   <div class="form-group">
-    <label for="name">{{ 'product-form.name' | translate }}</label>
-    <input formControlName="name" id="name" type="text" class="form-control" [readOnly]="isReadOnly">
+    <label for="name">
+      {{ 'product-form.name' | translate }}
+    </label>
+    <input formControlName="name" id="name" type="text" class="form-control">
+
     <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
       <div *ngIf="name?.errors['required']">
         {{ 'form-validation.required' | translate }}
@@ -17,8 +20,11 @@
   </div>
 
   <div class="form-group">
-    <label for="description">{{ 'product-form.description' | translate }}</label>
-    <textarea formControlName="description" id="description" type="text" class="form-control" [readOnly]="isReadOnly" cols="30" rows="10"></textarea>
+    <label for="description">
+      {{ 'product-form.description' | translate }}
+    </label>
+    <textarea formControlName="description" id="description" type="text" class="form-control" cols="30" rows="10"></textarea>
+
     <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
       <div *ngIf="description?.errors['required']">
         {{ 'form-validation.required' | translate }}
@@ -29,6 +35,6 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" type="submit" (click)="onSubmitClicked()">
+  <button *ngIf="!isReadOnly" class="btn btn-primary" type="submit" [disabled]="!productForm.valid" (click)="submit(productForm.value)">
     {{ 'button.submit' | translate }}
   </button>

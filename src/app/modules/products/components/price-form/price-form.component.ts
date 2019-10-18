@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
-import { Price } from 'src/app/core/interfaces/price';
-import { StockEntry } from 'src/app/core/interfaces/stock-entry';
+import { Price } from 'src/app/core/models/price';
+import { StockEntry } from 'src/app/core/models/stock-entry';
 
 @Component({
   selector: 'app-price-form',
@@ -11,31 +11,29 @@ import { StockEntry } from 'src/app/core/interfaces/stock-entry';
 })
 export class PriceFormComponent implements OnInit {
 
-  price: Price;
   @Input() stockEntry: StockEntry;
   @Output() newPriceEntry = new EventEmitter<Price>();
 
   priceEntryForm = new FormGroup({
-    figure: new FormControl(
+    price: new FormControl(
       '',
       [Validators.required])
   });
 
-  constructor( private productApiService: ProductApiService ) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    const date = new Date();
-    console.log(date.getTime().toString());
-    this.price.dateUpdated = date.getTime();
-    this.price.price = this.priceEntryForm.get('figure').value;
-    this.price.stockEntry = this.stockEntry;
-    console.log(this.price.stockEntry);
+    const priceEntry: Price = {
+      stockEntry: this.stockEntry,
+      price: this.priceEntryForm.get('price').value,
+      dateUpdated: new Date().getTime()
+    };
 
-    return this.newPriceEntry.emit( this.price );
+    return this.newPriceEntry.emit(priceEntry);
   }
 
 }

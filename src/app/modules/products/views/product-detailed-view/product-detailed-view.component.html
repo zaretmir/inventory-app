@@ -1,37 +1,10 @@
-<app-product-form *ngIf="isDataReady" [inputProduct]="product" [isReadOnly]="true"></app-product-form>
+<app-product-form
+  [product]='product$ | async'
+  [isReadOnly]='true'>
+</app-product-form>
 
-<div *ngFor="let stockEntry of stockEntries" class="container mt-3">
-  <h5>Availability</h5>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Hangar</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <td>{{ stockEntry.hangarPk }}</td>
-      <td>{{ stockEntry.productPk }}</td>
-    </tbody>
-  </table>
-</div>
-
-<div *ngFor="let stockEntry of stockEntries" class="container mt-3">
-  <h5>Price history</h5>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Date</th>
-        <th scope="col">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let priceEntry of stockEntry.priceHistory">
-          <td>{{ priceEntry.price_id }}</td>
-          <td>{{ priceEntry.dateUpdated | date }}</td>
-          <td>{{ priceEntry.price }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngFor='let stockEntry of productStock$ | async' class='container mt-3'>
+  <app-stock-entry-form
+    [stockEntry]='stockEntry'>
+  </app-stock-entry-form>
 </div>
