@@ -1,11 +1,19 @@
-import { StockState } from './stock.reducer';
-import { Store } from '@ngrx/store';
-import { LoadHangarStock, LoadProductStock, SelectProduct } from './stock.actions';
-import { HangarsState } from '../hangars/hangars.reducer';
-import { Observable } from 'rxjs';
-import { StockEntry } from '../../models/stock-entry';
-import { selectStockEntries, selectStockEntriesOfHangar, selectStockEntriesOfProduct } from './stock.selectors';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { StockEntry } from '../../models/stock-entry';
+import { StockState } from './stock.reducer';
+import {
+  selectStockEntries,
+  selectStockEntriesOfHangar,
+  selectStockEntriesOfProduct
+} from './stock.selectors';
+import {
+  LoadHangarStock,
+  LoadProductStock,
+  SelectProduct,
+  SelectHangar
+} from './stock.actions';
+import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class StockFacade {
@@ -27,7 +35,7 @@ export class StockFacade {
   }
 
   setSelectedHangar(hangarId: number) {
-    this.store.dispatch(new SelectProduct(hangarId));
+    this.store.dispatch(new SelectHangar(hangarId));
   }
 
   loadHangarStock(hangarId: number) {

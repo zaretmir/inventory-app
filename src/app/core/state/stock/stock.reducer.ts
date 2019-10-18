@@ -21,7 +21,7 @@ export function stockReducer(state: StockState = initialState, action: StockActi
       case (StockActionTypes.SELECT_PRODUCT):
         return tassign(state, { selectedProductId: action.productId });
       case (StockActionTypes.SELECT_HANGAR):
-          return tassign(state, { selectedProductId: action.hangarId });
+        return tassign(state, { selectedHangarId: action.hangarId });
       case (StockActionTypes.PRODUCT_STOCK_ENTRIES_LOADED):
         return tassign(state, { stockEntries: action.stockEntries} );
       case (StockActionTypes.HANGAR_STOCK_ENTRIES_LOADED):

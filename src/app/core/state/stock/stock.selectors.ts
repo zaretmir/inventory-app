@@ -21,7 +21,10 @@ export const selectStockId = createSelector(
 
 export const selectStockEntries = createSelector(
   selectStockState,
-  (state: StockState) => state.stockEntries
+  (state: StockState) => {
+    console.log('selector genral entries');
+    return state.stockEntries;
+  }
 );
 
 export const selectCurrentStockEntry = createSelector(
@@ -48,6 +51,7 @@ export const selectStockEntriesOfHangar = createSelector(
   selectHangarId,
   selectStockEntries,
   (hangarId: number, allEntries: StockEntry[]) => {
+    console.log('selector hangares');
     if (hangarId && allEntries) {
       return allEntries.filter(entry => entry.id.hangarPk === hangarId);
     }
