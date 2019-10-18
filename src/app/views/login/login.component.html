@@ -1,5 +1,5 @@
 <div class="box">
-  <form [formGroup]="loginForm" (ngSubmit)="checkLogin()">
+  <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
     <div class="form-group">
       <label for="username">{{ 'registration-form.username' | translate }}</label>
       <input type="text" formControlName="username" id="username" class="form-control">

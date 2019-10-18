@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/auth/authentication.service';
 import { Router } from '@angular/router';
+import { AuthFacade } from 'src/app/core/state/auth/auth.facade';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AuthFacade]
 })
 
 export class LoginComponent implements OnInit {
@@ -22,12 +25,20 @@ export class LoginComponent implements OnInit {
 
   invalidLogin = true;
 
-  constructor(private authenticationService: AuthenticationService,
-              private router: Router) { }
+  constructor(
+    private authFacade: AuthFacade,
+    private authenticationService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
+  authenticate() {
+    const user: User = this.loginForm.value;
+    this.authFacade.authenticate(user);
+  }
+
+  /*
   checkLogin() {
     console.log('Auth: ');
     this.authenticationService.authenticate(this.username.value, this.password.value)
@@ -45,6 +56,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  */
 
   get username() {
     return this.loginForm.get('username');

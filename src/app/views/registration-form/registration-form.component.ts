@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { RegistrationService } from 'src/app/core/services/auth/registration.service';
 import { PasswordValidators } from './password.validators';
 import { UsernameValidators } from './username.validators';
-import { User } from 'src/app/core/interfaces/user';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-registration-form',
