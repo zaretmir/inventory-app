@@ -4,19 +4,23 @@ import { FloatingButtonPlusComponent } from './floating-button-plus/floating-but
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { StockEntryFormComponent } from './stock-entry-form/stock-entry-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [FloatingButtonPlusComponent, SearchbarComponent],
+  declarations: [FloatingButtonPlusComponent, SearchbarComponent, StockEntryFormComponent],
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ],
   exports: [
     FloatingButtonPlusComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    StockEntryFormComponent
   ]
 })
 export class SharedModule { }

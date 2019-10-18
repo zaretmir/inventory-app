@@ -1,0 +1,56 @@
+<h5>Availability</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Hangar</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>{{ stockEntry.id.hangarPk }}</td>
+      <td>{{ stockEntry.id.productPk }}</td>
+    </tbody>
+  </table>
+
+  <h5>Price history</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let priceEntry of stockEntry.priceHistory">
+          <td>{{ priceEntry.price_id }}</td>
+          <td>{{ priceEntry.dateUpdated | date }}</td>
+          <td>{{ priceEntry.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Formulario</h1>
+  <form [formGroup]='stockForm'>
+    <label>
+      Hangar:
+      <input formControlName='hangarName'>
+    </label>
+    <label>
+      Product:
+      <input formControlName='productName'>
+    </label>
+    <label>
+      Quantity
+      <input formControlName='quantity'>
+    </label>
+
+    <div formArrayName='priceEntries' *ngFor="let priceEntry of stockForm.controls.priceEntries?.value; let i = index">
+      <div [formGroupName]='i'>
+        <input formControlName='dateUpdated' placeholder='date updated'>
+        <input formControlName='price' placeholder='price'>
+      </div>
+
+    </div>
+
+  </form>
