@@ -1,6 +1,13 @@
-<pre> {{ order$ | async | json}} </pre>
-<div *ngIf='order$ | async as order'>
-  <app-cart-items-list [order]="order"></app-cart-items-list>
-  <app-cart-extras-totals [order]="order"></app-cart-extras-totals>
+<!--
+  <pre> {{ order$ | async | json}} </pre>
+-->
+<div>
+  <app-cart-items-list
+    [cartProducts$]="cartProducts$"
+    (removeProduct)="onRemoveProduct($event)">
+  </app-cart-items-list>
+  <app-cart-extras-totals
+    [cartTotal$]="cartTotals$">
+  </app-cart-extras-totals>
 </div>
 

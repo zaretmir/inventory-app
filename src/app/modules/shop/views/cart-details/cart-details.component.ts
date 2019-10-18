@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EcommerceService } from 'src/app/core/services/ecommerce.service';
-import { Order } from 'src/app/core/interfaces/cart';
+import { Order } from 'src/app/core/models/cart';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CartFacade } from 'src/app/core/state/cart/cart.facade';
+import { CartProduct } from 'src/app/core/models/cartProduct';
 
 @Component({
   selector: 'app-cart-details',
@@ -11,26 +13,19 @@ import { map } from 'rxjs/operators';
 })
 export class CartDetailsComponent implements OnInit {
 
-  //order: Order;
-  order$: Observable<Order>;
+  cartTotals$: Observable<number>;
+  cartProducts$: Observable<CartProduct[]>;
 
-  constructor( private shopService: EcommerceService) { }
-
-  ngOnInit() {
-    this.getCartData(17);
+  constructor(private facade: CartFacade) {
+    this.cartTotals$ = this.facade.totalPrice$;
+    this.cartProducts$ = this.facade.cartProducts$;
   }
 
-  getCartData(orderId: number) {
- /*    this.shopService.getOrder(orderId)
-      .subscribe(
-        (response: Order) => {
-          this.order = response;
-          console.log(response);
-        },
-        error => console.log(error),
-        () => console.log('Order data ready')
-      ); */
-    this.order$ = this.shopService.getOrder(17);
+  ngOnInit() {
+  }
+
+  onRemoveProduct(cartProduct: CartProduct) {
+    this.facade.removeProductFromCart(cartProduct);
   }
 
 }

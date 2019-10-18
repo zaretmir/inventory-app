@@ -1,1 +1,19 @@
-<p>cart-items-list works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Product Id</th>
+      <th>Hangar Id</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cartProduct of cartProducts$ | async">
+      <td>{{ cartProduct.stockEntry.id.hangarPk }}</td>
+      <td>{{ cartProduct.stockEntry.id.productPk }}</td>
+      <td>{{ cartProduct.orderedQuantity }}</td>
+      <td>
+        <button (click)="onClickRemoveFromCart(cartProduct)">Remove from cart</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

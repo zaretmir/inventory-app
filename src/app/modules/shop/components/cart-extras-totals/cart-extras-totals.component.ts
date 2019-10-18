@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from 'src/app/core/interfaces/cart';
+import { Order } from 'src/app/core/models/cart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-extras-totals',
@@ -8,12 +9,11 @@ import { Order } from 'src/app/core/interfaces/cart';
 })
 export class CartExtrasTotalsComponent implements OnInit {
 
-  @Input() order: Order;
+  @Input() cartTotal$: Observable<number>;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.order);
   }
 
 }

@@ -1,7 +1,7 @@
 <div id="cart-totals">
   <dl>
     <dt>Subtotal</dt>
-    <dd>{{ order.totalAmount }}</dd>
+    <dd>{{ cartTotal$ | async }}</dd>
     <dt>VAT</dt>
     <dd>00.00 €</dd>
     <dt>Total</dt>
