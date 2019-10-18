@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Hangar } from '../interfaces/hangar';
+import { Hangar } from '../models/hangar';
 
 @Injectable({
   providedIn: 'root'
@@ -55,23 +55,4 @@ export class HangarApiService {
     return this.http.put(urlR, null);
   }
 
-
-
-  /**
-   * Model mappings
-   */
-/*
-  public mapToHangar(response: any): Hangar {
-    const hangar = new Hangar();
-    hangar.id = response.id;
-    hangar.name = response.name;
-    hangar.address = response.address;
-    hangar.owner = response.owner;
-    hangar.ownerEmail = response.ownerEmail;
-    hangar.phoneNumber = response.phoneNumber;
-    hangar.isState = response.isState;
-
-    return hangar;
-  }
-  */
 }

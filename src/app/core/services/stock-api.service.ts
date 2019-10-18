@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { StockEntry } from '../interfaces/stock-entry';
+import { StockEntry } from '../models/stock-entry';
+import { HangarStockLoaded } from '../state/stock/stock.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class ProductHangarApiService {
 
   constructor( private http: HttpClient ) { }
 
-  public getProductsInHangar( hangarid: number ): Observable<any> {
+  public getStockInHangar( hangarid: number ): Observable<any> {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${'/entries/hangars/'}${hangarid}`;
+    const urlR = `${this.urlApi}${'/entries/hangar/'}${hangarid}`;
     return this.http.get(urlR);
   }
 
@@ -28,11 +29,15 @@ export class ProductHangarApiService {
     const id = hangarid.toString();
     const urlR = `${this.urlApi}${'/entries/hangar/'}${hangarid}${'?details=true'}`;
     return this.http.get(urlR);
-
   }
-
+/*
   public addProductToHangar( entry: StockEntry ) {
-    const id = entry.hangarPk.toString();
+    const urlR = `${this.urlApi}${'/entries'}`;
+    return this.http.put(urlR, entry);
+  }
+  */
+
+  public updateStock(entry: StockEntry) {
     const urlR = `${this.urlApi}${'/entries'}`;
     return this.http.put(urlR, entry);
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Product } from '../interfaces/product';
+import { Product } from '../models/product';
 
 @Injectable()
 export class ProductResolver implements Resolve<any> {

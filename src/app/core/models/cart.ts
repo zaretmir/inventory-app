@@ -1,4 +1,5 @@
 import { Item } from './item';
+import { CartProduct } from './cartProduct';
 
 export interface Order {
   id: number;
@@ -7,4 +8,5 @@ export interface Order {
   totalAmount: number;
   totalItems: number;
   items: Item[];
+  cartProducts: CartProduct[];
 }

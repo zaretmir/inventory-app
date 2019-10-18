@@ -15,10 +15,12 @@ export class AuthenticationService {
 
   private authUrl = 'http://localhost:9006/authenticate';
 
+  /*
   authenticate(username, password) {
     return this.http.post<any>(this.authUrl, {username, password}).pipe(
       map(
         userData => {
+          console.log(userData);
           sessionStorage.setItem('username', username);
           console.log(jwt_decode(userData.token));
           const tokenStr = 'Bearer ' + userData.token;
@@ -28,6 +30,11 @@ export class AuthenticationService {
       )
     );
   }
+  */
+
+ authenticate(username: string, password: string) {
+   return this.http.post<any>(this.authUrl, {username, password});
+ }
 
   isUserLoggedIn() {
     const user = sessionStorage.getItem('username');

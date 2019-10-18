@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from '../interfaces/cart';
+import { Order } from '../models/cart';
 
 const BASE_URL = 'http://localhost:9006/api/order-management/';
 

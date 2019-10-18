@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Price } from '../interfaces/price';
+import { Price } from '../models/price';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,10 @@ export class PriceApiService {
     return this.http.get(urlR);
   }
 
-  public postPrice( productId: number, price: Price ) {
-    const id = productId.toString();
-    const urlR = `${this.urlApi}${'/entries/products/'}${id}`;
+  public postPrice(price: Price) {
+    console.log('Api');
+    console.log(price);
+    const urlR = `${this.urlApi}/entries`;
     return this.http.post(urlR, price);
   }
 }
