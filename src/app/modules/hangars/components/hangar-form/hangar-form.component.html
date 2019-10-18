@@ -1,74 +1,57 @@
-<!-- Reactive form (nested)
-
-<form [formGroup]="hangarForm" (ngSubmit)="onSubmit($event)">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input formControlName="name" id="name" type="text" class="form-control" [readonly]="isReadOnly">
-    <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-      <div *ngIf="name?.errors['required']">This field is required.</div>
-      <div *ngIf="name?.errors['minlength']">This field bust be at least {{ name.errors['minlength'].requiredLength }} characters.</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="address">Address</label>
-    <input formControlName="address" id="address" type="text" class="form-control" [readonly]="isReadOnly">
-    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">This field is required.</div>
-  </div>
-  <div formGroupName="ownerInfo">
-    <div class="form-group">
-        <label for="owner">Owner</label>
-        <input formControlName="owner" id="owner" type="text" class="form-control" [readOnly]="isReadOnly">
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input formControlName="email" id="ownerEmail" type="email" class="form-control" [readOnly]="isReadOnly">
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input formControlName="phone" id="phone" type="tel" class="form-control" [readOnly]="isReadOnly">
-      </div>
-  </div>
-
-
-  <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-
--->
-
-
-<form [formGroup]="hangarForm" (ngSubmit)="onSubmit($event)">
+<form [formGroup]="hangarForm">
 
   <div class="form-group">
     <label for="name">{{ 'hangar-form.name' | translate }}</label>
-    <input formControlName="name" id="name" type="text" class="form-control" [readonly]="isReadOnly">
+    <input formControlName="name" id="name" type="text" class="form-control">
     <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-      <div *ngIf="name?.errors['required']">{{ 'form-validation.required' | translate }}</div>
-      <div *ngIf="name?.errors['minlength']">{{ 'form-validation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}</div>
+      <div *ngIf="name?.errors['required']">
+        {{ 'form-validation.required' | translate }}
+      </div>
+      <div *ngIf="name?.errors['minlength']">
+        {{ 'form-validation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}
+      </div>
     </div>
   </div>
 
   <div class="form-group">
     <label for="address">{{ 'hangar-form.address' | translate }}</label>
-    <input formControlName="address" id="address" type="text" class="form-control" [readonly]="isReadOnly">
-    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">{{ 'form-validation.required' | translate }}</div>
+    <input formControlName="address" id="address" type="text" class="form-control">
+    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">
+      {{ 'form-validation.required' | translate }}
+    </div>
   </div>
 
   <div class="form-group">
     <label for="owner">{{ 'hangar-form.owner' | translate }}</label>
-    <input formControlName="owner" id="owner" type="text" class="form-control" [readOnly]="isReadOnly">
+    <input formControlName="owner" id="owner" type="text" class="form-control">
   </div>
 
   <div class="form-group">
     <label for="ownerEmail">E-mail</label>
-    <input formControlName="ownerEmail" id="ownerEmail" type="email" class="form-control" [readOnly]="isReadOnly">
+    <input formControlName="ownerEmail" id="ownerEmail" type="email" class="form-control">
   </div>
 
   <div class="form-group">
-    <label for="phoneNumber">{{ 'hangar-form.phone' | translate }}</label>
-    <input formControlName="phoneNumber" id="phoneNumber" type="tel" class="form-control" [readOnly]="isReadOnly">
+    <label for="phoneNumber">
+      {{ 'hangar-form.phone' | translate }}
+    </label>
+    <input formControlName="phoneNumber" id="phoneNumber" type="tel" class="form-control">
   </div>
 
-  <button class="btn btn-primary" type="submit">{{ 'button.submit' | translate }}</button>
+  <button
+    *ngIf="!isReadOnly"
+    class="btn btn-primary"
+    type="submit"
+    (click)="update(hangarForm.value)">
+    {{ 'button.submit' | translate }}
+  </button>
+  <button
+    *ngIf="!isReadOnly"
+    class="btn btn-primary"
+    type="submit"
+    (click)="submit(hangarForm.value)">
+    {{ 'button.submit' | translate }}
+  </button>
 
 </form>
 

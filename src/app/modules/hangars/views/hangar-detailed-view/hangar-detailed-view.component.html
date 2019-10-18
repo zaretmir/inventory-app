@@ -10,11 +10,20 @@
   <div>
     <button class="btn btn-block" (click)="onLoadProducts()">Load products</button>
   </div>
-
-  <div>
-    <app-products-excerpts *ngIf='loadProducts'></app-products-excerpts>
-  </div>
 </div>
+
+
+<pre>{{ stockEntries$ | async | json }}</pre>
+
+<!--
+<div *ngIf='stockEntries$ | async as stockEntries'>
+
+  <app-stock-entry-form
+    *ngFor="let stockEntry of stockEntries"
+    [stockEntry]='stockEntry'>
+  </app-stock-entry-form>
+</div>
+-->
 
 <ng-template #loading>
   Loading hangar data...

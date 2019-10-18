@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Hangar } from 'src/app/core/models/hangar';
-import { ProductExcerpt } from 'src/app/core/models/product-excerpt';
 import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
 import { Observable } from 'rxjs';
+import { StockFacade } from 'src/app/core/state/stock/stock.facade';
+import { StockEntry } from 'src/app/core/models/stock-entry';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hangar-detailed-view',
@@ -14,15 +16,19 @@ export class HangarDetailedViewComponent implements OnInit {
   id: number;
   hangar$: Observable<Hangar>;
   hangar: Hangar;
-  products: ProductExcerpt[];
+  hangarId: number;
+  stockEntries$: Observable<StockEntry[]>;
 
   isReadOnly = false;
 
-  isDataReady = false;
-  loadProducts = false;
 
-  constructor(private hangarsFacade: HangarsFacade) {
-     this.hangar$ = this.hangarsFacade.selectedHangar$;
+  constructor(
+    private hangarsFacade: HangarsFacade,
+    private stockFacade: StockFacade,
+    private route: ActivatedRoute) {
+      this.hangarId = +this.route.snapshot.params.hangarid; // Cambiar esto
+      this.hangar$ = this.hangarsFacade.selectedHangar$;
+      this.stockEntries$ = this.stockFacade.stockEntriesOfHangar$;
   }
 
   ngOnInit() {
@@ -35,7 +41,8 @@ export class HangarDetailedViewComponent implements OnInit {
 
   onLoadProducts() {
     console.log('load products');
-    this.loadProducts = true;
+    this.stockFacade.setSelectedHangar(this.hangarId);
+    this.stockFacade.loadHangarStock(this.hangarId);
   }
 
 

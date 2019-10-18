@@ -11,12 +11,10 @@ import { HangarDetailedViewComponent } from './views/hangar-detailed-view/hangar
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-view.component';
-import { HangarEditViewComponent } from './views/hangar-edit-view/hangar-edit-view.component';
-import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-manage-view.component';
 
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ProductsExcerptsComponent } from './components/products-excerpts/products-excerpts.component';
+import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-manage-view.component';
 
 
 @NgModule({
@@ -26,9 +24,7 @@ import { ProductsExcerptsComponent } from './components/products-excerpts/produc
     HangarDetailedViewComponent,
     SidenavComponent,
     HangarFormViewComponent,
-    HangarEditViewComponent,
-    HangarManageViewComponent,
-    ProductsExcerptsComponent],
+    HangarManageViewComponent],
   imports: [
     CommonModule,
     HangarsRoutingModule,
