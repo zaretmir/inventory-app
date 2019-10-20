@@ -109,12 +109,10 @@ export class ProductsViewAllComponent implements OnInit {
 
   onSeeProductDetails(productId: number) {
     console.log('onsee');
-    this.productsFacade.setSelectedProductId(productId);
     this.router.navigate(['products/details/', productId.toString()]);
   }
 
   onEditProduct(productId: number) {
-    this.productsFacade.setSelectedProductId(productId);
     this.router.navigate(['/products/edit/', productId.toString()]);
   }
 
@@ -135,11 +133,9 @@ export class ProductsViewAllComponent implements OnInit {
     return stockEntry.priceHistory.find(entry => entry.dateUpdated === mostRecentDate);
   }
 
-  onRemoveProduct(product: Product) {
-    this.productsFacade.updateProduct(product);
+  onRemoveProduct(productId: number) { // TODO
+    // this.productsFacade.removeProduct();
     console.log(' delete product (parent)');
-    // this.componentComService.collectData(product);
-    // this.productApiService.removeProduct(product.id.toString()).subscribe();
   }
 
   selectButtonAction() {

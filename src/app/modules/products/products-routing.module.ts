@@ -12,13 +12,13 @@ const routes: Routes = [
     path: '', component: ProductsViewAllComponent
   },
   {
-    path: 'details/:productid', component: ProductDetailedViewComponent
+    path: 'details/:productId', component: ProductDetailedViewComponent
   },
   {
     path: 'add', component: ProductFormViewComponent
   },
   {
-    path: 'edit/:productid',
+    path: 'edit/:productId',
     component: ProductEditViewComponent
   }
 ];

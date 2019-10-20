@@ -38,7 +38,7 @@ export class HangarApiService {
   public postHangar( hangar: Hangar ) {
     console.log('Posting hangar');
     console.log(hangar);
-    const urlR = `${this.urlApi}${'/hangars'}`;
+    const urlR = `${this.urlApi}${'hangars'}`;
     return this.http.post(urlR, hangar);
   }
 

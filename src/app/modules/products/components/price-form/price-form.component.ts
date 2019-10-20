@@ -28,6 +28,7 @@ export class PriceFormComponent implements OnInit {
 
   onSubmit() {
     const priceEntry: Price = {
+      price_id: null,
       stockEntry: this.stockEntry,
       price: this.priceEntryForm.get('price').value,
       dateUpdated: new Date().getTime()

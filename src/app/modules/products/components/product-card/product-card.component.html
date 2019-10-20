@@ -4,6 +4,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text">{{ product.description }}</p>
+    <!--
     <table>
       <thead>
         <th></th>
@@ -21,30 +22,10 @@
         </tr>
       </tbody>
     </table>
+    -->
 
     <button (click)="seeProductDetails()" class="btn btn-primary">{{ 'button.more' | translate }}</button>
     <button (click)="editProduct()" class="btn btn-primary">{{ 'button.edit' | translate }}</button>
     <button (click)="removeProduct()" class="btn btn-primary">{{ 'button.remove' | translate }}</button>
   </div>
 </div>
-
-<!--
-<div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="..." class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
-          <p class="card-text"><small class="text-muted">Product price here</small></p>
-        </div>
-      </div>
-      <div class="col-md-1">
-        <button (click)="onClick()" class="btn btn-primary">More</button>
-      </div>
-    </div>
-  </div>
-
-  -->

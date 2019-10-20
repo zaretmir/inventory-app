@@ -9,9 +9,9 @@ import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-man
 const routes: Routes = [
   { path: '', component: HangarsComponent},
   { path: 'add', component: HangarFormViewComponent },
-  { path: 'details/:hangarid', component: HangarDetailedViewComponent },
-  { path: 'edit/:hangarid', component: HangarDetailedViewComponent },
-  { path: 'manage/:hangarid', component: HangarManageViewComponent}
+  { path: 'details/:hangarId', component: HangarDetailedViewComponent },
+  { path: 'edit/:hangarId', component: HangarDetailedViewComponent },
+  { path: 'manage/:hangarId', component: HangarManageViewComponent}
 ];
 
 @NgModule({

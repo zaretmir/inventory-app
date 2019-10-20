@@ -33,14 +33,7 @@ import { RegistrationFormComponent } from './views/registration-form/registratio
 import { HeaderComponent } from './layouts/header/header.component';
 
 // Redux
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { rootReducers, metaReducers } from './core/state';
 import { StateModule } from './core/state/state.module';
-import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './core/state/app.effects';
-import { ProductApiService } from './core/services/product-api.service';
 
 
 @NgModule({

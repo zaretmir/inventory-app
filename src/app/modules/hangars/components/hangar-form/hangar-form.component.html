@@ -42,14 +42,14 @@
     *ngIf="!isReadOnly"
     class="btn btn-primary"
     type="submit"
-    (click)="update(hangarForm.value)">
+    (click)="update()">
     {{ 'button.submit' | translate }}
   </button>
   <button
     *ngIf="!isReadOnly"
     class="btn btn-primary"
     type="submit"
-    (click)="submit(hangarForm.value)">
+    (click)="submit()">
     {{ 'button.submit' | translate }}
   </button>
 

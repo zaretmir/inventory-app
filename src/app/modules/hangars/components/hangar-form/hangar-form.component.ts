@@ -2,11 +2,8 @@ import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HangarApiService } from 'src/app/core/services/hangar-api.service';
-import { TranslateService } from '@ngx-translate/core';
 import { Hangar } from 'src/app/core/models/hangar';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tassign } from 'tassign';
 
 @Component({
   selector: 'app-hangar-form',
@@ -53,19 +50,21 @@ export class HangarFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('en form');
+    console.log(this.isReadOnly);
     if (this.isReadOnly) {
       this.hangarForm.disable();
     }
-
     this.hangarForm.patchValue(this.hangar);
   }
 
-  submit(hangar: Hangar) {
-    this.submited.emit(hangar);
+  submit() {
+    this.submited.emit(this.hangarForm.value);
   }
 
-  update(hangar: Hangar) {
-    this.updated.emit(hangar);
+  update() {
+    const hangarUpdate: Hangar = tassign(this.hangar, this.hangarForm.value);
+    this.updated.emit(hangarUpdate);
   }
 
 }

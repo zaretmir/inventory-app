@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/core/models/product';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
+import { tassign } from 'tassign';
 
 @Component({
   selector: 'app-product-form',
@@ -39,7 +40,8 @@ export class ProductFormComponent implements OnInit {
   get name() { return this.productForm.get('name'); }
   get description() { return this.productForm.get('description'); }
 
-  public submit(product: Product) {
-    this.submited.emit(product);
+  public submit() {
+    const productUpdate: Product = tassign(this.product, this.productForm.value);
+    this.submited.emit(productUpdate);
   }
 }

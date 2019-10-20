@@ -35,6 +35,6 @@
     </div>
   </div>
 
-  <button *ngIf="!isReadOnly" class="btn btn-primary" type="submit" [disabled]="!productForm.valid" (click)="submit(productForm.value)">
+  <button *ngIf="!isReadOnly" class="btn btn-primary" type="submit" [disabled]="!productForm.valid" (click)="submit()">
     {{ 'button.submit' | translate }}
   </button>

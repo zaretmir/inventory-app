@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { Hangar } from 'src/app/core/models/hangar';
 import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
 import { Observable } from 'rxjs';
 import { HangarPage } from 'src/app/core/models/hangarPage';
+import { SidenavComponent } from '../../components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-hangars',
@@ -13,14 +12,18 @@ import { HangarPage } from 'src/app/core/models/hangarPage';
 })
 export class HangarsComponent implements OnInit {
 
+  @ViewChild(SidenavComponent, {static: false})
+  menu: SidenavComponent;
+
   // Pagination
   currentPage = 0;
   items = 5;
   total: number;
 
-  hangarsPage$: Observable<HangarPage>;
+  selectedHangarId: number = null;
 
-  isHangarSelected: boolean;
+  hangarsPage$: Observable<HangarPage>;
+  preselectedHangarId$: Observable<number>;
 
   constructor(
     private router: Router,
@@ -28,11 +31,7 @@ export class HangarsComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-
-    this.isHangarSelected = false;
-
     this.hangarsPage$ = this.hangarsFacade.hangarsPage$;
-
     this.getHangarsPage(this.currentPage, this.items);
   }
 
@@ -40,34 +39,35 @@ export class HangarsComponent implements OnInit {
     this.hangarsFacade.loadHangarsPage(page, items);
   }
 
-  /***
-   * Navigate to hangar form:
-   *  _Shows hangar info (edit=false) if hangar has been previously selected.
-   *  _Else shows empty form to submit new hangar.
-   */
-  public hangarForm( hangar: Hangar ) {
-    this.router.navigate(['/hangars/details', hangar.id]);
+  public setSelectedHangar(hangarId: number) {  // TODO: improve this function
+    if (hangarId === this.selectedHangarId) {
+      this.menu.toggle();
+    } else {
+      this.menu.isOpen = false;
+      this.selectedHangarId = hangarId;
+      this.hangarsFacade.setPreselectedHangar(this.selectedHangarId);
+      this.menu.toggle();
+    }
   }
 
-  public hangarEdit( hangar: Hangar ) {
-    this.router.navigate(['hangar/edit', hangar.id]);
+  public hangarForm() {
+    this.router.navigate(['/hangars/details', this.selectedHangarId]);
+  }
+
+  public onClickManage() {
+    console.log('mange');
+  }
+
+  public onClickRemove() {
+    console.log('remove');
+  }
+
+  public onClickEdit() {
+    this.router.navigate(['hangars/edit', this.selectedHangarId]);
   }
 
   public addNewHangar() {
     this.router.navigate(['hangars/add']);
-  }
-
-  public setHangarSelected( hangar: Hangar) {
-    this.hangarsFacade.setSelectedHangar(hangar.id);
-    this.isHangarSelected = true;
-  }
-
-  public selectButtonAction() {
-    if (this.isHangarSelected) {
-
-    } else {
-      this.addNewHangar();
-    }
   }
 
   pageChanged(page: number) {

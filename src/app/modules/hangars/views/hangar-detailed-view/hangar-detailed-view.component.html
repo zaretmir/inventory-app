@@ -3,12 +3,12 @@
 
   <app-hangar-form
     [hangar]="hangar"
-    [isReadOnly]="isReadOnly"
+    [isReadOnly]="isReadOnly$ | async"
     (updated)="onUpdate($event)">
   </app-hangar-form>
 
   <div>
-    <button class="btn btn-block" (click)="onLoadProducts()">Load products</button>
+    <button class="btn btn-block" (click)="onLoadProducts(hangar.id)">Load products</button>
   </div>
 </div>
 

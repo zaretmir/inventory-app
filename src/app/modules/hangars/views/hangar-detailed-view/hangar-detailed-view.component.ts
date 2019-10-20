@@ -4,7 +4,10 @@ import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
 import { Observable } from 'rxjs';
 import { StockFacade } from 'src/app/core/state/stock/stock.facade';
 import { StockEntry } from 'src/app/core/models/stock-entry';
-import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { RouterFacade } from 'src/app/core/state/router/router.facade';
+import { RouterStateUrl } from 'src/app/core/state/router/router.reducer';
+import { RouterReducerState } from '@ngrx/router-store';
 
 @Component({
   selector: 'app-hangar-detailed-view',
@@ -15,34 +18,33 @@ export class HangarDetailedViewComponent implements OnInit {
 
   id: number;
   hangar$: Observable<Hangar>;
-  hangar: Hangar;
-  hangarId: number;
   stockEntries$: Observable<StockEntry[]>;
 
-  isReadOnly = false;
-
+  isReadOnly$: Observable<boolean>;
 
   constructor(
+    private routerFacade: RouterFacade,
     private hangarsFacade: HangarsFacade,
-    private stockFacade: StockFacade,
-    private route: ActivatedRoute) {
-      this.hangarId = +this.route.snapshot.params.hangarid; // Cambiar esto
-      this.hangar$ = this.hangarsFacade.selectedHangar$;
+    private stockFacade: StockFacade
+    ) {
+      this.hangar$ = this.hangarsFacade.preselectedHangar$;
       this.stockEntries$ = this.stockFacade.stockEntriesOfHangar$;
+      this.isReadOnly$ = this.routerFacade.router$.pipe(
+        map((reducerState: RouterReducerState<RouterStateUrl>) => reducerState.state.url),
+        map((url) => !url.includes('edit'))
+      );
   }
 
   ngOnInit() {
   }
 
   onUpdate(hangar: Hangar) {
-    hangar.id = this.hangar.id;
     this.hangarsFacade.updateHangar(hangar);
   }
 
-  onLoadProducts() {
+  onLoadProducts(hangarId: number) {
     console.log('load products');
-    this.stockFacade.setSelectedHangar(this.hangarId);
-    this.stockFacade.loadHangarStock(this.hangarId);
+    this.stockFacade.loadHangarStock(hangarId);
   }
 
 

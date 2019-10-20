@@ -1,6 +1,12 @@
-<app-floating-button-plus (click)="selectButtonAction()" [sidenavComponent]="hangarsSidenav"></app-floating-button-plus>
+<app-floating-button-plus
+  (click)="addNewHangar()">
+</app-floating-button-plus>
 
-<app-sidenav #hangarsSidenav></app-sidenav>
+<app-sidenav #hangarsMenu
+  (manage)="onClickManage()"
+  (edit)="onClickEdit()"
+  (remove)="onClickRemove()">
+</app-sidenav>
 
 <table class="table">
   <thead>
@@ -17,7 +23,7 @@
                                             totalItems: (hangarsPage$ | async)?.totalElements }">
       <td>{{ hangar.name }}</td>
       <td>{{ hangar.address }}</td>
-      <button (click)="setHangarSelected(hangar)" (dblclick)="hangarForm(hangar)" type="button" class="btn btn-outline-primary btn-block btn-sm">Seleccionar</button>
+      <button (click)="setSelectedHangar(hangar.id)" (dblclick)="hangarForm(hangar.id)" type="button" class="btn btn-outline-primary btn-block btn-sm">Seleccionar</button>
       <!-- Usar un timeout en el ts -->
     </tr>
   </tbody>

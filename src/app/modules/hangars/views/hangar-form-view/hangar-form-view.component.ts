@@ -15,25 +15,20 @@ export class HangarFormViewComponent implements OnInit {
   isReadOnly: boolean;
 
   constructor(
-    private hangarsFacade: HangarsFacade,
-    private router: Router
-    ) {
-
-    }
+    private hangarsFacade: HangarsFacade
+    ) { }
 
   ngOnInit() {
   }
 
   onUpdate(hangar: Hangar) {
-    hangar.id = this.hangar.id;
     this.hangarsFacade.updateHangar(hangar);
   }
 
   onSubmit(hangar: Hangar) {
-    hangar.isActive = true;
     this.hangarsFacade.addHangar(hangar);
     // TODO: Retrieve id and navigate to details
-    this.router.navigate(['/hangars/details', hangar.id]);
+    //this.router.navigate(['/hangars/details', hangar.id]);
   }
 
 }

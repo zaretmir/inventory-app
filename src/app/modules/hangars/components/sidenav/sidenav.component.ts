@@ -1,13 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ComponentComService } from 'src/app/core/services/component-com.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { HangarApiService } from 'src/app/core/services/hangar-api.service';
-import { Hangar } from 'src/app/core/models/hangar';
 import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
 import { Observable, Subscription } from 'rxjs';
-import { NumberValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-sidenav',
@@ -32,14 +30,16 @@ export class SidenavComponent implements OnDestroy {
   hangarId$: Observable<number>;
   hangarId: number;
 
+  @Output() manage = new EventEmitter<MouseEvent>();
+  @Output() edit = new EventEmitter<MouseEvent>();
+  @Output() remove = new EventEmitter<MouseEvent>();
+
   constructor(
     private hangarsFacade: HangarsFacade,
     private router: Router,
     private componentComService: ComponentComService,
-    private hangarApiService: HangarApiService,
-    private route: ActivatedRoute ) {
-      const subscription = this.hangarsFacade.selectedHangarId$
-        .subscribe((hangarId: number) => this.hangarId = hangarId);
+    private hangarApiService: HangarApiService
+    ) {
   }
 
   ngOnDestroy() {
@@ -52,16 +52,19 @@ export class SidenavComponent implements OnDestroy {
   }
 
   public manageElement() {
-    this.router.navigate(['/hangars/manage', this.hangarId.toString()]);
+    this.manage.emit();
+    // this.router.navigate(['/hangars/manage', this.hangarId.toString()]);
   }
 
   public editElement() {
-    this.router.navigate(['hangars/edit', this.hangarId.toString()]);
+    this.edit.emit();
+    // this.router.navigate(['hangars/edit', this.hangarId.toString()]);
   }
 
   public removeElement() {
-    this.hangarApiService.removeHangar( this.hangarId )
-      .subscribe( () => this.componentComService.retrieveData());
+    this.remove.emit();
+    // this.hangarApiService.removeHangar( this.hangarId )
+      // .subscribe( () => this.componentComService.retrieveData());
   }
 
 }
