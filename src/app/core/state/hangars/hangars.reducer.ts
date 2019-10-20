@@ -1,4 +1,4 @@
-import { HangarsActionTypes, HangarsAction, SelectHangar } from './hangars.actions';
+import { HangarsActionTypes, HangarsAction } from './hangars.actions';
 import { Hangar } from '../../models/hangar';
 import { tassign } from 'tassign';
 import { HangarPage } from '../../models/hangarPage';
@@ -10,13 +10,13 @@ const updatedHangars = (hangars: Hangar[], hangar: Hangar) =>
   hangars.map(h => h.id === hangar.id ? hangar : h);
 
 export interface HangarsState {
-  selectedHangarId: number;
+  preselectedHangarId: number;
   currentHangarPage: HangarPage;
   hangars: Hangar[];
 }
 
 export const initialState: HangarsState = {
-  selectedHangarId: null,
+  preselectedHangarId: null,
   currentHangarPage: null,
   hangars: []
 };
@@ -24,8 +24,9 @@ export const initialState: HangarsState = {
 export function hangarsReducer(
   state: HangarsState = initialState, action: HangarsAction): HangarsState {
     switch (action.type) {
-      case HangarsActionTypes.SELECT_HANGAR:
-        return tassign(state, { selectedHangarId: action.hangarId });
+      case HangarsActionTypes.PRESELECT_HANGAR:
+        return tassign(state,
+          { preselectedHangarId: action.hangarId });
       case HangarsActionTypes.LOAD_HANGARS_SUCCESS:
         return tassign(state,
           { hangars: action.hangars });
@@ -34,7 +35,7 @@ export function hangarsReducer(
           {
             currentHangarPage: action.hangarPage,
             hangars: addHangars(state.hangars, action.hangarPage.content)
-           });
+          });
       case HangarsActionTypes.ADD_HANGAR_SUCCESS:
         return tassign(state,
           { hangars: addHangar(this.hangars, action.hangar)});

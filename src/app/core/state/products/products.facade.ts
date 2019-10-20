@@ -5,18 +5,16 @@ import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as ProductsActions from './products.actions';
 import { Observable } from 'rxjs';
-import { selectCurrentProduct, selectAllProducts, selectProductId } from './products.selectors';
+import { selectCurrentProduct, selectAllProducts } from './products.selectors';
 
 @Injectable({providedIn: 'root'})
 export class ProductsFacade {
 
   products$: Observable<Product[]>;
   selectedProduct$: Observable<Product>;
-  selectedProductId$: Observable<number>;
 
   constructor(private store: Store<ProductsState>) {
     this.products$ = this.store.select(selectAllProducts);
-    this.selectedProductId$ = this.store.select(selectProductId);
     this.selectedProduct$ = this.store.select(selectCurrentProduct);
   }
 
@@ -35,9 +33,4 @@ export class ProductsFacade {
   updateProduct(product: Product) {
     this.store.dispatch(new ProductsActions.UpdateProduct(product));
   }
-
-  setSelectedProductId(productId: number) {
-    this.store.dispatch(new ProductsActions.SelectProduct(productId));
-  }
-
 }

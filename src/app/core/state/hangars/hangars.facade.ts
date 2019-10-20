@@ -5,7 +5,13 @@ import { Hangar } from '../../models/hangar';
 import * as HangarsActions from './hangars.actions';
 import { Injectable } from '@angular/core';
 import { HangarPage } from '../../models/hangarPage';
-import { selectCurrentHangarsPage, selectAllHangars, selectHangarId, selectCurrentHangar  } from './hangars.selectors';
+import {
+  selectCurrentHangarsPage,
+  selectAllHangars,
+  selectCurrentHangar,
+  selectPreselectedHangar,
+  selectPreselectedHangarId
+} from './hangars.selectors';
 
 @Injectable({providedIn: 'root'})
 export class HangarsFacade {
@@ -13,17 +19,19 @@ export class HangarsFacade {
   hangarsPage$: Observable<HangarPage>;
   hangars$: Observable<Hangar[]>;
   selectedHangar$: Observable<Hangar>;
-  selectedHangarId$: Observable<number>;
+  preselectedHangar$: Observable<Hangar>;
+  preselectedHangarId$: Observable<number>;
 
   constructor(private store: Store<HangarsState>) {
     this.hangarsPage$ = this.store.select(selectCurrentHangarsPage);
     this.hangars$ = this.store.select(selectAllHangars);
-    this.selectedHangarId$ = this.store.select(selectHangarId);
     this.selectedHangar$ = this.store.select(selectCurrentHangar);
+    this.preselectedHangar$ = this.store.select(selectPreselectedHangar);
+    this.preselectedHangarId$ = this.store.select(selectPreselectedHangarId);
   }
 
-  setSelectedHangar(id: number) {
-    this.store.dispatch(new HangarsActions.SelectHangar(id));
+  setPreselectedHangar(id: number) {
+    this.store.dispatch(new HangarsActions.PreselectHangar(id));
   }
 
   loadHangar(id: number) {

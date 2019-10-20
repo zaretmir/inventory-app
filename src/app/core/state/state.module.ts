@@ -9,6 +9,8 @@ import { HangarsEffects } from './hangars/hangars.effects';
 import { CartEffects } from './cart/cart.effects';
 import { AuthEffects } from './auth/auth.effects';
 import { StockEffects } from './stock/stock.effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { CustomSerializer } from './router/custom-serializer';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { StockEffects } from './stock/stock.effects';
   imports: [
     CommonModule,
     StoreModule.forRoot(rootReducers),
+    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       ProductsEffects,
       HangarsEffects,
@@ -23,6 +26,7 @@ import { StockEffects } from './stock/stock.effects';
       AuthEffects,
       StockEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 10 })
-  ]
+  ],
+  providers: [{provide: RouterStateSerializer, useClass: CustomSerializer}]
 })
 export class StateModule { }

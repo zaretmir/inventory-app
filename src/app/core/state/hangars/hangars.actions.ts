@@ -3,7 +3,7 @@ import { Hangar } from '../../models/hangar';
 import { HangarPage } from '../../models/hangarPage';
 
 export enum HangarsActionTypes {
-  SELECT_HANGAR = '[Hangars] Selected',
+  PRESELECT_HANGAR = '[Hangars] Set preselected hangar id',
   LOAD_HANGAR = '[Hangars] Load hangar data',
   LOAD_HANGAR_SUCCESS = '[Hangars] Hangar data loaded',
   LOAD_HANGARS = '[Hangars] Load all hangars data',
@@ -18,11 +18,10 @@ export enum HangarsActionTypes {
   DELETE_HANGAR_SUCCESS = '[Hangars] Data deleted'
 }
 
-export class SelectHangar implements Action {
-  readonly type = HangarsActionTypes.SELECT_HANGAR;
+export class PreselectHangar implements Action {
+  readonly type = HangarsActionTypes.PRESELECT_HANGAR;
   constructor(public hangarId: number) {}
 }
-
 export class LoadHangar implements Action {
   readonly type = HangarsActionTypes.LOAD_HANGAR;
   constructor(public hangarId: number) {}
@@ -84,7 +83,7 @@ export class HangarDeleted implements Action {
   constructor(public hangar: Hangar) {}
 }
 
-export type HangarsAction = SelectHangar
+export type HangarsAction = PreselectHangar
   | LoadHangars
   | HangarsLoaded
   | LoadHangarsPage

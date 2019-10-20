@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { HangarsActionTypes, LoadHangarsPage, HangarsPageLoaded, AddHangar, HangarAdded, LoadHangar } from './hangars.actions';
 import { HangarApiService } from '../../services/hangar-api.service';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Hangar } from '../../models/hangar';
 import { HangarPage } from '../../models/hangarPage';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HangarsEffects {
@@ -54,8 +55,15 @@ export class HangarsEffects {
             ))
       );
 
+  @Effect() hangarUpdateSuccess$: Observable<Action>
+    = this.actions$.pipe(
+        ofType(HangarsActionTypes.UPDATE_HANGAR_SUCCESS),
+        tap(() => this.router.navigateByUrl('/home'))
+    );
+
 
   constructor(private hangarService: HangarApiService,
-              private actions$: Actions) { }
+              private actions$: Actions,
+              private router: Router) { }
 
 }

@@ -11,15 +11,16 @@ import {
   ProductUpdated,
   AddProduct,
   ProductAdded} from './products.actions';
-import { switchMap, map, filter } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { ProductApiService } from '../../services/product-api.service';
-import { Product } from '../../models/product';
+import { Product, ProductAdapter } from '../../models/product';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ProductsEffects {
   @Effect() loadProducts$: Observable<Action>
   = this.actions$.pipe(
-      ofType(ProductsActionTypes.LoadProducts),
+      ofType(ProductsActionTypes.LOAD_PRODUCTS),
       switchMap(() =>
         this.productsService
             .getAllProducts()
@@ -30,7 +31,7 @@ export class ProductsEffects {
 
   @Effect() loadProductsPage$: Observable<Action>
     = this.actions$.pipe(
-      ofType(ProductsActionTypes.LoadProductsPage),
+      ofType(ProductsActionTypes.LOAD_PRODUCTS_PAGE),
       switchMap((action: LoadProductsPage) =>
         this.productsService
             .getProductPage(action.page, action.items)
@@ -41,7 +42,7 @@ export class ProductsEffects {
 
   @Effect() addProduct$: Observable<Action>
     = this.actions$.pipe(
-      ofType(ProductsActionTypes.AddProduct),
+      ofType(ProductsActionTypes.ADD_PRODUCT),
       switchMap((action: AddProduct) =>
         this.productsService
           .postProduct(action.product)
@@ -51,18 +52,26 @@ export class ProductsEffects {
 
   @Effect() updateProduct$: Observable<Action>
     = this.actions$.pipe(
-      ofType(ProductsActionTypes.UpdateProduct),
+      ofType(ProductsActionTypes.UPDATE_PRODUCT),
       switchMap((action: UpdateProduct) =>
         this.productsService
           .editProduct(action.product)
           .pipe(
-            map((response: Product) => new ProductUpdated(response)))
+            map((response: Product) => new ProductUpdated(this.adapter.adapt(response)))
           )
+    ));
+
+    @Effect({dispatch: false}) productUpdateSuccess$: Observable<Action>
+    = this.actions$.pipe(
+        ofType(ProductsActionTypes.UPDATE_PRODUCT_SUCCESS),
+        tap(() => this.router.navigateByUrl('/home'))
     );
 
   constructor(
     private productsService: ProductApiService,
-    private actions$: Actions
+    private actions$: Actions,
+    private router: Router,
+    private adapter: ProductAdapter
   ) {}
 
 }

@@ -4,12 +4,12 @@ import { StockEntry } from '../../models/stock-entry';
 
 export const selectStockState = createFeatureSelector('stock');
 
-export const selectHangarId = createSelector(
+export const selectStockHangarId = createSelector(
   selectStockState,
   (state: StockState) => state.selectedHangarId
 );
 
-export const selectProductId = createSelector(
+export const selectStockProductId = createSelector(
   selectStockState,
   (state: StockState) => state.selectedProductId
 );
@@ -38,7 +38,7 @@ export const selectCurrentStockEntry = createSelector(
 );
 
 export const selectStockEntriesOfProduct = createSelector(
-  selectProductId,
+  selectStockProductId,
   selectStockEntries,
   (productId: number, allEntries: StockEntry[]) => {
     if (productId && allEntries) {
@@ -48,7 +48,7 @@ export const selectStockEntriesOfProduct = createSelector(
 );
 
 export const selectStockEntriesOfHangar = createSelector(
-  selectHangarId,
+  selectStockHangarId,
   selectStockEntries,
   (hangarId: number, allEntries: StockEntry[]) => {
     console.log('selector hangares');

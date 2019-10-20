@@ -4,30 +4,27 @@ import { tassign } from 'tassign'; // Type-safe, immutable
 
 const addProducts = (products: Product[], newProducts: Product[]) => [...products, ...newProducts];
 const updatedProducts =
-  (products: Product[], product: Product): Product[] =>
-    products.map(p => p.id === product.id ? product : p);
+  (products: Product[], product: Product): Product[] => {
+    return products.map(p => p.id === product.id ? product : p);
+  };
 
 export interface ProductsState {
   products: Product[];
-  selectedProductId: number;
 }
 
 export const initialState: ProductsState  = {
   products: [],
-  selectedProductId: null
 };
 
 export function productsReducer(
   state: ProductsState = initialState, action: ProductsAction): ProductsState {
     switch (action.type) {
-      case ProductsActionTypes.ProductsLoaded:
+      case ProductsActionTypes.LOAD_PRODUCTS_SUCCESS:
         return tassign(state, { products: action.products });
-      case ProductsActionTypes.ProductsPageLoaded:
+      case ProductsActionTypes.LOAD_PRODUCTS_PAGE_SUCCESS:
         return tassign(state, { products: addProducts(state.products, action.products) });
-      case ProductsActionTypes.SelectProduct:
-        return tassign(state, { selectedProductId: action.productId});
-      case ProductsActionTypes.ProductUpdated:
-        return tassign(state, { products: updatedProducts(this.products, action.product)});
+      case ProductsActionTypes.UPDATE_PRODUCT_SUCCESS:
+        return tassign(state, { products: updatedProducts(state.products, action.product)});
       default:
         return state;
     }
