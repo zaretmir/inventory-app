@@ -42,6 +42,12 @@ export class HangarsFacade {
     this.store.dispatch(new HangarsActions.LoadHangarsPage(page, items));
   }
 
+  submitHangarData(hangar: Hangar) {
+    console.log('in facade');
+    this.store.dispatch(new HangarsActions.SubmitHangar(hangar));
+  }
+
+  /*
   addHangar(hangar: Hangar) {
     this.store.dispatch(new HangarsActions.AddHangar(hangar));
   }
@@ -49,4 +55,5 @@ export class HangarsFacade {
   updateHangar(hangar: Hangar) {
     this.store.dispatch(new HangarsActions.UpdateHangar(hangar));
   }
+  */
 }

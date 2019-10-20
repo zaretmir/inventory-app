@@ -22,7 +22,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // Components
 import { AppComponent } from './app.component';
 import { NavComponent } from './layouts/nav/nav.component';
-import { SideNavComponent } from './layouts/side-nav/side-nav.component';
 import { ContentLayoutComponent } from './layouts/content-layout/content-layout.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { CardComponent } from './views/home/components/card/card.component';
@@ -40,7 +39,6 @@ import { StateModule } from './core/state/state.module';
   declarations: [
     AppComponent,
     NavComponent,
-    SideNavComponent,
     ContentLayoutComponent,
     NotFoundComponent,
     CardComponent,

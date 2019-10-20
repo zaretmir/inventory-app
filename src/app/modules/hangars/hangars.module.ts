@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HangarFormComponent } from './components/hangar-form/hangar-form.component';
 import { HangarsComponent } from './views/hangars/hangars.component';
-import { HangarDetailedViewComponent } from './views/hangar-detailed-view/hangar-detailed-view.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-view.component';
@@ -21,7 +20,6 @@ import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-man
   declarations: [
     HangarsComponent,
     HangarFormComponent,
-    HangarDetailedViewComponent,
     SidenavComponent,
     HangarFormViewComponent,
     HangarManageViewComponent],

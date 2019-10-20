@@ -41,30 +41,25 @@ export class HangarFormComponent implements OnInit {
 
   // Hangar to populate fields when viewing or editing existent hangar
   @Input() hangar?: Hangar;
-
   @Input() isReadOnly: boolean;
+  @Input() isAddNew: boolean;
 
   @Output() submited = new EventEmitter<Hangar>();
-  @Output() updated = new EventEmitter<Hangar>();
 
   constructor() { }
 
   ngOnInit() {
-    console.log('en form');
-    console.log(this.isReadOnly);
-    if (this.isReadOnly) {
-      this.hangarForm.disable();
+    if (!this.isAddNew) {
+      this.isReadOnly && this.hangarForm.disable();
+      this.hangarForm.patchValue(this.hangar);
     }
-    this.hangarForm.patchValue(this.hangar);
   }
 
   submit() {
-    this.submited.emit(this.hangarForm.value);
-  }
-
-  update() {
+    console.log('submit from form');
+    // set "id" and "isActive" attributes (important when updating):
     const hangarUpdate: Hangar = tassign(this.hangar, this.hangarForm.value);
-    this.updated.emit(hangarUpdate);
+    this.submited.emit(this.hangarForm.value);
   }
 
 }

@@ -55,7 +55,8 @@ export class HangarsComponent implements OnInit {
   }
 
   public onClickManage() {
-    console.log('mange');
+    this.router.navigate(['/hangars/manage', this.selectedHangarId]);
+
   }
 
   public onClickRemove() {

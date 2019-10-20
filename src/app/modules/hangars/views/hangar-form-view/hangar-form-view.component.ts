@@ -1,34 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Hangar } from 'src/app/core/models/hangar';
 import { HangarsFacade } from 'src/app/core/state/hangars/hangars.facade';
+import { Observable } from 'rxjs';
+import { RouterFacade } from 'src/app/core/state/router/router.facade';
+import { RouterReducerState } from '@ngrx/router-store';
+import { RouterStateUrl } from 'src/app/core/state/router/router.reducer';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hangar-form-view',
   templateUrl: './hangar-form-view.component.html',
   styleUrls: ['./hangar-form-view.component.css']
 })
-export class HangarFormViewComponent implements OnInit {
+export class HangarFormViewComponent {
 
-  hangar: Hangar = null;
+  id: number;
+  hangar$: Observable<Hangar>;
 
-  isReadOnly: boolean;
+  isReadOnly$: Observable<boolean>;
+  isAddNew$: Observable<boolean>;
 
   constructor(
+    private routerFacade: RouterFacade,
     private hangarsFacade: HangarsFacade
-    ) { }
-
-  ngOnInit() {
-  }
-
-  onUpdate(hangar: Hangar) {
-    this.hangarsFacade.updateHangar(hangar);
+    ) {
+      this.hangar$ = this.hangarsFacade.preselectedHangar$;
+      this.isAddNew$ = this.routerFacade.router$.pipe(
+        map((reducerState: RouterReducerState<RouterStateUrl>) => reducerState.state.url),
+        map((url) => url.includes('add'))
+      );
+      this.isReadOnly$ = this.routerFacade.router$.pipe(
+        map((reducerState: RouterReducerState<RouterStateUrl>) => reducerState.state.url),
+        map((url) => url.includes('details'))
+      );
   }
 
   onSubmit(hangar: Hangar) {
-    this.hangarsFacade.addHangar(hangar);
+    console.log('submit from view');
+    this.hangarsFacade.submitHangarData(hangar);
     // TODO: Retrieve id and navigate to details
-    //this.router.navigate(['/hangars/details', hangar.id]);
+    // this.router.navigate(['/hangars/details', hangar.id]);
   }
 
 }

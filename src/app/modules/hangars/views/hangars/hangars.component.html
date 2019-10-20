@@ -1,12 +1,12 @@
-<app-floating-button-plus
-  (click)="addNewHangar()">
-</app-floating-button-plus>
-
 <app-sidenav #hangarsMenu
   (manage)="onClickManage()"
   (edit)="onClickEdit()"
   (remove)="onClickRemove()">
 </app-sidenav>
+
+<app-floating-button-plus
+  (click)="addNewHangar()">
+</app-floating-button-plus>
 
 <table class="table">
   <thead>

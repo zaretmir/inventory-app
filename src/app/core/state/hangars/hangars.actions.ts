@@ -10,6 +10,7 @@ export enum HangarsActionTypes {
   LOAD_HANGARS_SUCCESS = '[Hangars] All hangars data loaded',
   LOAD_HANGARS_PAGE = '[Hangars] Load hangars data page',
   LOAD_HANGARS_PAGE_SUCCESS = '[Hangars] hangars data page loaded',
+  SUBMIT_HANGAR = '[Hangars] Hangar data submitted',
   ADD_HANGAR = '[Hangars] Add data',
   ADD_HANGAR_SUCCESS = '[Hangars] Data added',
   UPDATE_HANGAR = '[Hangars] Update data',
@@ -53,6 +54,11 @@ export class HangarsPageLoaded implements Action {
   constructor(public hangarPage: HangarPage) {}
 }
 
+export class SubmitHangar implements Action {
+  readonly type = HangarsActionTypes.SUBMIT_HANGAR;
+  constructor(public hangar: Hangar) {}
+}
+
 export class AddHangar implements Action {
   readonly type = HangarsActionTypes.ADD_HANGAR;
   constructor(public hangar: Hangar) {}
@@ -90,6 +96,7 @@ export type HangarsAction = PreselectHangar
   | HangarsPageLoaded
   | LoadHangar
   | HangarLoaded
+  | SubmitHangar
   | AddHangar
   | HangarAdded
   | UpdateHangar

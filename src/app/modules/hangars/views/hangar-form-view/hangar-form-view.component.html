@@ -1,7 +1,8 @@
 <h2>New hangar</h2>
 
 <app-hangar-form
-  [isReadOnly]='isReadOnly'
-  (submited)='onSubmit($event)'
-  (updated)='onUpdate($event)'>
+  [hangar]='hangar$ | async'
+  [isAddNew]='isAddNew$ | async'
+  [isReadOnly]='isReadOnly$ | async'
+  (submited)='onSubmit($event)'>
 </app-hangar-form>
