@@ -10,7 +10,7 @@ import { StockFacade } from 'src/app/core/state/stock/stock.facade';
 
 @Component({
   selector: 'app-product-manage-view',
-  templateUrl: './product-manage-view.component',
+  templateUrl: './product-manage-view.component.html',
   styleUrls: ['./product-manage-view.component.css']
 })
 export class ProductManageViewComponent implements OnInit {
@@ -39,8 +39,5 @@ export class ProductManageViewComponent implements OnInit {
       }
      );
   }
-
-
-
 
 }
