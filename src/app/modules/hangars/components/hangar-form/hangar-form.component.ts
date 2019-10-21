@@ -56,7 +56,6 @@ export class HangarFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit from form');
     // set "id" and "isActive" attributes (important when updating):
     const hangarUpdate: Hangar = tassign(this.hangar, this.hangarForm.value);
     this.submited.emit(this.hangarForm.value);

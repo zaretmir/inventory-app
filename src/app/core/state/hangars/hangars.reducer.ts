@@ -2,6 +2,7 @@ import { HangarsActionTypes, HangarsAction } from './hangars.actions';
 import { Hangar } from '../../models/hangar';
 import { tassign } from 'tassign';
 import { HangarPage } from '../../models/hangarPage';
+import { adaptError } from '../utils/store.utils';
 
 
 const addHangar = (hangars: Hangar[], newHangar: Hangar) => [...hangars, newHangar];
@@ -13,12 +14,14 @@ export interface HangarsState {
   preselectedHangarId: number;
   currentHangarPage: HangarPage;
   hangars: Hangar[];
+  error: any;
 }
 
 export const initialState: HangarsState = {
   preselectedHangarId: null,
   currentHangarPage: null,
-  hangars: []
+  hangars: [],
+  error: null
 };
 
 export function hangarsReducer(
@@ -26,24 +29,39 @@ export function hangarsReducer(
     switch (action.type) {
       case HangarsActionTypes.PRESELECT_HANGAR:
         return tassign(state,
-          { preselectedHangarId: action.hangarId });
+          {
+            preselectedHangarId: action.hangarId,
+            error: null
+          });
       case HangarsActionTypes.LOAD_HANGARS_SUCCESS:
         return tassign(state,
-          { hangars: action.hangars });
+          {
+            hangars: action.hangars,
+            error: null
+          });
       case HangarsActionTypes.LOAD_HANGARS_PAGE_SUCCESS:
         return tassign(state,
           {
             currentHangarPage: action.hangarPage,
-            hangars: addHangars(state.hangars, action.hangarPage.content)
+            hangars: addHangars(state.hangars, action.hangarPage.content),
+            error: null
           });
       case HangarsActionTypes.ADD_HANGAR_SUCCESS:
         return tassign(state,
-          { hangars: addHangar(this.hangars, action.hangar)});
+          {
+            hangars: addHangar(this.hangars, action.hangar),
+            error: null
+          });
       case HangarsActionTypes.UPDATE_HANGAR_SUCCESS:
-          return tassign(state,
-            { hangars: updatedHangars(this.hangars, action.hangar)});
+        return tassign(state,
+          {
+            hangars: updatedHangars(this.hangars, action.hangar),
+            error: null
+          });
       case HangarsActionTypes.DELETE_HANGAR_SUCCESS: // TODO
-        return state;
+       return state;
+      case HangarsActionTypes.HANGAR_REQUEST_FAIL:
+        return tassign(state, { error: adaptError(action.payload) });
       default:
         return state;
     }

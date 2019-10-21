@@ -10,7 +10,8 @@ import {
   selectAllHangars,
   selectCurrentHangar,
   selectPreselectedHangar,
-  selectPreselectedHangarId
+  selectPreselectedHangarId,
+  selectError
 } from './hangars.selectors';
 
 @Injectable({providedIn: 'root'})
@@ -21,6 +22,7 @@ export class HangarsFacade {
   selectedHangar$: Observable<Hangar>;
   preselectedHangar$: Observable<Hangar>;
   preselectedHangarId$: Observable<number>;
+  error$: Observable<any>;
 
   constructor(private store: Store<HangarsState>) {
     this.hangarsPage$ = this.store.select(selectCurrentHangarsPage);
@@ -28,6 +30,7 @@ export class HangarsFacade {
     this.selectedHangar$ = this.store.select(selectCurrentHangar);
     this.preselectedHangar$ = this.store.select(selectPreselectedHangar);
     this.preselectedHangarId$ = this.store.select(selectPreselectedHangarId);
+    this.error$ = this.store.select(selectError);
   }
 
   setPreselectedHangar(id: number) {

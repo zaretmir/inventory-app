@@ -18,3 +18,8 @@ export const selectCurrentProduct = createSelector(
   }
 );
 
+export const selectError = createSelector(
+  selectProductsState,
+  (state: ProductsState) => state.error
+);
+

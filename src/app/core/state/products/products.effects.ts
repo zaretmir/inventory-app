@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { ofType, Actions, Effect } from '@ngrx/effects';
 import {
@@ -8,10 +8,11 @@ import {
   ProductsPageLoaded,
   LoadProductsPage,
   UpdateProduct,
-  ProductUpdated,
+  UpdateProductSuccess,
   AddProduct,
-  ProductAdded} from './products.actions';
-import { switchMap, map, tap } from 'rxjs/operators';
+  AddProductSuccess,
+  ProductRequestFail} from './products.actions';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { ProductApiService } from '../../services/product-api.service';
 import { Product, ProductAdapter } from '../../models/product';
 import { Router } from '@angular/router';
@@ -25,7 +26,9 @@ export class ProductsEffects {
         this.productsService
             .getAllProducts()
             .pipe(
-              map((response: Product[]) => new ProductsLoaded(response)))
+              map((response: Product[]) => new ProductsLoaded(response)),
+              catchError((error) => of(new ProductRequestFail(error)))
+            )
       )
     );
 
@@ -36,7 +39,8 @@ export class ProductsEffects {
         this.productsService
             .getProductPage(action.page, action.items)
             .pipe(
-              map((response: any) => new ProductsPageLoaded(response.content))
+              map((response: any) => new ProductsPageLoaded(response.content)),
+              catchError((error) => of(new ProductRequestFail(error)))
             ))
     );
 
@@ -47,7 +51,9 @@ export class ProductsEffects {
         this.productsService
           .postProduct(action.product)
           .pipe(
-            map((response: Product) => new ProductAdded(response)))
+            map((response: Product) => new AddProductSuccess(response)),
+            catchError((error) => of(new ProductRequestFail(error)))
+          )
       ));
 
   @Effect() updateProduct$: Observable<Action>
@@ -57,7 +63,8 @@ export class ProductsEffects {
         this.productsService
           .editProduct(action.product)
           .pipe(
-            map((response: Product) => new ProductUpdated(this.adapter.adapt(response)))
+            map((response: Product) => new UpdateProductSuccess(this.adapter.adapt(response))),
+            catchError((error) => of(new ProductRequestFail(error)))
           )
     ));
 

@@ -35,3 +35,8 @@ export const selectCurrentHangar = createSelector(
     return router.state && allHangars.find(hangar => hangar.id === +router.state.params.hangarId);
   }
 );
+
+export const selectError = createSelector(
+  selectHangarsState,
+  (state: HangarsState) => state.error
+);

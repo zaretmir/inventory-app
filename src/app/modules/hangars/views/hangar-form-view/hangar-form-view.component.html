@@ -1,8 +1,12 @@
-<h2>New hangar</h2>
+<app-error-toast *ngIf='error$ | async as error'
+  [error]='error'>
+</app-error-toast>
 
+<h2>New hangar</h2>
 <app-hangar-form
   [hangar]='hangar$ | async'
   [isAddNew]='isAddNew$ | async'
   [isReadOnly]='isReadOnly$ | async'
   (submited)='onSubmit($event)'>
 </app-hangar-form>
+

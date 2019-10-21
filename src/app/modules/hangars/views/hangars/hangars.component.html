@@ -1,3 +1,7 @@
+<app-error-toast *ngIf='error$ | async as error'
+  [error]='error'>
+</app-error-toast>
+
 <app-sidenav #hangarsMenu
   (manage)="onClickManage()"
   (edit)="onClickEdit()"

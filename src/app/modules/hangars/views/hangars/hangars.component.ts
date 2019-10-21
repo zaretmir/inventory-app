@@ -24,6 +24,7 @@ export class HangarsComponent implements OnInit {
 
   hangarsPage$: Observable<HangarPage>;
   preselectedHangarId$: Observable<number>;
+  error$: Observable<any>;
 
   constructor(
     private router: Router,
@@ -31,6 +32,7 @@ export class HangarsComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    this.error$ = this.hangarsFacade.error$;
     this.hangarsPage$ = this.hangarsFacade.hangarsPage$;
     this.getHangarsPage(this.currentPage, this.items);
   }

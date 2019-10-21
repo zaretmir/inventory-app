@@ -16,7 +16,8 @@ export enum HangarsActionTypes {
   UPDATE_HANGAR = '[Hangars] Update data',
   UPDATE_HANGAR_SUCCESS = '[Hangars] Data updated',
   DELETE_HANGAR = '[Hangars] Delete data',
-  DELETE_HANGAR_SUCCESS = '[Hangars] Data deleted'
+  DELETE_HANGAR_SUCCESS = '[Hangars] Data deleted',
+  HANGAR_REQUEST_FAIL = '[Hangars] Request failed',
 }
 
 export class PreselectHangar implements Action {
@@ -28,7 +29,7 @@ export class LoadHangar implements Action {
   constructor(public hangarId: number) {}
 }
 
-export class HangarLoaded implements Action {
+export class LoadHangarSuccess implements Action {
   readonly type = HangarsActionTypes.LOAD_HANGAR_SUCCESS;
   constructor(public hangar: Hangar) {}
 }
@@ -37,7 +38,7 @@ export class LoadHangars implements Action {
   readonly type = HangarsActionTypes.LOAD_HANGARS;
 }
 
-export class HangarsLoaded implements Action {
+export class LoadHangarsSuccess implements Action {
   readonly type = HangarsActionTypes.LOAD_HANGARS_SUCCESS;
   constructor(public hangars: Hangar[]) {}
 }
@@ -49,7 +50,7 @@ export class LoadHangarsPage implements Action {
       public items: number) {}
 }
 
-export class HangarsPageLoaded implements Action {
+export class LoadHangarsPageSuccess implements Action {
   readonly type = HangarsActionTypes.LOAD_HANGARS_PAGE_SUCCESS;
   constructor(public hangarPage: HangarPage) {}
 }
@@ -64,10 +65,11 @@ export class AddHangar implements Action {
   constructor(public hangar: Hangar) {}
 }
 
-export class HangarAdded implements Action {
+export class AddHangarSuccess implements Action {
   readonly type = HangarsActionTypes.ADD_HANGAR_SUCCESS;
   constructor(public hangar: Hangar) {}
 }
+
 
 export class UpdateHangar implements Action {
   readonly type = HangarsActionTypes.UPDATE_HANGAR;
@@ -89,16 +91,22 @@ export class HangarDeleted implements Action {
   constructor(public hangar: Hangar) {}
 }
 
+export class HangarRequestFail implements Action {
+  readonly type = HangarsActionTypes.HANGAR_REQUEST_FAIL;
+  constructor(public payload: any) {}
+}
+
 export type HangarsAction = PreselectHangar
   | LoadHangars
-  | HangarsLoaded
+  | LoadHangarsSuccess
   | LoadHangarsPage
-  | HangarsPageLoaded
+  | LoadHangarsPageSuccess
   | LoadHangar
-  | HangarLoaded
+  | LoadHangarSuccess
   | SubmitHangar
   | AddHangar
-  | HangarAdded
+  | AddHangarSuccess
+  | HangarRequestFail
   | UpdateHangar
   | HangarUpdated
   | DeleteHangar

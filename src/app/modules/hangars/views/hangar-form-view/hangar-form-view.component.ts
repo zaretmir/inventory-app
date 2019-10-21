@@ -16,6 +16,7 @@ export class HangarFormViewComponent {
 
   id: number;
   hangar$: Observable<Hangar>;
+  error$: Observable<any>;
 
   isReadOnly$: Observable<boolean>;
   isAddNew$: Observable<boolean>;
@@ -24,6 +25,7 @@ export class HangarFormViewComponent {
     private routerFacade: RouterFacade,
     private hangarsFacade: HangarsFacade
     ) {
+      this.error$ = this.hangarsFacade.error$;
       this.hangar$ = this.hangarsFacade.preselectedHangar$;
       this.isAddNew$ = this.routerFacade.router$.pipe(
         map((reducerState: RouterReducerState<RouterStateUrl>) => reducerState.state.url),

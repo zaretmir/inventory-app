@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductsState } from './products.reducer';
-import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import * as ProductsActions from './products.actions';
 import { Observable } from 'rxjs';
-import { selectCurrentProduct, selectAllProducts } from './products.selectors';
+import { selectCurrentProduct, selectAllProducts, selectError } from './products.selectors';
 
 @Injectable({providedIn: 'root'})
 export class ProductsFacade {
 
   products$: Observable<Product[]>;
   selectedProduct$: Observable<Product>;
+  error$: Observable<any>;
 
   constructor(private store: Store<ProductsState>) {
     this.products$ = this.store.select(selectAllProducts);
     this.selectedProduct$ = this.store.select(selectCurrentProduct);
+    this.error$ = this.store.select(selectError);
   }
 
   loadAllProducts() {

@@ -9,29 +9,27 @@ import { StockEntry } from 'src/app/core/models/stock-entry';
 import { StockFacade } from 'src/app/core/state/stock/stock.facade';
 
 @Component({
-  selector: 'app-product-edit-view',
-  templateUrl: './product-edit-view.component.html',
-  styleUrls: ['./product-edit-view.component.css']
+  selector: 'app-product-manage-view',
+  templateUrl: './product-manage-view.component',
+  styleUrls: ['./product-manage-view.component.css']
 })
-export class ProductEditViewComponent implements OnInit {
+export class ProductManageViewComponent implements OnInit {
 
   product$: Observable<Product>;
   productStock$: Observable<StockEntry[]>;
+  error$: Observable<any>;
   isDataReady = false;
 
   constructor(
     private productsFacade: ProductsFacade,
     private stockFacade: StockFacade,
     private priceApiService: PriceApiService) {
+      this.error$ = this.productsFacade.error$;
       this.product$ = this.productsFacade.selectedProduct$;
       this.productStock$ = this.stockFacade.stockEntriesOfProduct$;
     }
 
   ngOnInit() {
-  }
-
-  onSubmit(product: Product) {
-    this.productsFacade.updateProduct(product);
   }
 
   postPrice(price: Price) {

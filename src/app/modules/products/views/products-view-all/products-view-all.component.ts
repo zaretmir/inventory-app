@@ -13,11 +13,9 @@ import { ProductsEffects } from 'src/app/core/state/products/products.effects';
 import { ProductsActionTypes, LoadProducts } from 'src/app/core/state/products/products.actions';
 import { ProductsFacade } from 'src/app/core/state/products/products.facade';
 import { CartFacade } from 'src/app/core/state/cart/cart.facade';
-import { Item } from 'src/app/core/models/item';
 import { StockEntry } from 'src/app/core/models/stock-entry';
 import { CartProduct } from 'src/app/core/models/cartProduct';
 import { Price } from 'src/app/core/models/price';
-import { tassign } from 'tassign';
 
 @Component({
   selector: 'app-products-view-all',
@@ -34,6 +32,7 @@ export class ProductsViewAllComponent implements OnInit {
   isShopping = true;
 
   products$: Observable<Product[]>;
+  error$: Observable<any>;
 
   constructor(
     private router: Router,
@@ -45,6 +44,7 @@ export class ProductsViewAllComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.error$ = this.productsFacade.error$;
     if (this.isShopping) {
       this.products$ = this.productsFacade.products$;
     }

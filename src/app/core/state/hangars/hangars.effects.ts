@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import { HangarsActionTypes, LoadHangarsPage, HangarsPageLoaded, AddHangar, HangarAdded, LoadHangar, SubmitHangar, UpdateHangar, HangarUpdated } from './hangars.actions';
+import { HangarsActionTypes, LoadHangarsPage, LoadHangarsPageSuccess, AddHangar, AddHangarSuccess, LoadHangar, SubmitHangar, UpdateHangar, HangarUpdated, HangarRequestFail } from './hangars.actions';
 import { HangarApiService } from '../../services/hangar-api.service';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, tap, withLatestFrom, catchError } from 'rxjs/operators';
 import { Hangar } from '../../models/hangar';
 import { HangarPage } from '../../models/hangarPage';
 import { Router } from '@angular/router';
@@ -20,7 +20,8 @@ export class HangarsEffects {
         this.hangarService
           .getHangarById(action.hangarId)
           .pipe(
-            map((response: Hangar) => new HangarAdded(response)) // No necesito pasar por el reducer?
+            map((response: Hangar) => new AddHangarSuccess(response)), // No necesito pasar por el reducer?
+            catchError((error) => of(new HangarRequestFail(error)))
           ))
     );
 
@@ -31,7 +32,8 @@ export class HangarsEffects {
           this.hangarService
             .getHangarPage(action.page, action.items)
             .pipe(
-              map((response: HangarPage) => new HangarsPageLoaded(response))
+              map((response: HangarPage) => new LoadHangarsPageSuccess(response)),
+              catchError((error) => of(new HangarRequestFail(error)))
             ))
       );
 
@@ -42,7 +44,8 @@ export class HangarsEffects {
           this.hangarService
             .postHangar(action.hangar)
             .pipe(
-              map((response: Hangar) => new HangarAdded(response))
+              map((response: Hangar) => new AddHangarSuccess(response)),
+              catchError((error) => of(new HangarRequestFail(error)))
             ))
       );
 
@@ -74,7 +77,8 @@ export class HangarsEffects {
           this.hangarService
             .editHangar(action.hangar)
             .pipe(
-              map((response: Hangar) => new HangarUpdated(response))
+              map((response: Hangar) => new HangarUpdated(response)),
+              catchError((error) => of(new HangarRequestFail(error)))
             ))
       );
 

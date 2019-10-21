@@ -1,3 +1,7 @@
+<app-error-toast *ngIf='error$ | async as error'
+  [error]='error'>
+</app-error-toast>
+
 <app-searchbar (keyup)="search()"></app-searchbar>
 <div infiniteScroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
 

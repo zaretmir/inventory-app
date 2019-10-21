@@ -6,11 +6,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { StockEntryFormComponent } from './stock-entry-form/stock-entry-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorToastComponent } from './error-toast/error-toast.component';
+import { LoadingToastComponent } from './loading-toast/loading-toast.component';
 
 
 
 @NgModule({
-  declarations: [FloatingButtonPlusComponent, SearchbarComponent, StockEntryFormComponent],
+  declarations: [
+    FloatingButtonPlusComponent,
+    SearchbarComponent,
+    StockEntryFormComponent,
+    ErrorToastComponent,
+    LoadingToastComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -20,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     FloatingButtonPlusComponent,
     SearchbarComponent,
-    StockEntryFormComponent
+    StockEntryFormComponent,
+    ErrorToastComponent,
+    LoadingToastComponent
   ]
 })
 export class SharedModule { }
