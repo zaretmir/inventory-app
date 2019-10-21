@@ -59,6 +59,12 @@ const routes: Routes = [
     loadChildren: './modules/shop/shop.module#ShopModule'
   },
   {
+    path: 'user-dashboard',
+    component: ContentLayoutComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: './modules/user/user.module#UserModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
