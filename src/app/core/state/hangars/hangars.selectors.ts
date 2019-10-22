@@ -30,9 +30,9 @@ export const selectPreselectedHangar = createSelector(
 
 export const selectCurrentHangar = createSelector(
   selectAllHangars,
-  fromRouter.selectRouterState,
-  (allHangars: Hangar[], router): Hangar => {
-    return router.state && allHangars.find(hangar => hangar.id === +router.state.params.hangarId);
+  fromRouter.selectParamHangarId,
+  (allHangars: Hangar[], hangarId: string): Hangar => {
+    return hangarId && allHangars.find(hangar => hangar.id === +hangarId);
   }
 );
 

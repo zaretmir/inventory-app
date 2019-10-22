@@ -43,15 +43,14 @@ export class HangarApiService {
   }
 
   public editHangar( hangar: Hangar ) {
-    const id = hangar.id.toString();
-    console.log(id);
-    const urlR = `${this.urlApi}${'/hangars/'}${id}`;
+    console.log(hangar);
+    const urlR = `${this.urlApi}hangars/${hangar.id}`;
     return this.http.put(urlR, hangar);
   }
 
   public removeHangar( hangarid: number ) {
     const id = hangarid.toString();
-    const urlR = `${this.urlApi}${'/delete/'}${id}`;
+    const urlR = `${this.urlApi}${'delete/'}${id}`;
     return this.http.put(urlR, null);
   }
 

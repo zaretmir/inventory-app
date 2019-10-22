@@ -15,7 +15,7 @@ export class HangarManageViewComponent implements OnInit {
   constructor(private stockFacade: StockFacade) { }
 
   ngOnInit() {
-    this.stockFacade.loadHangarStock(4);
+    this.stockFacade.loadHangarStockByRouteParam();
     this.stockEntries$ = this.stockFacade.stockEntries$;
   }
 

@@ -76,7 +76,7 @@ export class UpdateHangar implements Action {
   constructor(public hangar: Hangar) {}
 }
 
-export class HangarUpdated implements Action {
+export class UpdateHangarSuccess implements Action {
   readonly type = HangarsActionTypes.UPDATE_HANGAR_SUCCESS;
   constructor(public hangar: Hangar) {}
 }
@@ -108,6 +108,6 @@ export type HangarsAction = PreselectHangar
   | AddHangarSuccess
   | HangarRequestFail
   | UpdateHangar
-  | HangarUpdated
+  | UpdateHangarSuccess
   | DeleteHangar
   | HangarDeleted;

@@ -7,6 +7,7 @@ export enum ProductsActionTypes {
   LOAD_PRODUCTS_SUCCESS = '[Products] All products data loaded',
   LOAD_PRODUCTS_PAGE = '[Products] Load products data page',
   LOAD_PRODUCTS_PAGE_SUCCESS = '[Products] Products data page loaded',
+  SUBMIT_PRODUCT = '[Products] Product data submitted',
   ADD_PRODUCT = '[Products] Add data',
   ADD_PRODUCT_SUCCESS = '[Products] Data added',
   UPDATE_PRODUCT = '[Products] Update data',
@@ -39,6 +40,11 @@ export class LoadProductsPage implements Action {
 export class ProductsPageLoaded implements Action {
   readonly type = ProductsActionTypes.LOAD_PRODUCTS_PAGE_SUCCESS;
   constructor(public products: Product[]) {}
+}
+
+export class SubmitProduct implements Action {
+  readonly type = ProductsActionTypes.SUBMIT_PRODUCT;
+  constructor(public product: Product) {}
 }
 
 export class AddProduct implements Action {
@@ -81,6 +87,7 @@ export type ProductsAction = LoadProducts
   | ProductsLoaded
   | LoadProductsPage
   | ProductsPageLoaded
+  | SubmitProduct
   | AddProduct
   | AddProductSuccess
   | UpdateProduct

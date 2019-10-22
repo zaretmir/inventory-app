@@ -11,7 +11,9 @@ import {
   LoadHangarStock,
   LoadProductStock,
   SelectProduct,
-  SelectHangar
+  SelectHangar,
+  LoadSelectedHangarStock,
+  LoadSelectedProductStock
 } from './stock.actions';
 import { Observable } from 'rxjs';
 
@@ -44,5 +46,13 @@ export class StockFacade {
 
   loadProductStock(productId: number) {
     this.store.dispatch(new LoadProductStock(productId));
+  }
+
+  loadHangarStockByRouteParam() {
+    this.store.dispatch(new LoadSelectedHangarStock());
+  }
+
+  loadProductStockByRouteParam() {
+    this.store.dispatch(new LoadSelectedProductStock());
   }
 }

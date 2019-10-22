@@ -49,13 +49,13 @@ export function hangarsReducer(
       case HangarsActionTypes.ADD_HANGAR_SUCCESS:
         return tassign(state,
           {
-            hangars: addHangar(this.hangars, action.hangar),
+            hangars: addHangar(state.hangars, action.hangar),
             error: null
           });
       case HangarsActionTypes.UPDATE_HANGAR_SUCCESS:
         return tassign(state,
           {
-            hangars: updatedHangars(this.hangars, action.hangar),
+            hangars: updatedHangars(state.hangars, action.hangar),
             error: null
           });
       case HangarsActionTypes.DELETE_HANGAR_SUCCESS: // TODO

@@ -12,9 +12,9 @@ export const selectAllProducts = createSelector(
 
 export const selectCurrentProduct = createSelector(
   selectAllProducts,
-  fromRouter.selectRouterState,
-  (allProducts: Product[], router): Product => {
-    return router.state && allProducts.find(product => product.id === +router.state.params.productId);
+  fromRouter.selectParamProductId,
+  (allProducts: Product[], productId: string): Product => {
+    return productId && allProducts.find(product => product.id === +productId);
   }
 );
 

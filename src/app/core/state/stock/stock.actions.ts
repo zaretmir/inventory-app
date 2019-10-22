@@ -3,8 +3,10 @@ import { StockEntry } from '../../models/stock-entry';
 
 export enum StockActionTypes {
   LOAD_PRODUCT_STOCK_ENTRIES = '[Stock] Load stock entries data by product',
+  LOAD_SELECTED_PRODUCT_STOCK_ENTRIES = '[Stock] Load stock entries data by product param',
   PRODUCT_STOCK_ENTRIES_LOADED = '[Stock] Product stock entries loaded',
   LOAD_HANGAR_STOCK_ENTRIES = '[Stock] Load stock entries data by hangar',
+  LOAD_SELECTED_HANGAR_STOCK_ENTRIES = '[Stock] Load stock entries data by hangar param',
   HANGAR_STOCK_ENTRIES_LOADED = '[Stock] Hangar stock entries loaded',
   UPDATE_STOCK = '[Stock] Update stock entry data',
   STOCK_UPDATED = '[Stock] Stock entry data updated',
@@ -19,6 +21,11 @@ export class LoadProductStock implements Action {
   constructor(public productId: number) {}
 }
 
+export class LoadSelectedProductStock implements Action {
+  readonly type = StockActionTypes.LOAD_SELECTED_PRODUCT_STOCK_ENTRIES;
+  constructor() {}
+}
+
 export class ProductStockLoaded implements Action {
   readonly type = StockActionTypes.PRODUCT_STOCK_ENTRIES_LOADED;
   constructor(public stockEntries: StockEntry[]) {}
@@ -27,6 +34,11 @@ export class ProductStockLoaded implements Action {
 export class LoadHangarStock implements Action {
   readonly type = StockActionTypes.LOAD_HANGAR_STOCK_ENTRIES;
   constructor(public hangarId: number) {}
+}
+
+export class LoadSelectedHangarStock implements Action {
+  readonly type = StockActionTypes.LOAD_SELECTED_HANGAR_STOCK_ENTRIES;
+  constructor() {}
 }
 
 export class HangarStockLoaded implements Action {
@@ -55,8 +67,10 @@ export class SelectHangar implements Action {
 }
 
 export type StockAction = LoadProductStock
+| LoadSelectedProductStock
 | ProductStockLoaded
 | LoadHangarStock
+| LoadSelectedProductStock
 | HangarStockLoaded
 | UpdateStockEntry
 | StockEntryUpdated

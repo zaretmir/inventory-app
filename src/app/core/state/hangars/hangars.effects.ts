@@ -2,14 +2,25 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import { HangarsActionTypes, LoadHangarsPage, LoadHangarsPageSuccess, AddHangar, AddHangarSuccess, LoadHangar, SubmitHangar, UpdateHangar, HangarUpdated, HangarRequestFail } from './hangars.actions';
+import {
+  HangarsActionTypes,
+  LoadHangarsPage,
+  LoadHangarsPageSuccess,
+  AddHangar,
+  AddHangarSuccess,
+  LoadHangar,
+  SubmitHangar,
+  UpdateHangar,
+  UpdateHangarSuccess,
+  HangarRequestFail
+} from './hangars.actions';
 import { HangarApiService } from '../../services/hangar-api.service';
 import { map, switchMap, tap, withLatestFrom, catchError } from 'rxjs/operators';
 import { Hangar } from '../../models/hangar';
 import { HangarPage } from '../../models/hangarPage';
 import { Router } from '@angular/router';
 import { RootState } from '..';
-import { selectStateUrl } from '../router/router.selectors';
+import { selectUrl } from '../router/router.selectors';
 
 @Injectable()
 export class HangarsEffects {
@@ -52,7 +63,7 @@ export class HangarsEffects {
   @Effect() submitHangar$: Observable<Action>
     = this.actions$.pipe(
       ofType(HangarsActionTypes.SUBMIT_HANGAR),
-      withLatestFrom(this.store.select('router', 'state', 'url')),
+      withLatestFrom(this.store.select(selectUrl)),
       map(([action, url]: [SubmitHangar, string]) => {
         console.log('inside effect');
         console.log(url);
@@ -77,12 +88,12 @@ export class HangarsEffects {
           this.hangarService
             .editHangar(action.hangar)
             .pipe(
-              map((response: Hangar) => new HangarUpdated(response)),
+              map((response: Hangar) => new UpdateHangarSuccess(response)),
               catchError((error) => of(new HangarRequestFail(error)))
             ))
       );
 
-  @Effect() hangarUpdateSuccess$: Observable<Action>
+  @Effect({dispatch: false}) hangarUpdateSuccess$: Observable<Action>
     = this.actions$.pipe(
         ofType(HangarsActionTypes.UPDATE_HANGAR_SUCCESS),
         tap(() => this.router.navigateByUrl('/home'))
