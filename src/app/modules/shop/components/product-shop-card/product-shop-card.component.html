@@ -1,0 +1,10 @@
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ stockEntry.product.name }}</h5>
+    <p class="card-text">{{ stockEntry.product.description}}</p>
+    <p class="card-text">Stock: {{ stockEntry.quantity }}</p>
+    <a class="btn btn-primary"
+      (click)='addProductoCart(stockEntry)'>Add to cart</a>
+  </div>
+</div>

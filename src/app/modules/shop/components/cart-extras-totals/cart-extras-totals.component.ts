@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from 'src/app/core/models/cart';
 import { Observable } from 'rxjs';
 
 @Component({

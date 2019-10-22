@@ -1,0 +1,4 @@
+<app-product-shop-card *ngFor='let cartProduct of (cartProducts$ | async)'
+  [stockEntry]='cartProduct'
+  (addToCart)='onAddToCart($event)'>
+</app-product-shop-card>

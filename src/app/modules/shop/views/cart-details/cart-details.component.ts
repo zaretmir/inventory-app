@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EcommerceService } from 'src/app/core/services/ecommerce.service';
-import { Order } from 'src/app/core/models/cart';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { CartFacade } from 'src/app/core/state/cart/cart.facade';
 import { CartProduct } from 'src/app/core/models/cartProduct';
 
