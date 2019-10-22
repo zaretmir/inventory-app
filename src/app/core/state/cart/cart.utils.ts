@@ -1,34 +1,39 @@
 import { CartState } from './cart.reducer';
 import { CartProduct } from '../../models/cartProduct';
+import { tassign } from 'tassign';
+import { Order } from '../../models/order';
 
-export function updatedCartState(state: CartState, updatedCartProducts: CartProduct[]): CartState {
-  return {
-    cartProducts: updatedCartProducts,
-    productsCounter: updateItemsCount(updatedCartProducts),
-    totalPrice: updateTotalPrice(updatedCartProducts)
-  };
+export const addNewCartProduct = (order: Order, newCartProduct: CartProduct): Order => {
+  const updatedCartProducts: CartProduct[] = [...order.cartProducts, newCartProduct];
+
+  return updatedOrder(order, updatedCartProducts);
+};
+
+export const updateItemQuantity =
+(order: Order, cartProduct: CartProduct, index: number): Order => {
+  const newQuantity = order.cartProducts[index].orderedQuantity + cartProduct.orderedQuantity;
+  const updatedProduct = tassign(order.cartProducts[index], { orderedQuantity: newQuantity });
+  const updatedCartProducts = Object.assign([], order.cartProducts, { [index]: updatedProduct });
+
+  return updatedOrder(order, updatedCartProducts);
+};
+
+export const deleteItem = (order: Order, cartProduct: CartProduct): Order => {
+  const updatedCartProducts: CartProduct[] =
+    order.cartProducts.filter(p => p.stockEntry.id !== cartProduct.stockEntry.id);
+
+  return updatedOrder(order, updatedCartProducts);
+};
+
+function updatedOrder(order: Order, updatedCartProducts: CartProduct[]): Order {
+  return tassign(
+    order,
+    {
+      cartProducts: updatedCartProducts,
+      totalProducts: updateItemsCount(updatedCartProducts),
+      totalAmount: updateTotalPrice(updatedCartProducts)
+    });
 }
-
-export const deleteItem = (cartProducts: CartProduct[], cartProduct: CartProduct): CartProduct[] =>
-  cartProducts.filter(p => p.stockEntry.id !== cartProduct.stockEntry.id);
-
-export function addItem(cartProducts: CartProduct[], cartProduct: CartProduct): CartProduct[] {
-  const itemIndex: number = cartProducts
-    .findIndex(i => i.stockEntry.id === cartProduct.stockEntry.id);
-
-  return (itemIndex === -1)
-  ? addNewItem(cartProducts, cartProduct)
-  : updateItemQuantity(cartProducts, cartProduct, itemIndex);
-}
-
-const addNewItem = (cartProducts: CartProduct[], newCartProduct: CartProduct): CartProduct[] =>
-  [...cartProducts, newCartProduct];
-
-const updateItemQuantity =
-  (cartProducts: CartProduct[], cartProduct: CartProduct, cartProductIndex: number): CartProduct[] => {
-    cartProduct.orderedQuantity = cartProducts[cartProductIndex].orderedQuantity++;
-    return Object.assign([], cartProducts, {itemIndex: cartProduct});
-  };
 
 function updateItemsCount(cartProducts: CartProduct[]): number {
   return cartProducts.reduce(

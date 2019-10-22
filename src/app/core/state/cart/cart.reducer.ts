@@ -1,33 +1,60 @@
 import { CartActionTypes, CartAction} from './cart.actions';
-import { Item } from '../../models/item';
 import { tassign } from 'tassign';
 import * as CartUtils from './cart.utils';
 import { CartProduct } from '../../models/cartProduct';
+import { Order } from '../../models/order';
 
 
 export interface CartState {
+  order: Order;
+  /*
   cartProducts: CartProduct[];
   productsCounter: number;
   totalPrice: number;
+  */
+  error: any;
 }
 
 export const initialState: CartState  = {
-  cartProducts: [],
-  productsCounter: 0,
-  totalPrice: 0
+  order : {
+    id: null,
+    user: null, // retrieve?,
+    date: null, // set before post?
+    cartProducts: [],
+    totalProducts: 0,
+    totalAmount: 0
+  },
+  error: null
 };
 
+/*
+NB!!!: So far, tassign is not needed, as all values in store are being updated after every action.
+It is left here intentionally foreseeing near-future needs. (maybe when handling errors?)
+*/
 export function cartReducer(
   state: CartState = initialState, action: CartAction): CartState {
     switch (action.type) {
-      case CartActionTypes.AddItem:
+      case CartActionTypes.ADD_NEW_ITEM:
         return tassign(
           state,
-          CartUtils.updatedCartState(state, CartUtils.addItem(state.cartProducts, action.cartProduct)));
-      case CartActionTypes.DeleteItem:
+          {
+            order: CartUtils.addNewCartProduct(state.order, action.cartProduct),
+            error: null
+          });
+      case CartActionTypes.UPDATE_EXISTENT_ITEM:
         return tassign(
           state,
-          CartUtils.updatedCartState(state, CartUtils.deleteItem(state.cartProducts, action.cartProduct)));
+          {
+            order: CartUtils.updateItemQuantity(state.order, action.cartProduct, action.index),
+            error: null
+          });
+      case CartActionTypes.DELETE_ITEM:
+        return tassign(
+          state,
+          {
+            order: CartUtils.deleteItem(state.order, action.cartProduct),
+            error: null
+          });
       default:
         return state;
     }

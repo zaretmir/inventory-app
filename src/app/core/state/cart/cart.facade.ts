@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { CartActionTypes } from './cart.actions';
 import * as CartActions from './cart.actions';
 import { CartProduct } from '../../models/cartProduct';
+import { selectCartProducts, selectCartProductsCount, selectCartTotalPrice } from './cart.selectors';
 
 @Injectable({providedIn: 'root'})
 export class CartFacade {
@@ -17,21 +18,10 @@ export class CartFacade {
 
   constructor(private store: Store<CartState>) {
 
-    this.cartProducts$ = this.store.pipe(
-      select('cart'),
-      map((cartState: CartState) => cartState.cartProducts)
-      );
-
-    this.productsCount$ = this.store.pipe(
-      select('cart'),
-      map((cartState: CartState) => cartState.productsCounter)
-      );
-
-    this.totalPrice$ = this.store.pipe(
-      select('cart'),
-      map((cartState: CartState) => cartState.totalPrice)
-      );
-    }
+    this.cartProducts$ = this.store.select(selectCartProducts);
+    this.productsCount$ = this.store.select(selectCartProductsCount);
+    this.totalPrice$ = this.store.select(selectCartTotalPrice);
+  }
 
   addCartProductToCart(cartProduct: CartProduct) {
     console.log('facade');

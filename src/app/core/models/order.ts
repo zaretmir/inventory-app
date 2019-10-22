@@ -9,8 +9,7 @@ export class Order {
     public user: any, // unnecessary?
     public date: number,
     public totalAmount: number,
-    public totalItems: number,
-    public items: Item[],
+    public totalProducts: number,
     public cartProducts: CartProduct[]
   ) {}
 }
@@ -24,8 +23,7 @@ export class OrderAdapter implements Adapter<Order> {
       item.date,
       item.totalAmount,
       item.totalItems,
-      item.items,
-      item.cartProducts
+      item.items // check backend for attrs names
     );
 
   }
