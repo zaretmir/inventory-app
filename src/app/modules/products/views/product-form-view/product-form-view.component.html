@@ -1,4 +1,6 @@
 <app-product-form
-  [isReadOnly]="false"
+  [product]='product$ | async'
+  [isReadOnly]='isReadOnly$ | async'
+  [isAddNew]='isAddNew$ | async'
   (submited)="onSumbit($event)">
 </app-product-form>

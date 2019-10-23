@@ -14,6 +14,7 @@ export class ProductFormComponent implements OnInit {
 
   @Input() product?: Product;
   @Input() isReadOnly: boolean;
+  @Input() isAddNew: boolean;
 
   @Output() submited = new EventEmitter<Product>();
 
@@ -29,10 +30,8 @@ export class ProductFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.isReadOnly) {
-      this.productForm.disable();
-    }
-    if (this.product) {
+    if (!this.isAddNew) {
+      this.isReadOnly && this.productForm.disable();
       this.productForm.patchValue(this.product);
     }
   }

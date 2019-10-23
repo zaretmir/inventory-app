@@ -104,33 +104,17 @@ export class ProductsViewAllComponent implements OnInit {
       );
   }
 
-  // Pasar estas funciones a los componentes de las tarjetas???
-  // REPENSAR BIEN ESTO
-
   onSeeProductDetails(productId: number) {
     console.log('onsee');
     this.router.navigate(['products/details/', productId.toString()]);
   }
 
+  onManage(productId: number) {
+    this.router.navigate(['products/manage/', productId.toString()]);
+  }
+
   onEditProduct(productId: number) {
     this.router.navigate(['/products/edit/', productId.toString()]);
-  }
-
-  onAddToCart(stockEntry: StockEntry) {
-    console.log(stockEntry);
-    const cartProduct: CartProduct = {
-      stockEntry: stockEntry,
-      price: this.getLatestPrice(stockEntry).price,
-      orderedQuantity: 1,
-    };
-
-    this.cartFacade.addCartProductToCart(cartProduct);
-  }
-
-  private getLatestPrice(stockEntry: StockEntry): Price {
-    const mostRecentDate: number = Math.max(...stockEntry.priceHistory
-      .map( priceEntry => priceEntry.dateUpdated) );
-    return stockEntry.priceHistory.find(entry => entry.dateUpdated === mostRecentDate);
   }
 
   onRemoveProduct(productId: number) { // TODO
@@ -138,11 +122,7 @@ export class ProductsViewAllComponent implements OnInit {
     console.log(' delete product (parent)');
   }
 
-  selectButtonAction() {
-    this.router.navigate(['products/details/66']);
-  }
-
-  addProduct(e: MouseEvent) {
+  addProduct() {
     console.log('add product');
     this.router.navigate(['products/add']);
   }

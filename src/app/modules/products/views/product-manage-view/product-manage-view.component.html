@@ -2,17 +2,11 @@
   [error]='error'>
 </app-error-toast>
 
-<app-product-form
-  [isReadOnly]="false"
-  [product]="product$ |async"
-  (submited)=onSubmit($event)>
-</app-product-form>
-
-<div class="container mt-2" *ngFor="let stockEntry of productStock$ | async">
+<div class='container mt-2' *ngFor='let stockEntry of productStock$ | async'>
   <h5>Update Price</h5>
   <app-price-form
-    [stockEntry]="stockEntry"
-    (newPriceEntry)="postPrice($event)">
+    [stockEntry]='stockEntry'
+    (newPriceEntry)='postPrice($event)'>
   </app-price-form>
 </div>
 

@@ -5,17 +5,15 @@
 <app-searchbar (keyup)="search()"></app-searchbar>
 <div infiniteScroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
 
-    <app-floating-button-plus (click)="addProduct($event)"></app-floating-button-plus>
-
-    <app-product-manager-nav></app-product-manager-nav>
+    <app-floating-button-plus (click)="addProduct()"></app-floating-button-plus>
 
     <div class="card-columns">
     <app-product-card *ngFor="let product of products$ | async"
       [product]="product"
-      (seeDetails)=onSeeProductDetails(product.id)
-      (edit)=onEditProduct(product.id)
-      (addToCart)=onAddToCart($event)
-      (remove)=onRemoveProduct(product.id)>
+      (seeDetails)='onSeeProductDetails(product.id)'
+      (manage)='onManage(product.id)'
+      (edit)='onEditProduct(product.id)'
+      (remove)='onRemoveProduct(product.id)'>
     </app-product-card>
     </div>
 

@@ -9,7 +9,6 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductFormViewComponent } from './views/product-form-view/product-form-view.component';
 import { PriceFormComponent } from './components/price-form/price-form.component';
-import { ProductManagerNavComponent } from './components/product-manager-nav/product-manager-nav.component';
 import { ProductManageViewComponent } from './views/product-manage-view/product-manage-view.component';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -23,8 +22,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     ProductManageViewComponent,
     ProductFormComponent,
     ProductFormViewComponent,
-    PriceFormComponent,
-    ProductManagerNavComponent],
+    PriceFormComponent
+  ],
   imports: [
     CommonModule,
     ProductsRoutingModule,

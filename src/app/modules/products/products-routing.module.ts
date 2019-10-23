@@ -13,6 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'details/:productId',
+    component: ProductFormViewComponent
+  },
+  {
+    path: 'manage/:productId',
     component: ProductManageViewComponent
   },
   {
@@ -21,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'edit/:productId',
-    component: ProductManageViewComponent
+    component: ProductFormViewComponent
   }
 ];
 

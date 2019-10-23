@@ -45,7 +45,7 @@ export class ProductsEffects {
 
         if (url.includes('edit')) {
           console.log('isEdit');
-          return new SubmitProduct(action.product);
+          return new UpdateProduct(action.product);
         }
 
         if (url.includes('add')) {

@@ -27,11 +27,7 @@ export class ProductsFacade {
     this.store.dispatch(new ProductsActions.LoadProductsPage(page, items));
   }
 
-  addProduct(product: Product) {
-    this.store.dispatch(new ProductsActions.AddProduct(product));
-  }
-
-  updateProduct(product: Product) {
-    this.store.dispatch(new ProductsActions.UpdateProduct(product));
+  submitProduct(product: Product) {
+    this.store.dispatch(new ProductsActions.SubmitProduct(product));
   }
 }

@@ -11,6 +11,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
   @Output() seeDetails = new EventEmitter();
+  @Output() manage = new EventEmitter();
   @Output() edit = new EventEmitter();
   @Output() addToCart = new EventEmitter<StockEntry>();
   @Output() remove = new EventEmitter<Product>();
@@ -26,12 +27,12 @@ export class ProductCardComponent implements OnInit {
     this.seeDetails.emit();
   }
 
-  editProduct() {
-    this.edit.emit();
+  manageProduct() {
+    this.manage.emit();
   }
 
-  addProductToCart(stockEntry: StockEntry) {
-    this.addToCart.emit(stockEntry);
+  editProduct() {
+    this.edit.emit();
   }
 
   removeProduct() {
