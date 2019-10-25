@@ -1,0 +1,25 @@
+.option-container {
+  height: 300px;
+  width: 75%;
+  margin: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #233333;
+  background-color:#f7ffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+a {
+  display: block;
+  height: 32px;
+  background-color: #7fcccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 8px;
+  text-align: left center;
+  vertical-align: middle;
+}

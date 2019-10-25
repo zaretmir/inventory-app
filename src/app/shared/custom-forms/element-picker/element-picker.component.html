@@ -1,0 +1,29 @@
+<form [formGroup]='selectorForm'>
+
+  <input
+  formControlName='searchControl'
+  type='text'>
+
+  <div class='option-container'>
+    <a
+    *ngFor='let element of filteredAvailable$ | async'
+    (click)='onSelectElement(element)'>
+      {{ element.name }}
+    </a>
+    <app-element-input
+    *ngFor='let element of filteredAvailable$ | async'
+    [element]='element'>
+    </app-element-input>
+  </div>
+
+  <div class="option-container">
+    <a
+    *ngFor='let element of selectedElements'
+    (click)='onUnselectElement(element)'>
+      {{ element.name }}
+    </a>
+  </div>
+
+</form>
+
+

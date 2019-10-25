@@ -1,0 +1,10 @@
+<form [formGroup]="testForm">
+  <app-element-picker
+    formControlName='selectedElementsControl'
+    [label]='"List input"'
+    [availableElements]='availableElements'>
+  </app-element-picker>
+</form>
+
+<p>Form value:</p>
+  <pre>{{ testForm.value | json }}</pre>

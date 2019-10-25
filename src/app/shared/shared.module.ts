@@ -8,6 +8,10 @@ import { StockEntryFormComponent } from './stock-entry-form/stock-entry-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorToastComponent } from './error-toast/error-toast.component';
 import { LoadingToastComponent } from './loading-toast/loading-toast.component';
+import { CustomInputComponent } from './custom-forms/custom-input/custom-input.component';
+import { TestFormComponent } from './custom-forms/test-form/test-form.component';
+import { ElementPickerComponent } from './custom-forms/element-picker/element-picker.component';
+import { ElementInputComponent } from './custom-forms/element-picker/element-input/element-input.component';
 
 
 
@@ -17,7 +21,11 @@ import { LoadingToastComponent } from './loading-toast/loading-toast.component';
     SearchbarComponent,
     StockEntryFormComponent,
     ErrorToastComponent,
-    LoadingToastComponent],
+    LoadingToastComponent,
+    CustomInputComponent,
+    TestFormComponent,
+    ElementPickerComponent,
+    ElementInputComponent],
   imports: [
     CommonModule,
     RouterModule,

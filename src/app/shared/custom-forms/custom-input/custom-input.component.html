@@ -1,0 +1,15 @@
+<label for="">
+  {{ label }}
+</label>
+<input
+  type='text'
+  (input)='onInput($event.target.value)'>
+
+<select name="hangars" id="">
+  <option *ngFor='let hangar of hangars; let i = index'
+    [value]='hangars[i].id'>
+    {{ hangars[i].name }}
+  </option>
+</select>
+
+<span>Number of letters: 0</span>
