@@ -11,8 +11,9 @@ import { LoadingToastComponent } from './loading-toast/loading-toast.component';
 import { CustomInputComponent } from './custom-forms/custom-input/custom-input.component';
 import { TestFormComponent } from './custom-forms/test-form/test-form.component';
 import { ElementPickerComponent } from './custom-forms/element-picker/element-picker.component';
-import { ElementInputComponent } from './custom-forms/element-picker/element-input/element-input.component';
-
+import { QuantityInputComponent } from './custom-forms/element-picker/quantity-input/quantity-input.component';
+import { FormsModule } from '@angular/forms';
+import { ElementFormComponent } from './custom-forms/element-picker/element-form/element-form.component';
 
 
 @NgModule({
@@ -25,19 +26,22 @@ import { ElementInputComponent } from './custom-forms/element-picker/element-inp
     CustomInputComponent,
     TestFormComponent,
     ElementPickerComponent,
-    ElementInputComponent],
+    QuantityInputComponent,
+    ElementFormComponent],
   imports: [
     CommonModule,
     RouterModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     FloatingButtonPlusComponent,
     SearchbarComponent,
     StockEntryFormComponent,
     ErrorToastComponent,
-    LoadingToastComponent
+    LoadingToastComponent,
+    ElementPickerComponent
   ]
 })
 export class SharedModule { }

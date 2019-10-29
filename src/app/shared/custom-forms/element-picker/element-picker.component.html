@@ -5,25 +5,87 @@
   type='text'>
 
   <div class='option-container'>
-    <a
-    *ngFor='let element of filteredAvailable$ | async'
-    (click)='onSelectElement(element)'>
-      {{ element.name }}
-    </a>
-    <app-element-input
-    *ngFor='let element of filteredAvailable$ | async'
-    [element]='element'>
-    </app-element-input>
-  </div>
-
-  <div class="option-container">
-    <a
-    *ngFor='let element of selectedElements'
-    (click)='onUnselectElement(element)'>
-      {{ element.name }}
-    </a>
+    <app-element-form
+      *ngFor='let element of filteredAvailable$ | async'
+      [element]='element'
+      (pick)='onSelectElement($event)'>
+    </app-element-form>
   </div>
 
 </form>
 
+<div [formGroup]='selectedForm' class="option-container">
+    <div formArrayName='elementsControl'>
+    <ng-container
+      *ngFor="let element of selectedElements; let elementControl of selectedForm.controls['elementsControl'].controls as FormGroup; let i = index">
+        <app-element-form
+          [formGroupName]="i"
+          [formGroup]="selectedForm.controls['elementsControl'].controls[i]"
+          [element]='element'
+          (pick)='onUnselectElement($event)'>
+        </app-element-form>
+    </ng-container>
+    </div>
 
+</div>
+
+
+<pre>{{ this.selectedForm.value | json }}</pre>
+<pre>{{ this.selectorForm.value | json }}</pre>
+<!--
+
+  <form [formGroup]='selectedForm'>
+
+  <div class="option-container">
+    <div formArrayName='elementsControl'
+    *ngFor="let elementControl of selectedForm.controls['elementsControl'].controls; let i = index">
+
+    <div [formGroupName]="i">
+        <app-element-form *ngFor="let element of selectedElements"
+          [element]='element'
+          (pick)='onUnselectElement($event)'>
+        </app-element-form>
+        <app-quantity-input
+          formControlName='quantityControl'>
+        </app-quantity-input>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+  <form [formGroup]='selectedForm'>
+
+  <div class="option-container">
+    <div formArrayName='elementsControl'
+    *ngFor="let element of selectedElements; let elementControl of selectedForm.get('elementsControl').controls; let i = index">
+    <div [formGroupName]="i">
+        <a
+        (click)='onUnselectElement(element)'>
+          {{ element.name }}
+        </a>
+        <app-quantity-input formControlName='quantityControl'>
+        </app-quantity-input>
+      </div>
+    </div>
+</div>
+
+</form>
+
+
+
+<form [formGroup]='selectedForm'>
+
+    <div class="option-container">
+      <div formArrayName='elementsControl'
+      *ngFor="let element of selectedElements; let elementControl of selectedForm.get('elementsControl').controls; let i = index">
+        <app-element-form
+        [formGroupName]='i'
+        [element]='element'
+        [parentForm]='selectedForm'>
+        </app-element-form>
+      </div>
+  </div>
+
+  </form>
+  -->

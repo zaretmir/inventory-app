@@ -1,0 +1,39 @@
+* {margin: 0; padding: 0;}
+
+div.quantity-input {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  text-align:center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.arrows-container {
+  padding: 0 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.arrows-container > a {
+  display: flex;
+}
+
+a:hover {
+  cursor: pointer;
+}
+

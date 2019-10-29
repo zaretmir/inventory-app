@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { Product } from 'src/app/core/models/product';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup } from '@angular/forms';
-import { Observable, of, from, combineLatest, Subject, PartialObserver, BehaviorSubject } from 'rxjs';
-import { map, filter, startWith } from 'rxjs/operators';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-element-picker',
@@ -21,12 +20,14 @@ export class ElementPickerComponent implements ControlValueAccessor, OnInit {
 
   selectorForm: FormGroup;
 
+  selectedForm: FormGroup;
+  selectedElements: any[]; // Form input
+  quantityExternal: number;
+
   _availableElements$: BehaviorSubject<any[]> = new BehaviorSubject([]); // Hangars from input that have not been selected yet
   public readonly availableElements$: Observable<any[]> = this._availableElements$.asObservable();
   filter$: Observable<string>; // text to filter list
   filteredAvailable$: Observable<any[]>; // filtered availables
-
-  selectedElements: any[]; // Form input
 
   onChange: any = (selectedElements: any[]) => {};
   onTouch: any = () => {};
@@ -35,13 +36,15 @@ export class ElementPickerComponent implements ControlValueAccessor, OnInit {
     this.availableElements =
       this.availableElements.filter(e => e.id !== element.id);
     this._availableElements$.next(this.availableElements);
+    this.addElementForm();
     this.selectedElements.push(element);
     this.onChange(this.selectedElements);
   }
 
-  onUnselectElement(element: any) {
+  onUnselectElement(element: any, index: number) {
     this.availableElements.push(element);
     this._availableElements$.next(this.availableElements);
+    this.removeElementForm(index);
     this.selectedElements =
       this.selectedElements.filter(e => e.id !== element.id);
     this.onChange(this.selectedElements);
@@ -62,9 +65,12 @@ export class ElementPickerComponent implements ControlValueAccessor, OnInit {
   }
 
 
-  constructor() {
-    this.selectorForm = new FormGroup({
+  constructor(private fb: FormBuilder) {
+    this.selectorForm = this.fb.group({
       searchControl: new FormControl()
+    });
+    this.selectedForm = this.fb.group({
+      elementsControl: this.fb.array([])
     });
   }
 
@@ -75,6 +81,25 @@ export class ElementPickerComponent implements ControlValueAccessor, OnInit {
     this.filteredAvailable$ = combineLatest(this.availableElements$, this.filter$).pipe(
       map(([availables, filterVal]) => availables.filter(av => av.name.includes(filterVal)))
       );
+  }
+
+
+  createElementForm(): FormGroup {
+    return this.fb.group({
+      name: ['testname'],
+      quantityControl: [10]
+    });
+  }
+
+  addElementForm() {
+    const elementsControl = this.selectedForm.controls.elementsControl as FormArray;
+    elementsControl.push(this.createElementForm());
+  }
+
+  removeElementForm(index: number) {
+    const elementsControl = this.selectedForm.controls.elementsControl as FormArray;
+    console.log(elementsControl);
+    elementsControl.removeAt(index);
   }
 
 }

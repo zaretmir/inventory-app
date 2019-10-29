@@ -1,25 +1,30 @@
-.option-container {
+form {
+  margin: 20px 0px;
+}
+
+div.option-container {
   height: 300px;
   width: 75%;
-  margin: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #233333;
+  margin: 6px 0px 18px 0px;
+  padding: 2px;
   background-color:#f7ffff;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  /*box-shadow: 0px 0px 2px #29323c;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c0c0c0;
 }
 
-a {
-  display: block;
-  height: 32px;
-  background-color: #7fcccc;
+
+input[type='text'] {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c0c0c0;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  margin: 5px;
-  padding: 8px;
-  text-align: left center;
-  vertical-align: middle;
+  padding: 0 5px;
+  height: 32px;
 }
