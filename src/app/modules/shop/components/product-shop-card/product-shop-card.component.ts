@@ -17,9 +17,9 @@ export class ProductShopCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  addProductoCart(stockEntry: StockEntry) {
+  addProductoCart() {
     console.log('clicked add ot cart');
-    this.addToCart.emit(stockEntry);
+    this.addToCart.emit(this.stockEntry);
   }
 
 }

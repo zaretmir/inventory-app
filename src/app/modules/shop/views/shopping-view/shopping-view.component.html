@@ -1,4 +1,6 @@
-<app-product-shop-card *ngFor='let cartProduct of (cartProducts$ | async)'
-  [stockEntry]='cartProduct'
-  (addToCart)='onAddToCart($event)'>
-</app-product-shop-card>
+<div class="product-card-container">
+  <app-product-shop-card *ngFor='let cartProduct of (cartProducts$ | async)'
+    [stockEntry]='cartProduct'
+    (addToCart)='onAddToCart($event)'>
+  </app-product-shop-card>
+</div>

@@ -4,6 +4,8 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { CartDetailsComponent } from './views/cart-details/cart-details.component';
 import { CartItemsListComponent } from './components/cart-items-list/cart-items-list.component';
 import { CartExtrasTotalsComponent } from './components/cart-extras-totals/cart-extras-totals.component';
+import { ShoppingViewComponent } from './views/shopping-view/shopping-view.component';
+import { ProductShopCardComponent } from './components/product-shop-card/product-shop-card.component';
 
 
 
@@ -11,7 +13,9 @@ import { CartExtrasTotalsComponent } from './components/cart-extras-totals/cart-
   declarations: [
     CartDetailsComponent,
     CartItemsListComponent,
-    CartExtrasTotalsComponent],
+    CartExtrasTotalsComponent,
+    ProductShopCardComponent,
+    ShoppingViewComponent],
   imports: [
     CommonModule,
     ShopRoutingModule

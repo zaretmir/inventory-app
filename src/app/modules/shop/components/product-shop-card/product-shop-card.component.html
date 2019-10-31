@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<!--<div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ stockEntry.product.name }}</h5>
@@ -8,3 +8,31 @@
       (click)='addProductoCart(stockEntry)'>Add to cart</a>
   </div>
 </div>
+-->
+
+
+
+<div class="card">
+
+  <div class="card-head">
+    <div class="head-content">
+      <a class="info-button"><img src="\assets\icons\info-letter-interface-sign.svg"></a>
+      <div id="hoverinfo">
+        <p>{{ stockEntry.product.description }}</p>
+      </div>
+      <img src="https://images.fineartamerica.com/images-medium-large/toxic-medication-conceptual-image-kevin-curtis.jpg" alt="Card image">
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="card-data">
+      <span>{{ stockEntry.product.name }}</span>
+      <span>$34</span>
+      <p>{{ stockEntry.quantity }} in stock</p>
+    </div>
+    <div class="button-container">
+      <a [routerLink]="" (click)='addProductoCart()' class="add-to-cart-button">Add to cart</a>
+    </div>
+    </div>
+
+  </div>
