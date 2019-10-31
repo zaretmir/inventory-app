@@ -53,7 +53,7 @@ const routes: Routes = [
     loadChildren: './modules/products/products.module#ProductsModule'
   },
   {
-    path: 'cart',
+    path: 'store',
     component: ContentLayoutComponent,
     canActivate: [AuthGuardService],
     loadChildren: './modules/shop/shop.module#ShopModule'

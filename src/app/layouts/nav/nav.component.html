@@ -33,6 +33,7 @@
     <li><a routerLink='/home'>Home</a></li>
     <li><a routerLink='/hangars'>Hangars</a></li>
     <li><a routerLink='/products'>Products</a></li>
+    <li><a routerLink='/store/products'>Store</a></li>
     <li><a *ngIf='!authenticationService.isUserLoggedIn()' routerLink='/login'>Log in</a></li>
     <li><a *ngIf='authenticationService.isUserLoggedIn()' routerLink='/logout'>Log out</a></li>
     <li *ngIf='authenticationService.isUserLoggedIn()' style='float: right;'>
@@ -40,7 +41,7 @@
         {{ authenticationService.getUsername() }}
       </a>
     </li>
-    <li style='float: right;'><a routerLink='/cart'>Cart ({{productsCount$ | async}} items)</a></li>
+    <li style='float: right;'><a routerLink='/store/cart'>Cart ({{productsCount$ | async}} items)</a></li>
   </ul>
   </div>
 </div>

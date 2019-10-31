@@ -33,6 +33,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 
 // Redux
 import { StateModule } from './core/state/state.module';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { StateModule } from './core/state/state.module';
     LoginComponent,
     LogoutComponent,
     RegistrationFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserAnimationsModule,

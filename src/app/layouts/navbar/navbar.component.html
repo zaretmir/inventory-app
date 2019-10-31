@@ -1,0 +1,26 @@
+<div class='nav-container'>
+  <nav>
+    <input type='checkbox' id='nav-toggle'>
+    <label for='nav-toggle' class='burger-menu'>
+      <img alt='|||'>
+    </label>
+    <a class='logo'>AppName</a>
+
+    <div class='primary-menu'>
+      <a routerLink='/home'>Home</a>
+      <a routerLink='/hangars'>Hangars</a>
+      <a routerLink='/products'>Products</a>
+      <a routerLink='/store/products'>Store</a>
+    </div>
+    <div class='secondary-menu'>
+      <a routerLink='/store/cart'>Cart ({{productsCount$ | async}} items)</a>
+      <a *ngIf='!authenticationService.isUserLoggedIn()' routerLink='/login'>
+        <img src='assets\icons\user.svg'>
+      </a>
+      <a *ngIf='authenticationService.isUserLoggedIn()' routerLink='/logout'>
+        <img src='assets\icons\user.svg'>
+      </a>
+      <a>S</a>
+    </div>
+  </nav>
+</div>
