@@ -1,0 +1,24 @@
+<div class='card-container'>
+  <div class='info-container'>
+    <h1>{{ cartProduct.stockEntry.product.name }}</h1>
+  </div>
+
+  <div class='item-quantity'>
+    <form>
+      <app-quantity-input></app-quantity-input>
+    </form>
+    <span>{{ cartProduct.stockEntry.priceHistory[0].price }} EUR</span> <!--TODO: get latest price-->
+  </div>
+
+  <div class='action-buttons-container'>
+    <app-round-icon-button
+      (click)='onClickRemoveFromCart(cartProduct)'
+      [iconType]='iconTypes.delete'
+      buttonClass='danger'>
+    </app-round-icon-button>
+  </div>
+
+  <div class='item-subtotal'>
+    <span>{{ cartProduct.stockEntry.priceHistory[0].price }} EUR</span>
+  </div>
+</div>

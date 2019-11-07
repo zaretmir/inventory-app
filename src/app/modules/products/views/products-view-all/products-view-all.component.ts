@@ -1,26 +1,15 @@
-import { Component, OnInit, OnChanges, AfterContentInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ComponentComService } from 'src/app/core/services/component-com.service';
-import { ProductApiService } from 'src/app/core/services/product-api.service';
-import { Product } from 'src/app/core/models/product';
-import { Store, select } from '@ngrx/store';
-import { CartState } from 'src/app/core/state/cart/cart.reducer';
 import { Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { CartActionTypes } from 'src/app/core/state/cart/cart.actions';
-import { ProductsState } from 'src/app/core/state/products/products.reducer';
-import { ProductsEffects } from 'src/app/core/state/products/products.effects';
-import { ProductsActionTypes, LoadProducts } from 'src/app/core/state/products/products.actions';
-import { ProductsFacade } from 'src/app/core/state/products/products.facade';
+import { Product } from 'src/app/core/models/product';
+import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { CartFacade } from 'src/app/core/state/cart/cart.facade';
-import { StockEntry } from 'src/app/core/models/stock-entry';
-import { CartProduct } from 'src/app/core/models/cartProduct';
-import { Price } from 'src/app/core/models/price';
+import { ProductsFacade } from 'src/app/core/state/products/products.facade';
 
 @Component({
   selector: 'app-products-view-all',
   templateUrl: './products-view-all.component.html',
-  styleUrls: ['./products-view-all.component.css']
+  styleUrls: ['./products-view-all.component.scss']
 })
 export class ProductsViewAllComponent implements OnInit {
 

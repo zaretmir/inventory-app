@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-cart-extras-totals',
   templateUrl: './cart-extras-totals.component.html',
-  styleUrls: ['./cart-extras-totals.component.css']
+  styleUrls: ['./cart-extras-totals.component.scss']
 })
 export class CartExtrasTotalsComponent implements OnInit {
 

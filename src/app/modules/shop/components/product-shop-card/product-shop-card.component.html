@@ -16,7 +16,9 @@
 
   <div class="card-head">
     <div class="head-content">
-      <a class="info-button"><img src="\assets\icons\info-letter-interface-sign.svg"></a>
+      <app-round-icon-button
+        [iconType]='iconTypes.plus'>
+      </app-round-icon-button>
       <div id="hoverinfo">
         <p>{{ stockEntry.product.description }}</p>
       </div>

@@ -1,0 +1,31 @@
+* {margin: 0; padding: 0;}
+$dark-gray: #6b6b6b;
+$light-gray: #d4d1d5;
+$border-gray: #c9c6ca;
+
+table {
+  width: 100%;
+  color: $dark-gray;
+  background-color: $light-gray;
+  thead tr {
+    height: 3em;
+    color: white;
+    background: linear-gradient(to right, #25c481, #25b7c4);
+  }
+  tr {
+    box-sizing: border-box;
+    height: 3em;
+    border-bottom: $border-gray 1px solid;
+  }
+  td, th {
+    box-sizing: border-box;
+    padding-left: 0.5em;
+  }
+
+}
+
+img {
+  display: inline-block;
+  height: 2em;
+  color: whitesmoke;
+}

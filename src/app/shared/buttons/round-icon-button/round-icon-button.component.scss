@@ -1,0 +1,47 @@
+@import 'src/app/app.component.scss';
+* { margin: 0; padding: 0; }
+
+a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  margin: 0 0.3em;
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+
+  text-decoration: none;
+  color: white;
+
+  background-color: $main;
+  border-radius: 50%;
+  transition: all 200ms ease-in-out;
+  backface-visibility: hidden;
+
+  svg-icon {
+    display: inline-block;
+    justify-content: center;
+    justify-items: center;
+
+    overflow: visible; // some icons appear clipped in moz
+    fill: $white;
+    width: 70%;
+    margin-bottom: 7%;
+  }
+
+}
+
+a:hover {
+  background-color: $main-dark;
+  transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+}
+
+a.danger {
+  background-color: $danger-red;
+  &:hover {
+    background-color: $danger-red-dark;
+  }
+}

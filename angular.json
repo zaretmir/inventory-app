@@ -125,5 +125,10 @@
   "defaultProject": "inventoryApp",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }

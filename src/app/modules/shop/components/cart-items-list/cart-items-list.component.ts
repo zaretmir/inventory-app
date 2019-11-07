@@ -5,7 +5,7 @@ import { CartProduct } from 'src/app/core/models/cartProduct';
 @Component({
   selector: 'app-cart-items-list',
   templateUrl: './cart-items-list.component.html',
-  styleUrls: ['./cart-items-list.component.css']
+  styleUrls: ['./cart-items-list.component.scss']
 })
 export class CartItemsListComponent implements OnInit {
 
@@ -16,14 +16,6 @@ export class CartItemsListComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  }
-
-  onClickRemoveFromCart(cartProduct: CartProduct) {
-    this.removeProduct.emit(cartProduct);
-  }
-
-  getItemDetails() {
 
   }
 

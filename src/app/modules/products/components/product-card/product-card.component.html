@@ -1,13 +1,22 @@
+<div class='card-container'>
+  <div class='info-container'>
+    <h1>{{ product.name }}</h1>
+  </div>
+  <div class='action-buttons-container'>
+    <app-round-icon-button
+      (click)='seeProductDetails()'
+      [iconType]='iconTypes.view'>
+    </app-round-icon-button>
 
-<div class="card" style="width: 18rem;">
-  <!--<img src="..." class="card-img-top" alt="...">-->
-  <div class="card-body">
-    <h5 class="card-title">{{ product.name }}</h5>
-    <p class="card-text">{{ product.description }}</p>
+    <app-round-icon-button
+      (click)='editProduct()'
+      [iconType]='iconTypes.edit'>
+    </app-round-icon-button>
 
-    <button (click)="seeProductDetails()" class="btn btn-primary">{{ 'button.more' | translate }}</button>
-    <button (click)="manageProduct()" class="btn btn-primary">Manage</button>
-    <button (click)="editProduct()" class="btn btn-primary">{{ 'button.edit' | translate }}</button>
-    <button (click)="removeProduct()" class="btn btn-primary">{{ 'button.remove' | translate }}</button>
+    <app-round-icon-button
+      (click)='removeProduct()'
+      [iconType]='iconTypes.delete'
+      buttonClass='danger'>
+    </app-round-icon-button>
   </div>
 </div>

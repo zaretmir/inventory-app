@@ -3,6 +3,36 @@
   [error]='error'>
 </app-error-toast>
 -->
+
+<table>
+  <thead>
+    <tr>
+      <th>PRODUCT</th>
+      <th>STOCK</th>
+      <th>PRICE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let stockEntry of (stockEntries$ | async)'>
+      <td>{{ stockEntry.product.name }}</td>
+      <td>{{ stockEntry.quantity }}</td>
+      <td>{{ stockEntry.priceHistory[0].price }}</td><!-- TODO: show latest price only -->
+      <td class='stock-actions-cell'>
+          <span><img src='assets\icons\new-file.svg'></span>
+          <span><img src='assets\icons\delete.svg'></span>
+          <span><img src='assets\icons\new-file.svg'></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>TESTING CUSTOM FORM CONTROL</h1>
+<app-test-form></app-test-form>
+
+<app-stock-entry-data *ngFor='let stockEntry of (stockEntries$ | async)'
+  [stockEntry]='stockEntry'>
+</app-stock-entry-data>
+
 <app-stock-entry-form *ngFor='let stockEntry of (stockEntries$ | async)'
   [stockEntry]='stockEntry'>
 </app-stock-entry-form>

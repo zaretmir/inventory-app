@@ -13,6 +13,7 @@ import { ProductManageViewComponent } from './views/product-manage-view/product-
 import { TranslateModule } from '@ngx-translate/core';
 
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    AngularSvgIconModule
   ]
 })
 export class ProductsModule { }

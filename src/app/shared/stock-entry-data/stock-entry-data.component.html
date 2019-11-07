@@ -1,0 +1,15 @@
+<div>
+  <a (click)='toggleExpand()'>
+    <div>
+      {{ stockEntry.product.name }}
+    </div>
+    <div>
+      {{ stockEntry.quantity }}
+    </div>
+    <div class='expanded-info-container'>
+      {{ stockEntry.priceHistory }}
+    </div>
+
+  </a>
+
+</div>

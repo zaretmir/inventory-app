@@ -13,6 +13,9 @@ import { HangarFormViewComponent } from './views/hangar-form-view/hangar-form-vi
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-manage-view.component';
+import { ChartsModule } from 'ng2-charts';
+import { StockEntryDataComponent } from 'src/app/shared/stock-entry-data/stock-entry-data.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { HangarManageViewComponent } from './views/hangar-manage-view/hangar-man
     ReactiveFormsModule,
     SharedModule,
     TranslateModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule,
+    AngularSvgIconModule
   ],
   providers: [// ¿proveer en el raíz?
   ]

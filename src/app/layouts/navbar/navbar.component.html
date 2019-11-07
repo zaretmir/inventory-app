@@ -1,26 +1,90 @@
 <div class='nav-container'>
-  <nav>
-    <input type='checkbox' id='nav-toggle'>
-    <label for='nav-toggle' class='burger-menu'>
-      <img alt='|||'>
-    </label>
-    <a class='logo'>AppName</a>
+    <nav>
+      <app-round-icon-button id='burger-menu'
+      (click)='toggleSidebar()'
+      [iconType]='iconTypes.menu'
+      buttonClass='navbar-button'>
+      </app-round-icon-button>
 
-    <div class='primary-menu'>
-      <a routerLink='/home'>Home</a>
-      <a routerLink='/hangars'>Hangars</a>
-      <a routerLink='/products'>Products</a>
-      <a routerLink='/store/products'>Store</a>
-    </div>
-    <div class='secondary-menu'>
-      <a routerLink='/store/cart'>Cart ({{productsCount$ | async}} items)</a>
-      <a *ngIf='!authenticationService.isUserLoggedIn()' routerLink='/login'>
-        <img src='assets\icons\user.svg'>
-      </a>
-      <a *ngIf='authenticationService.isUserLoggedIn()' routerLink='/logout'>
-        <img src='assets\icons\user.svg'>
-      </a>
-      <a>S</a>
-    </div>
-  </nav>
+      <a class='logo'>AppName</a>
+
+      <div class='primary-menu'>
+        <app-text-button
+          buttonText='Home'
+          routerLink='/home'>
+        </app-text-button>
+        <app-text-button
+          buttonText='Hangars'
+          routerLink='/hangars'>
+        </app-text-button>
+        <app-text-button
+          buttonText='Products'
+          routerLink='/products'>
+        </app-text-button>
+        <app-text-button
+          buttonText='Store'
+          routerLink='/store/products'>
+        </app-text-button>
+      </div>
+
+      <div class='secondary-menu'>
+
+        <app-round-icon-button
+          routerLink='/store/cart'
+          [iconType]='iconTypes.cart'
+          buttonClass='navbar-button'>
+        </app-round-icon-button>
+<!--
+        <a class='nav-icon' routerLink='/store/cart'>
+          <span>({{productsCount$ | async}})</span>
+          <svg-icon class='nav-icon' src='assets\icons\shop.svg'></svg-icon>
+        </a> -->
+
+        <app-round-icon-button *ngIf='authenticationService.isUserLoggedIn()'
+          (click)='toggleUserMenu()'
+          [iconType]='iconTypes.user'
+          buttonClass='navbar-button'>
+        </app-round-icon-button>
+
+        <app-round-icon-button id="lan-button" (click)="switchLanguage()"
+          [iconType]='iconTypes.globe'
+          buttonClass='navbar-button'>
+        </app-round-icon-button>
+      </div>
+
+    </nav>
+  </div>
+
+<div
+  class='menu-sidebar'
+  [ngClass]='{ "active": this.showSidebar}'>
+  <app-text-button
+    buttonText='Home'
+    routerLink='/home'>
+  </app-text-button>
+  <app-text-button
+    buttonText='Hangars'
+    routerLink='/hangars'>
+  </app-text-button>
+  <app-text-button
+    buttonText='Products'
+    routerLink='/products'>
+  </app-text-button>
+  <app-text-button
+    buttonText='Store'
+    routerLink='/store/products'>
+  </app-text-button>
+</div>
+
+<div
+  class='user-dropdown'
+  [ngClass]='{ "activeDropdown": this.showUserMenu}'>
+  <app-text-button
+    buttonText='Logout'
+    routerLink='/logout'>
+  </app-text-button>
+  <app-text-button
+    buttonText='Dashboard'
+    routerLink='/user-dashboard'>
+  </app-text-button>
 </div>

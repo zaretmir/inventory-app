@@ -1,19 +1,5 @@
-<table>
-  <thead>
-    <tr>
-      <th>Product Id</th>
-      <th>Hangar Id</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cartProduct of cartProducts$ | async">
-      <td>{{ cartProduct.stockEntry.id.hangarPk }}</td>
-      <td>{{ cartProduct.stockEntry.id.productPk }}</td>
-      <td>{{ cartProduct.orderedQuantity }}</td>
-      <td>
-        <button (click)="onClickRemoveFromCart(cartProduct)">Remove from cart</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class='cart-elements-container'>
+  <app-cart-item-element *ngFor='let cartProduct of cartProducts$ | async'
+    [cartProduct]='cartProduct'>
+  </app-cart-item-element>
+</div>

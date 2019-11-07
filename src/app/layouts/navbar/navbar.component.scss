@@ -1,0 +1,125 @@
+@import 'src/app/app.component.scss';
+* { margin: 0; padding: 0; box-sizing: border-box;}
+
+.nav-container {
+  z-index: 2;
+  height: 60px;
+  width: 100%;
+  background-color: #333333;
+  color: white;
+}
+
+nav {
+  position: relative;
+  max-width: 1720px;
+  margin: 0 0.5em;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-content: center;
+  align-items: center;
+}
+
+#burger-menu {
+  display: none;
+}
+
+.logo {
+  grid-column: 2;
+  text-align: left;
+  margin: auto 5vw;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
+
+.primary-menu {
+  grid-column: 3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    padding: 0.5em 2em;
+    border: solid 1px white;
+    width: auto;
+  }
+}
+
+.secondary-menu {
+  grid-column: 4;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+a {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: auto;
+  margin: 1em 0.5em;
+
+  text-decoration: none;
+  text-align: center;
+  color: white;
+
+}
+
+@media only screen and (max-width: 1025px) {
+
+  #burger-menu {
+    display: inline-block;
+  }
+
+  .logo {
+    grid-column: 2;
+  }
+
+  .primary-menu {
+    display: none;
+  }
+}
+
+.menu-sidebar {
+  background-color: #333333;
+  border-top: solid 1px #414141;
+  z-index: 9000;
+  position: fixed;
+  top: 60px;
+  width: 40vw;
+  min-width: 200px;
+  max-width: 400px;
+  height: 100vh;
+
+  transform: translateX(-100%);
+  transition: all 400ms cubic-bezier(.76,.14,.17,.98);
+
+  a {
+    width: 100%;
+    height: 30px;
+    display: block;
+    color: white;
+  }
+}
+
+.active {
+  transform: translateX(0);
+}
+
+.user-dropdown {
+  position: fixed;
+  top: 60px;
+  display: none;
+  z-index: 9000;
+}
+
+.activeDropdown {
+  display: block;
+}
+

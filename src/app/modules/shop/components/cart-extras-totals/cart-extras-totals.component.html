@@ -1,10 +1,27 @@
-<div id="cart-totals">
-  <dl>
-    <dt>Subtotal</dt>
-    <dd>{{ cartTotal$ | async }}</dd>
-    <dt>VAT</dt>
-    <dd>00.00 €</dd>
-    <dt>Total</dt>
-    <dd>00.00 €</dd>
-  </dl>
+<div class='cart-totals-container'>
+
+  <div class='card-totals'>
+    <table>
+      <tr>
+        <td>Subtotal</td>
+        <td>{{ cartTotal$ | async }} eur</td>
+      </tr>
+      <tr>
+        <td>VAT</td>
+        <td>00.00  eur</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{ cartTotal$ | async }} eur</td>
+      </tr>
+    </table>
+  </div>
+
+  <a>
+    Checkout
+    <svg-icon src='assets\icons\order.svg'></svg-icon>
+  </a>
+
 </div>
+
+

@@ -1,0 +1,27 @@
+div {
+  text-align: center;
+  margin: 12px;
+  align-self: auto;
+
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    display: inline-block;
+    vertical-align: center;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    height: 40px;
+    width: 110px;
+    padding: 0px 15px;
+    background-color: black;
+    border-radius: 40px;
+  }
+
+  img {
+    width: 1em;
+    height: 1em;
+  }
+}

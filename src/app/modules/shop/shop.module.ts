@@ -6,6 +6,9 @@ import { CartItemsListComponent } from './components/cart-items-list/cart-items-
 import { CartExtrasTotalsComponent } from './components/cart-extras-totals/cart-extras-totals.component';
 import { ShoppingViewComponent } from './views/shopping-view/shopping-view.component';
 import { ProductShopCardComponent } from './components/product-shop-card/product-shop-card.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CartItemElementComponent } from './components/cart-item-element/cart-item-element.component';
 
 
 
@@ -15,10 +18,13 @@ import { ProductShopCardComponent } from './components/product-shop-card/product
     CartItemsListComponent,
     CartExtrasTotalsComponent,
     ProductShopCardComponent,
-    ShoppingViewComponent],
+    ShoppingViewComponent,
+    CartItemElementComponent],
   imports: [
     CommonModule,
-    ShopRoutingModule
+    ShopRoutingModule,
+    AngularSvgIconModule,
+    SharedModule
   ]
 })
 export class ShopModule { }
