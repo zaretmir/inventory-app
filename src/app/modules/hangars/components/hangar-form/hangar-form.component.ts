@@ -29,7 +29,7 @@ export class HangarFormComponent implements OnInit {
       '',
       [Validators.required]
     )
-  });
+  }, {updateOn: 'blur'});
 
   // Getters for cleaner access in template.
   // Allows using hangarName instead of hangarForm.get('hangarName')

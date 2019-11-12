@@ -1,42 +1,36 @@
 <form [formGroup]="hangarForm">
 
-  <div class="form-group">
-    <label for="name">{{ 'hangar-form.name' | translate }}</label>
-    <input formControlName="name" id="name" type="text" class="form-control">
-    <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-      <div *ngIf="name?.errors['required']">
-        {{ 'form-validation.required' | translate }}
-      </div>
-      <div *ngIf="name?.errors['minlength']">
-        {{ 'form-validation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}
-      </div>
-    </div>
-  </div>
+    <app-custom-input
+      _label='{{ "hangar-form.name" | translate }}'
+      _formControlName='name'
+      [parentForm]='hangarForm'>
+    </app-custom-input>
 
-  <div class="form-group">
-    <label for="address">{{ 'hangar-form.address' | translate }}</label>
-    <input formControlName="address" id="address" type="text" class="form-control">
-    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">
-      {{ 'form-validation.required' | translate }}
-    </div>
-  </div>
+    <app-custom-input
+      _label='{{ "hangar-form.address" | translate }}'
+      _formControlName='address'
+      [parentForm]='hangarForm'>
+    </app-custom-input>
 
-  <div class="form-group">
-    <label for="owner">{{ 'hangar-form.owner' | translate }}</label>
-    <input formControlName="owner" id="owner" type="text" class="form-control">
-  </div>
+    <app-custom-input
+      _label='{{ "hangar-form.owner" | translate }}'
+      _formControlName='owner'
+      [parentForm]='hangarForm'>
+    </app-custom-input>
 
-  <div class="form-group">
-    <label for="ownerEmail">E-mail</label>
-    <input formControlName="ownerEmail" id="ownerEmail" type="email" class="form-control">
-  </div>
+    <app-custom-input
+      _label='E-mail'
+      _formControlName='ownerEmail'
+      _inputType='email'
+      [parentForm]='hangarForm'>
+    </app-custom-input>
 
-  <div class="form-group">
-    <label for="phoneNumber">
-      {{ 'hangar-form.phone' | translate }}
-    </label>
-    <input formControlName="phoneNumber" id="phoneNumber" type="tel" class="form-control">
-  </div>
+    <app-custom-input
+      _label='{{ "hangar-form.phone" | translate }}'
+      _formControlName='phoneNumber'
+      _inputType='tel'
+      [parentForm]='hangarForm'>
+    </app-custom-input>
 
   <button
     *ngIf="!isReadOnly"
