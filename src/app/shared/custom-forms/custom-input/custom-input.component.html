@@ -1,15 +1,23 @@
-<label for="">
-  {{ label }}
-</label>
-<input
-  type='text'
-  (input)='onInput($event.target.value)'>
+<div class='form-group'>
+  <label [formGroup]='parentForm' for='customInputText'>
+    {{ _label }}
+    <input
+    id='customInputText'
+    [formControlName]='_formControlName'
+    [type]='_inputType'
+    class='form-control'>
+  </label>
 
-<select name="hangars" id="">
-  <option *ngFor='let hangar of hangars; let i = index'
-    [value]='hangars[i].id'>
-    {{ hangars[i].name }}
-  </option>
-</select>
+  <div *ngIf='_formControl.touched && _formControl.invalid' class='alert alert-danger'>
+    <div *ngIf='_formControl?.errors["required"]'>
+        {{ 'form-validation.required' | translate }}
+    </div>
+    <div *ngIf="_formControl?.errors['minlength']">
+      {{ 'form-validation.minlength' | translate: {minlength: _formControl.errors['minlength'].requiredLength} }}
+    </div>
+    <div *ngIf="_formControl?.errors['email']">
+      Not a valid email
+    </div>
+  </div>
+</div>
 
-<span>Number of letters: 0</span>
