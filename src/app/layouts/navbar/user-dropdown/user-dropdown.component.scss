@@ -1,0 +1,10 @@
+.user-dropdown {
+  position: fixed;
+  top: 60px;
+  display: none;
+  z-index: 9000;
+}
+
+.active {
+  display: block;
+}

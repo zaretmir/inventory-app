@@ -13,7 +13,6 @@ export class CustomInputComponent implements OnInit {
   @Input() _formControlName: string;
   @Input() parentForm: FormGroup;
 
-
   constructor() { }
 
   ngOnInit() {

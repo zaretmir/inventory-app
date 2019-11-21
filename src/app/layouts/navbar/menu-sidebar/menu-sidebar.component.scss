@@ -1,0 +1,25 @@
+.menu-sidebar {
+  background-color: #333333;
+  border-top: solid 1px #414141;
+  z-index: 9000;
+  position: fixed;
+  top: 60px;
+  width: 40vw;
+  min-width: 200px;
+  max-width: 400px;
+  height: 100vh;
+
+  transform: translateX(-100%);
+  transition: all 400ms cubic-bezier(.76,.14,.17,.98);
+
+  a {
+    width: 100%;
+    height: 30px;
+    display: block;
+    color: white;
+  }
+}
+
+.active {
+  transform: translateX(0);
+}

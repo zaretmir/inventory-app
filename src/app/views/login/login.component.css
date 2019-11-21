@@ -1,5 +1,10 @@
-.box {
-  height: 30%;
-  width: 25%;
+.form-wrapper {
+  height: 100%;
+  width: 100%;
+  min-width: 250px;
   border: 2px grooved black;
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+  margin-top: 20vh;
 }

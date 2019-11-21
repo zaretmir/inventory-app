@@ -22,6 +22,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { TextButtonComponent } from './buttons/text-button/text-button.component';
 import { TextSquareButtonComponent } from './buttons/text-square-button/text-square-button.component';
 import { CustomInputComponent } from './custom-forms/custom-input/custom-input.component';
+import { AddressFormComponent } from './custom-forms/address-form/address-form.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CustomInputComponent } from './custom-forms/custom-input/custom-input.c
     RoundIconButtonComponent,
     TextButtonComponent,
     TextSquareButtonComponent,
-    CustomInputComponent],
+    CustomInputComponent,
+    AddressFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -60,7 +62,8 @@ import { CustomInputComponent } from './custom-forms/custom-input/custom-input.c
     QuantityInputComponent,
     RoundIconButtonComponent,
     TextButtonComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    AddressFormComponent
   ]
 })
 export class SharedModule { }

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services/auth/authentication.service';
 import { CartFacade } from 'src/app/core/state/cart/cart.facade';
 import { TranslateService } from '@ngx-translate/core';
 import { Icon } from 'src/app/shared/buttons/round-icon-button/round-icon-button.component';
+import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
+import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,13 +14,18 @@ import { Icon } from 'src/app/shared/buttons/round-icon-button/round-icon-button
 })
 export class NavbarComponent implements OnInit {
 
+  @ViewChild(UserDropdownComponent, {static: false})
+  userDropdown: UserDropdownComponent;
+  @ViewChild(MenuSidebarComponent, {static: false})
+  sidebar: MenuSidebarComponent;
+
+
   productsCount$: Observable<number>;
 
   langTag: string;
 
   iconTypes = Icon;
-  showSidebar = false;
-  showUserMenu = false;
+
 
   constructor(
     private translate: TranslateService,
@@ -38,7 +45,6 @@ export class NavbarComponent implements OnInit {
         () => this.updateLangTag()
       );
     } else {
-      console.log('No ES');
       this.translate.use('es').subscribe(
         () => this.updateLangTag()
       );
@@ -50,12 +56,13 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleSidebar() {
-    this.showSidebar = !this.showSidebar;
+    this.userDropdown.toggle(false);
+    this.sidebar.toggle();
   }
 
   toggleUserMenu() {
-    this.showUserMenu = !this.showUserMenu;
-    console.log(this.showUserMenu);
+    this.sidebar.toggle(true);
+    this.userDropdown.toggle();
   }
 
 }

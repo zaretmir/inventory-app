@@ -3,6 +3,13 @@
 -->
 <form [formGroup]="productForm">
 
+  <app-custom-input-text
+    _label='{{ "product-form.name" | translate }}'
+    _formControlName='name'
+    [parentForm]='productForm'>
+  </app-custom-input-text>
+
+<!--
   <div class="form-group">
     <label for="name">
       {{ 'product-form.name' | translate }}
@@ -17,7 +24,7 @@
         {{ 'form-validation.minlength' | translate: {minlength: name.errors['minlength'].requiredLength} }}
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="form-group">
     <label for="description">

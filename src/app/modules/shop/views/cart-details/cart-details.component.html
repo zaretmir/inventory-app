@@ -1,7 +1,7 @@
 <!--
   <pre> {{ order$ | async | json}} </pre>
 -->
-<div>
+<div [hidden]='(cartProducts$ | async)?.length == 0'>
   <app-cart-items-list
     [cartProducts$]="cartProducts$"
     (removeProduct)="onRemoveProduct($event)">
@@ -9,5 +9,10 @@
   <app-cart-extras-totals
     [cartTotal$]="cartTotals$">
   </app-cart-extras-totals>
+</div>
+
+
+<div [hidden]='(cartProducts$ | async)?.length > 0'>
+  No products yet
 </div>
 

@@ -1,0 +1,23 @@
+<div [formGroup]='parentForm'>
+  <form [formGroup]='addressForm'>
+  <app-custom-input
+    _label='Street Address'
+    _formControlName='streetAddress'
+    _inputType='text'
+    [parentForm]='addressForm'>
+  </app-custom-input>
+  <app-custom-input
+    _label='City'
+    _formControlName='city'
+    _inputType='text'
+    [parentForm]='addressForm'>
+  </app-custom-input>
+  <app-custom-input
+    _label='Zip/Postal Code'
+    _formControlName='postCode'
+    _inputType='number'
+    [parentForm]='addressForm'>
+  </app-custom-input>
+</form>
+</div>
+

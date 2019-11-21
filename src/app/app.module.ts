@@ -27,6 +27,8 @@ import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { RegistrationFormComponent } from './views/registration-form/registration-form.component';
+import { UserDropdownComponent } from './layouts/navbar/user-dropdown/user-dropdown.component';
+import { MenuSidebarComponent } from './layouts/navbar/menu-sidebar/menu-sidebar.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { RegistrationFormComponent } from './views/registration-form/registratio
     HomeComponent,
     LoginComponent,
     LogoutComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    UserDropdownComponent,
+    MenuSidebarComponent
   ],
   imports: [
     BrowserAnimationsModule,

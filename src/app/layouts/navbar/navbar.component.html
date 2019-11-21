@@ -3,7 +3,8 @@
       <app-round-icon-button id='burger-menu'
       (click)='toggleSidebar()'
       [iconType]='iconTypes.menu'
-      buttonClass='navbar-button'>
+      buttonClass='navbar-button'
+      class='whitelisted'>
       </app-round-icon-button>
 
       <a class='logo'>AppName</a>
@@ -43,7 +44,8 @@
         <app-round-icon-button *ngIf='authenticationService.isUserLoggedIn()'
           (click)='toggleUserMenu()'
           [iconType]='iconTypes.user'
-          buttonClass='navbar-button'>
+          buttonClass='navbar-button'
+          class='whitelisted'>
         </app-round-icon-button>
 
         <app-round-icon-button id="lan-button" (click)="switchLanguage()"
@@ -55,36 +57,6 @@
     </nav>
   </div>
 
-<div
-  class='menu-sidebar'
-  [ngClass]='{ "active": this.showSidebar}'>
-  <app-text-button
-    buttonText='Home'
-    routerLink='/home'>
-  </app-text-button>
-  <app-text-button
-    buttonText='Hangars'
-    routerLink='/hangars'>
-  </app-text-button>
-  <app-text-button
-    buttonText='Products'
-    routerLink='/products'>
-  </app-text-button>
-  <app-text-button
-    buttonText='Store'
-    routerLink='/store/products'>
-  </app-text-button>
-</div>
+<app-menu-sidebar [enableWhiteListing]='true'></app-menu-sidebar>
+<app-user-dropdown></app-user-dropdown>
 
-<div
-  class='user-dropdown'
-  [ngClass]='{ "activeDropdown": this.showUserMenu}'>
-  <app-text-button
-    buttonText='Logout'
-    routerLink='/logout'>
-  </app-text-button>
-  <app-text-button
-    buttonText='Dashboard'
-    routerLink='/user-dashboard'>
-  </app-text-button>
-</div>
